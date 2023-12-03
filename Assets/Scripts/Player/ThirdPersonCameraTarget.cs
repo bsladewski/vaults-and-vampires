@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using DG.Tweening;
 
 public class ThirdPersonCameraTarget : MonoBehaviour
 {

@@ -75,14 +75,14 @@ public class ThirdPersonCameraController : MonoBehaviour
     {
         switch (followState)
         {
-            case FollowState.Close:
-                ApplyNormalFollowOffset();
-                break;
             case FollowState.Normal:
                 ApplyFarFollowOffset();
                 break;
             case FollowState.Far:
                 ApplyCloseFollowOffset();
+                break;
+            default:
+                ApplyNormalFollowOffset();
                 break;
         }
     }
