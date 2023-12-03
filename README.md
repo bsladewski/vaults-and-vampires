@@ -18,13 +18,13 @@ The game uses the following dependencies:
 
 -   Cinemachine
 -   Unity Input System
--   Odin Inspector & Serializer
+-   Odin
 -   Feel
 -   GSpawn Level Designer
--   Kinematic Character Controller
 -   Text Animator (Febucci)
 -   The A* Pathfinding Project (Aron Granberg)
 -   QuickOutline (Chris Nolet)
+-   DOTween
 
 ## Licensing
 
