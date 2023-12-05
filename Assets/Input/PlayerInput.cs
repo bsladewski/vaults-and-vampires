@@ -44,6 +44,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Center"",
+                    ""type"": ""Button"",
+                    ""id"": ""f4c3fd22-d4f1-40ac-adf2-767e7414a77f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -112,6 +121,142 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""Zoom"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0933fcba-8d7a-4e95-881d-e759f9933439"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Center"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e593c599-05c5-4806-8af5-a1f0375d4cca"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Center"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Third-Person Movement"",
+            ""id"": ""b2531885-ab54-4a2a-bef9-1ff58e8d19e7"",
+            ""actions"": [
+                {
+                    ""name"": ""Run"",
+                    ""type"": ""Value"",
+                    ""id"": ""ff6cf091-bef2-4db8-9c08-f98ce96e963d"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""1d7a0392-e791-4393-8322-48a720d9f7a4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""20fae1c7-999a-4592-b863-68c11c8db3a7"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": ""NormalizeVector2"",
+                    ""groups"": """",
+                    ""action"": ""Run"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""WASD"",
+                    ""id"": ""4a09e4de-50c8-4d67-980f-5cb27f8ffc19"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Run"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""562096c6-3765-4aad-bcb0-d01e6583f82a"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Run"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""25897c7c-b904-48b3-824d-2d4e7f5fac5e"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Run"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""c40ad7df-8b98-414d-a65b-c3935769175a"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Run"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""3f6817f0-4703-429c-bd7e-86af302070e8"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Run"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d62ea534-8fb1-4878-8d6f-a5a2856440b2"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""392f19b2-dd08-4738-9266-598e5beaff73"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -122,6 +267,11 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_ThirdPersonCamera = asset.FindActionMap("Third-Person Camera", throwIfNotFound: true);
         m_ThirdPersonCamera_Rotate = m_ThirdPersonCamera.FindAction("Rotate", throwIfNotFound: true);
         m_ThirdPersonCamera_Zoom = m_ThirdPersonCamera.FindAction("Zoom", throwIfNotFound: true);
+        m_ThirdPersonCamera_Center = m_ThirdPersonCamera.FindAction("Center", throwIfNotFound: true);
+        // Third-Person Movement
+        m_ThirdPersonMovement = asset.FindActionMap("Third-Person Movement", throwIfNotFound: true);
+        m_ThirdPersonMovement_Run = m_ThirdPersonMovement.FindAction("Run", throwIfNotFound: true);
+        m_ThirdPersonMovement_Jump = m_ThirdPersonMovement.FindAction("Jump", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -185,12 +335,14 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private List<IThirdPersonCameraActions> m_ThirdPersonCameraActionsCallbackInterfaces = new List<IThirdPersonCameraActions>();
     private readonly InputAction m_ThirdPersonCamera_Rotate;
     private readonly InputAction m_ThirdPersonCamera_Zoom;
+    private readonly InputAction m_ThirdPersonCamera_Center;
     public struct ThirdPersonCameraActions
     {
         private @PlayerInput m_Wrapper;
         public ThirdPersonCameraActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Rotate => m_Wrapper.m_ThirdPersonCamera_Rotate;
         public InputAction @Zoom => m_Wrapper.m_ThirdPersonCamera_Zoom;
+        public InputAction @Center => m_Wrapper.m_ThirdPersonCamera_Center;
         public InputActionMap Get() { return m_Wrapper.m_ThirdPersonCamera; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -206,6 +358,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Zoom.started += instance.OnZoom;
             @Zoom.performed += instance.OnZoom;
             @Zoom.canceled += instance.OnZoom;
+            @Center.started += instance.OnCenter;
+            @Center.performed += instance.OnCenter;
+            @Center.canceled += instance.OnCenter;
         }
 
         private void UnregisterCallbacks(IThirdPersonCameraActions instance)
@@ -216,6 +371,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Zoom.started -= instance.OnZoom;
             @Zoom.performed -= instance.OnZoom;
             @Zoom.canceled -= instance.OnZoom;
+            @Center.started -= instance.OnCenter;
+            @Center.performed -= instance.OnCenter;
+            @Center.canceled -= instance.OnCenter;
         }
 
         public void RemoveCallbacks(IThirdPersonCameraActions instance)
@@ -233,9 +391,69 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         }
     }
     public ThirdPersonCameraActions @ThirdPersonCamera => new ThirdPersonCameraActions(this);
+
+    // Third-Person Movement
+    private readonly InputActionMap m_ThirdPersonMovement;
+    private List<IThirdPersonMovementActions> m_ThirdPersonMovementActionsCallbackInterfaces = new List<IThirdPersonMovementActions>();
+    private readonly InputAction m_ThirdPersonMovement_Run;
+    private readonly InputAction m_ThirdPersonMovement_Jump;
+    public struct ThirdPersonMovementActions
+    {
+        private @PlayerInput m_Wrapper;
+        public ThirdPersonMovementActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Run => m_Wrapper.m_ThirdPersonMovement_Run;
+        public InputAction @Jump => m_Wrapper.m_ThirdPersonMovement_Jump;
+        public InputActionMap Get() { return m_Wrapper.m_ThirdPersonMovement; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(ThirdPersonMovementActions set) { return set.Get(); }
+        public void AddCallbacks(IThirdPersonMovementActions instance)
+        {
+            if (instance == null || m_Wrapper.m_ThirdPersonMovementActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_ThirdPersonMovementActionsCallbackInterfaces.Add(instance);
+            @Run.started += instance.OnRun;
+            @Run.performed += instance.OnRun;
+            @Run.canceled += instance.OnRun;
+            @Jump.started += instance.OnJump;
+            @Jump.performed += instance.OnJump;
+            @Jump.canceled += instance.OnJump;
+        }
+
+        private void UnregisterCallbacks(IThirdPersonMovementActions instance)
+        {
+            @Run.started -= instance.OnRun;
+            @Run.performed -= instance.OnRun;
+            @Run.canceled -= instance.OnRun;
+            @Jump.started -= instance.OnJump;
+            @Jump.performed -= instance.OnJump;
+            @Jump.canceled -= instance.OnJump;
+        }
+
+        public void RemoveCallbacks(IThirdPersonMovementActions instance)
+        {
+            if (m_Wrapper.m_ThirdPersonMovementActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IThirdPersonMovementActions instance)
+        {
+            foreach (var item in m_Wrapper.m_ThirdPersonMovementActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_ThirdPersonMovementActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public ThirdPersonMovementActions @ThirdPersonMovement => new ThirdPersonMovementActions(this);
     public interface IThirdPersonCameraActions
     {
         void OnRotate(InputAction.CallbackContext context);
         void OnZoom(InputAction.CallbackContext context);
+        void OnCenter(InputAction.CallbackContext context);
+    }
+    public interface IThirdPersonMovementActions
+    {
+        void OnRun(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
     }
 }
