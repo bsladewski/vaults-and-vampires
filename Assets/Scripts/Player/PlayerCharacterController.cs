@@ -35,6 +35,8 @@ public class PlayerCharacterController : MonoBehaviour, ICharacterController
     [SerializeField]
     private float jumpMoveSpeedModifier = 0.25f;
 
+    private bool wasGrounded;
+
     private Vector3 jumpInertia;
 
     private bool shouldJump;
@@ -86,14 +88,18 @@ public class PlayerCharacterController : MonoBehaviour, ICharacterController
         currentVelocity = Vector3.Lerp(currentVelocity, planarMovement, Time.deltaTime * moveAcceleration);
         if (shouldJump)
         {
-            jumpInertia = planarMovement * jumpMoveSpeedModifier;
-            currentVelocity += Vector3.up * jumpHeight * 100;
+            currentVelocity += Vector3.up * jumpHeight * 100; // TODO: remove magic number
             shouldJump = false;
         }
 
         if (!isGrounded)
         {
             fallVelocity += gravity * Time.deltaTime;
+        }
+
+        if (!isGrounded && wasGrounded)
+        {
+            jumpInertia = planarMovement * jumpMoveSpeedModifier;
         }
 
         currentVelocity += Vector3.down * fallVelocity;
@@ -108,7 +114,13 @@ public class PlayerCharacterController : MonoBehaviour, ICharacterController
     {
         if (IsGrounded())
         {
+            wasGrounded = true;
+            jumpInertia = Vector3.zero;
             fallVelocity = 0f;
+        }
+        else
+        {
+            wasGrounded = false;
         }
     }
 

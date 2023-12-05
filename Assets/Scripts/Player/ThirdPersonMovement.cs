@@ -11,6 +11,14 @@ public class ThirdPersonMovement : MonoBehaviour
     [SerializeField]
     private float cameraCorrectionSpeed = 5f;
 
+
+    [SerializeField]
+    private float coyoteTime = 0.2f;
+
+    private float coyoteTimeTimer;
+
+    private bool isJumping;
+
     private PlayerInput playerInput;
 
     private Vector3 lastCameraForward;
@@ -28,12 +36,12 @@ public class ThirdPersonMovement : MonoBehaviour
     private void OnEnable()
     {
         playerInput.Enable();
-        playerInput.ThirdPersonMovement.Jump.performed += Jump;
+        playerInput.ThirdPersonMovement.Jump.started += Jump;
     }
 
     private void OnDisable()
     {
-        playerInput.ThirdPersonMovement.Jump.performed -= Jump;
+        playerInput.ThirdPersonMovement.Jump.started -= Jump;
     }
 
     private void Update()
@@ -55,6 +63,21 @@ public class ThirdPersonMovement : MonoBehaviour
 
         Vector3 targetVelocityNormalized = (Quaternion.LookRotation(lastCameraForward) * runDirection).normalized;
         playerCharacterController.SetTargetVelocityNormalized(targetVelocityNormalized);
+
+        bool isGrounded = playerCharacterController.IsGrounded();
+        if (!isJumping && isGrounded)
+        {
+            coyoteTimeTimer = coyoteTime;
+        }
+        else
+        {
+            coyoteTimeTimer -= Time.deltaTime;
+        }
+
+        if (!isGrounded)
+        {
+            isJumping = false;
+        }
     }
 
     private Vector3 GetCameraForward()
@@ -64,9 +87,11 @@ public class ThirdPersonMovement : MonoBehaviour
 
     private void Jump(InputAction.CallbackContext ctx)
     {
-        if (playerCharacterController.IsGrounded())
+        if (coyoteTimeTimer > 0f || playerCharacterController.IsGrounded())
         {
             playerCharacterController.SetShouldJump();
+            isJumping = true;
+            coyoteTimeTimer = 0f;
         }
     }
 }
