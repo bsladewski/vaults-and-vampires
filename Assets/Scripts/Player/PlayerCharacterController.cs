@@ -104,16 +104,6 @@ public class PlayerCharacterController : MonoBehaviour, ICharacterController
         return layerMask == (layerMask | 1 << coll.gameObject.layer);
     }
 
-    public void AfterCharacterUpdate(float deltaTime) { }
-
-    public void BeforeCharacterUpdate(float deltaTime) { }
-
-    public void OnDiscreteCollisionDetected(Collider hitCollider) { }
-
-    public void OnGroundHit(Collider hitCollider, Vector3 hitNormal, Vector3 hitPoint, ref HitStabilityReport hitStabilityReport) { }
-
-    public void OnMovementHit(Collider hitCollider, Vector3 hitNormal, Vector3 hitPoint, ref HitStabilityReport hitStabilityReport) { }
-
     public void PostGroundingUpdate(float deltaTime)
     {
         if (IsGrounded())
@@ -122,5 +112,33 @@ public class PlayerCharacterController : MonoBehaviour, ICharacterController
         }
     }
 
-    public void ProcessHitStabilityReport(Collider hitCollider, Vector3 hitNormal, Vector3 hitPoint, Vector3 atCharacterPosition, Quaternion atCharacterRotation, ref HitStabilityReport hitStabilityReport) { }
+    public void AfterCharacterUpdate(float deltaTime)
+    {
+        // Not needed at this time
+    }
+
+    public void BeforeCharacterUpdate(float deltaTime)
+    {
+        // Not needed at this time
+    }
+
+    public void OnDiscreteCollisionDetected(Collider hitCollider)
+    {
+        // Not needed at this time
+    }
+
+    public void OnGroundHit(Collider hitCollider, Vector3 hitNormal, Vector3 hitPoint, ref HitStabilityReport hitStabilityReport)
+    {
+        // Not needed at this time
+    }
+
+    public void OnMovementHit(Collider hitCollider, Vector3 hitNormal, Vector3 hitPoint, ref HitStabilityReport hitStabilityReport)
+    {
+        // Not needed at this time
+    }
+
+    public void ProcessHitStabilityReport(Collider hitCollider, Vector3 hitNormal, Vector3 hitPoint, Vector3 atCharacterPosition, Quaternion atCharacterRotation, ref HitStabilityReport hitStabilityReport)
+    {
+        // Not needed at this time
+    }
 }
