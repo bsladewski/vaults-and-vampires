@@ -82,28 +82,34 @@ public class PlayerCharacterController : MonoBehaviour, ICharacterController
         Vector3 planarMovement = targetVelocityNormalized * moveSpeed * (isGrounded ? 1f : jumpMoveSpeedModifier);
         if (!isGrounded)
         {
+            // conserve momentum if we are jumping
             planarMovement += jumpInertia;
         }
 
         currentVelocity = Vector3.Lerp(currentVelocity, planarMovement, Time.deltaTime * moveAcceleration);
+
+        if (!isGrounded && wasGrounded)
+        {
+            // if we left the ground, store our lateral momentum
+            jumpInertia = planarMovement * jumpMoveSpeedModifier;
+        }
+
         if (shouldJump)
         {
+            // initiate a jump
             motor.ForceUnground();
-            currentVelocity += Vector3.up * jumpHeight * 100; // TODO: remove magic number
+            float jumpVelocity = Mathf.Sqrt(jumpHeight * 2 * gravity);
+            currentVelocity.y += jumpVelocity;
+            fallVelocity = -jumpVelocity;
             shouldJump = false;
         }
 
         if (!isGrounded)
         {
+            // apply gravity
             fallVelocity += gravity * Time.deltaTime;
+            currentVelocity.y = -fallVelocity;
         }
-
-        if (!isGrounded && wasGrounded)
-        {
-            jumpInertia = planarMovement * jumpMoveSpeedModifier;
-        }
-
-        currentVelocity += Vector3.down * fallVelocity;
     }
 
     public bool IsColliderValidForCollisions(Collider coll)

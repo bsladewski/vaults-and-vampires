@@ -41,7 +41,7 @@ public class ThirdPersonMovement : MonoBehaviour
         playerInput.Enable();
     }
 
-    private void LateUpdate()
+    private void Update()
     {
         // get player movement input
         Vector2 runInput = playerInput.ThirdPersonMovement.Run.ReadValue<Vector2>();
