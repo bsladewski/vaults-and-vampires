@@ -46,7 +46,7 @@ public class PlayerCharacterController : MonoBehaviour, ICharacterController
         motor.CharacterController = this;
     }
 
-    public bool IsGrounded()
+    public bool GetIsGrounded()
     {
         return motor.GroundingStatus.IsStableOnGround;
     }
@@ -78,7 +78,7 @@ public class PlayerCharacterController : MonoBehaviour, ICharacterController
 
     public void UpdateVelocity(ref Vector3 currentVelocity, float deltaTime)
     {
-        bool isGrounded = IsGrounded();
+        bool isGrounded = GetIsGrounded();
         Vector3 planarMovement = targetVelocityNormalized * moveSpeed * (isGrounded ? 1f : jumpMoveSpeedModifier);
         if (!isGrounded)
         {
@@ -88,6 +88,7 @@ public class PlayerCharacterController : MonoBehaviour, ICharacterController
         currentVelocity = Vector3.Lerp(currentVelocity, planarMovement, Time.deltaTime * moveAcceleration);
         if (shouldJump)
         {
+            motor.ForceUnground();
             currentVelocity += Vector3.up * jumpHeight * 100; // TODO: remove magic number
             shouldJump = false;
         }
@@ -112,7 +113,7 @@ public class PlayerCharacterController : MonoBehaviour, ICharacterController
 
     public void PostGroundingUpdate(float deltaTime)
     {
-        if (IsGrounded())
+        if (GetIsGrounded())
         {
             wasGrounded = true;
             jumpInertia = Vector3.zero;
