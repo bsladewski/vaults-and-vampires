@@ -24,7 +24,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Center",
+                    "name": "Aim",
                     "type": "Button",
                     "id": "f4c3fd22-d4f1-40ac-adf2-767e7414a77f",
                     "expectedControlType": "Button",
@@ -103,11 +103,11 @@
                 {
                     "name": "",
                     "id": "0933fcba-8d7a-4e95-881d-e759f9933439",
-                    "path": "<Gamepad>/rightTrigger",
+                    "path": "<Gamepad>/leftTrigger",
                     "interactions": "Press",
                     "processors": "",
                     "groups": "",
-                    "action": "Center",
+                    "action": "Aim",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -118,7 +118,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Center",
+                    "action": "Aim",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

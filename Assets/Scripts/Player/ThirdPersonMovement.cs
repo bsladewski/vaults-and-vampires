@@ -8,6 +8,14 @@ public class ThirdPersonMovement : MonoBehaviour
     private PlayerCharacterController playerCharacterController;
 
     [SerializeField]
+    private float strafeMovementPenalty = 0.75f;
+
+    [SerializeField]
+    private float backwardsMovementPenalty = 0.5f;
+
+    private PlayerInput playerInput;
+
+    [SerializeField]
     private float cameraCorrectionSpeed = 5f;
 
     [SerializeField]
@@ -22,7 +30,6 @@ public class ThirdPersonMovement : MonoBehaviour
 
     private bool startedJump;
 
-    private PlayerInput playerInput;
 
     private Vector3 lastCameraForward;
 
@@ -45,6 +52,17 @@ public class ThirdPersonMovement : MonoBehaviour
     {
         // get player movement input
         Vector2 runInput = playerInput.ThirdPersonMovement.Run.ReadValue<Vector2>();
+        if (GetIsAimLocked() && runInput.y < 0f)
+        {
+            // if we're aim locked slow down the player's backwards movement
+            runInput.y *= backwardsMovementPenalty;
+        }
+        if (GetIsAimLocked())
+        {
+            // if we're aim locked slow down the player's sideways movement
+            runInput.x *= strafeMovementPenalty;
+        }
+
         Vector3 runDirection = new Vector3(runInput.x, 0f, runInput.y);
         if (runDirection == Vector3.zero)
         {
@@ -62,8 +80,8 @@ public class ThirdPersonMovement : MonoBehaviour
         }
 
         // calculate player's intended velocity
-        Vector3 targetVelocityNormalized = (Quaternion.LookRotation(lastCameraForward) * runDirection).normalized;
-        playerCharacterController.SetTargetVelocityNormalized(targetVelocityNormalized);
+        Vector3 targetDirection = Quaternion.LookRotation(lastCameraForward) * runDirection;
+        playerCharacterController.SetTargetDirection(targetDirection);
 
         bool isGrounded = playerCharacterController.GetIsGrounded();
         bool jumpInput = playerInput.ThirdPersonMovement.Jump.triggered;
@@ -109,5 +127,10 @@ public class ThirdPersonMovement : MonoBehaviour
     private Vector3 GetCameraForward()
     {
         return ThirdPersonCameraTarget.Instance.GetCameraForward();
+    }
+
+    private bool GetIsAimLocked()
+    {
+        return ThirdPersonCameraTarget.Instance.GetIsAimLocked();
     }
 }

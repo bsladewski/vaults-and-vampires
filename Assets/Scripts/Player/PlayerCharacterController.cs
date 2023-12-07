@@ -12,18 +12,18 @@ public class PlayerCharacterController : MonoBehaviour, ICharacterController
     private LayerMask layerMask;
 
     [SerializeField]
-    private float moveSpeed = 1f;
+    private float moveSpeed = 8f;
 
-    private Vector3 targetVelocityNormalized;
+    private Vector3 targetDirection;
 
     private Vector3 planarMovement;
 
     [SerializeField]
-    private float moveAcceleration = 1f;
+    private float moveAcceleration = 10f;
 
 
     [SerializeField]
-    private float rotateSpeed = 1f;
+    private float rotateSpeed = 10f;
 
     private Quaternion targetRotation;
 
@@ -36,7 +36,7 @@ public class PlayerCharacterController : MonoBehaviour, ICharacterController
     private float jumpHeight = 1f;
 
     [SerializeField]
-    private float jumpMoveSpeedModifier = 0.25f;
+    private float jumpMoveSpeedModifier = 0.5f;
 
     private Vector3 jumpInertia;
 
@@ -54,9 +54,9 @@ public class PlayerCharacterController : MonoBehaviour, ICharacterController
         return motor.GroundingStatus.IsStableOnGround;
     }
 
-    public void SetTargetVelocityNormalized(Vector3 targetVelocityNormalized)
+    public void SetTargetDirection(Vector3 targetDirection)
     {
-        this.targetVelocityNormalized = targetVelocityNormalized;
+        this.targetDirection = targetDirection;
     }
 
     public void SetTargetRotation(Quaternion targetRotation)
@@ -71,9 +71,15 @@ public class PlayerCharacterController : MonoBehaviour, ICharacterController
 
     public void UpdateRotation(ref Quaternion currentRotation, float deltaTime)
     {
-        if (targetVelocityNormalized != Vector3.zero)
+        if (ThirdPersonCameraTarget.Instance.GetIsAimLocked())
         {
-            targetRotation = Quaternion.LookRotation(targetVelocityNormalized, Vector3.up);
+            // if we're aim locked the player should remain facing their current forward vector
+            return;
+        }
+
+        if (targetDirection != Vector3.zero)
+        {
+            targetRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
         }
 
         currentRotation = Quaternion.Slerp(currentRotation, targetRotation, Time.deltaTime * rotateSpeed);
@@ -82,7 +88,7 @@ public class PlayerCharacterController : MonoBehaviour, ICharacterController
     public void UpdateVelocity(ref Vector3 currentVelocity, float deltaTime)
     {
         bool isGrounded = GetIsGrounded();
-        planarMovement = targetVelocityNormalized * moveSpeed * (isGrounded ? 1f : jumpMoveSpeedModifier);
+        planarMovement = targetDirection * moveSpeed * (isGrounded ? 1f : jumpMoveSpeedModifier);
         if (!isGrounded)
         {
             // conserve momentum if we are jumping

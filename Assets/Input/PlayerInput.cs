@@ -46,7 +46,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Center"",
+                    ""name"": ""Aim"",
                     ""type"": ""Button"",
                     ""id"": ""f4c3fd22-d4f1-40ac-adf2-767e7414a77f"",
                     ""expectedControlType"": ""Button"",
@@ -125,11 +125,11 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""0933fcba-8d7a-4e95-881d-e759f9933439"",
-                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
                     ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Center"",
+                    ""action"": ""Aim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -140,7 +140,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Center"",
+                    ""action"": ""Aim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -267,7 +267,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_ThirdPersonCamera = asset.FindActionMap("Third-Person Camera", throwIfNotFound: true);
         m_ThirdPersonCamera_Rotate = m_ThirdPersonCamera.FindAction("Rotate", throwIfNotFound: true);
         m_ThirdPersonCamera_Zoom = m_ThirdPersonCamera.FindAction("Zoom", throwIfNotFound: true);
-        m_ThirdPersonCamera_Center = m_ThirdPersonCamera.FindAction("Center", throwIfNotFound: true);
+        m_ThirdPersonCamera_Aim = m_ThirdPersonCamera.FindAction("Aim", throwIfNotFound: true);
         // Third-Person Movement
         m_ThirdPersonMovement = asset.FindActionMap("Third-Person Movement", throwIfNotFound: true);
         m_ThirdPersonMovement_Run = m_ThirdPersonMovement.FindAction("Run", throwIfNotFound: true);
@@ -335,14 +335,14 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private List<IThirdPersonCameraActions> m_ThirdPersonCameraActionsCallbackInterfaces = new List<IThirdPersonCameraActions>();
     private readonly InputAction m_ThirdPersonCamera_Rotate;
     private readonly InputAction m_ThirdPersonCamera_Zoom;
-    private readonly InputAction m_ThirdPersonCamera_Center;
+    private readonly InputAction m_ThirdPersonCamera_Aim;
     public struct ThirdPersonCameraActions
     {
         private @PlayerInput m_Wrapper;
         public ThirdPersonCameraActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Rotate => m_Wrapper.m_ThirdPersonCamera_Rotate;
         public InputAction @Zoom => m_Wrapper.m_ThirdPersonCamera_Zoom;
-        public InputAction @Center => m_Wrapper.m_ThirdPersonCamera_Center;
+        public InputAction @Aim => m_Wrapper.m_ThirdPersonCamera_Aim;
         public InputActionMap Get() { return m_Wrapper.m_ThirdPersonCamera; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -358,9 +358,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Zoom.started += instance.OnZoom;
             @Zoom.performed += instance.OnZoom;
             @Zoom.canceled += instance.OnZoom;
-            @Center.started += instance.OnCenter;
-            @Center.performed += instance.OnCenter;
-            @Center.canceled += instance.OnCenter;
+            @Aim.started += instance.OnAim;
+            @Aim.performed += instance.OnAim;
+            @Aim.canceled += instance.OnAim;
         }
 
         private void UnregisterCallbacks(IThirdPersonCameraActions instance)
@@ -371,9 +371,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Zoom.started -= instance.OnZoom;
             @Zoom.performed -= instance.OnZoom;
             @Zoom.canceled -= instance.OnZoom;
-            @Center.started -= instance.OnCenter;
-            @Center.performed -= instance.OnCenter;
-            @Center.canceled -= instance.OnCenter;
+            @Aim.started -= instance.OnAim;
+            @Aim.performed -= instance.OnAim;
+            @Aim.canceled -= instance.OnAim;
         }
 
         public void RemoveCallbacks(IThirdPersonCameraActions instance)
@@ -449,7 +449,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     {
         void OnRotate(InputAction.CallbackContext context);
         void OnZoom(InputAction.CallbackContext context);
-        void OnCenter(InputAction.CallbackContext context);
+        void OnAim(InputAction.CallbackContext context);
     }
     public interface IThirdPersonMovementActions
     {
