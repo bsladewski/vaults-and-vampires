@@ -92,6 +92,16 @@ public class ThirdPersonMovement : MonoBehaviour
             jumpBufferTimer = 0f;
             startedJump = true;
         }
+        else if (playerInput.ThirdPersonMovement.Jump.IsPressed())
+        {
+            // if the player didn't just jump and is pressing the jump button, set is jump held flag
+            playerCharacterController.SetIsJumpHeld(true);
+        }
+        else
+        {
+            // if the player didn't just jump and is not pressing the jump button, reset is jump held flag
+            playerCharacterController.SetIsJumpHeld(false);
+        }
 
         if (!isGrounded)
         {

@@ -33,14 +33,19 @@ public class PlayerCharacterController : MonoBehaviour, ICharacterController
     private float fallVelocity;
 
     [SerializeField]
-    private float jumpHeight = 1f;
+    private float minJumpHeight = 1f;
+
+    [SerializeField]
+    private float maxJumpHeight = 2f;
+
+    private bool shouldJump;
+
+    private bool isJumpHeld;
 
     [SerializeField]
     private float jumpMoveSpeedModifier = 0.5f;
 
     private Vector3 jumpInertia;
-
-    private bool shouldJump;
 
     private bool wasGrounded;
 
@@ -67,6 +72,11 @@ public class PlayerCharacterController : MonoBehaviour, ICharacterController
     public void SetShouldJump()
     {
         shouldJump = true;
+    }
+
+    public void SetIsJumpHeld(bool isJumpHeld)
+    {
+        this.isJumpHeld = isJumpHeld;
     }
 
     public void UpdateRotation(ref Quaternion currentRotation, float deltaTime)
@@ -101,16 +111,22 @@ public class PlayerCharacterController : MonoBehaviour, ICharacterController
         {
             // initiate a jump
             motor.ForceUnground();
-            float jumpVelocity = Mathf.Sqrt(jumpHeight * 2 * gravity);
-            currentVelocity.y += jumpVelocity;
-            fallVelocity = -jumpVelocity;
+
+            // apply velocity to reach min jump height
+            fallVelocity -= Mathf.Sqrt(2 * maxJumpHeight * gravity);
             shouldJump = false;
         }
 
-        if (!isGrounded)
+        else if (!isGrounded)
         {
-            // apply gravity
-            fallVelocity += gravity * Time.deltaTime;
+            if (!isJumpHeld && fallVelocity < 0f)
+            {
+                fallVelocity += gravity * (maxJumpHeight / minJumpHeight) * Time.deltaTime;
+            }
+            else
+            {
+                fallVelocity += gravity * Time.deltaTime;
+            }
             currentVelocity.y = -fallVelocity;
         }
     }
