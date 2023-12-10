@@ -112,7 +112,7 @@ public class PlayerCharacterController : MonoBehaviour, ICharacterController
             // initiate a jump
             motor.ForceUnground();
 
-            // apply velocity to reach min jump height
+            // apply velocity to reach max jump height
             fallVelocity -= Mathf.Sqrt(2 * maxJumpHeight * gravity);
             shouldJump = false;
         }
@@ -121,12 +121,16 @@ public class PlayerCharacterController : MonoBehaviour, ICharacterController
         {
             if (!isJumpHeld && fallVelocity < 0f)
             {
+                // if the player releases the jump button, adjust gravity so we hit the target jump height
                 fallVelocity += gravity * (maxJumpHeight / minJumpHeight) * Time.deltaTime;
             }
             else
             {
+                // calculate gravity
                 fallVelocity += gravity * Time.deltaTime;
             }
+
+            // apply gravity
             currentVelocity.y = -fallVelocity;
         }
     }
