@@ -16,15 +16,18 @@ The game is built in Unity 2022.3.8f1.
 
 The game uses the following dependencies:
 
--   Cinemachine
--   Unity Input System
--   Odin
--   Feel
--   GSpawn Level Designer
--   Text Animator (Febucci)
--   The A* Pathfinding Project (Aron Granberg)
--   QuickOutline (Chris Nolet)
--   DOTween
+-   Cinemachine (Unity Registry)
+-   Unity Input System (Unity Registry)
+-   TextMesh Pro (Unity Registry)
+-   ThirdParty/
+    -   Feel (Feel, _not yet implemented_)
+    -   GSpawn Level Designer (GSpawn, _not yet implemented_)
+    -   Kinematic Character Controller ()
+    -   QuickOutline (Chris Nolet, _not yet implemented_)
+-   Plugins/
+    -   DOTween (Demigiant)
+    -   Text Animator (Febucci, _not yet implemented_)
+    -   Odin (Sirenix)
 
 ## Licensing
 
