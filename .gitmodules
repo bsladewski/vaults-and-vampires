@@ -1,0 +1,3 @@
+[submodule "Assets/Plugins"]
+	path = Assets/Plugins
+	url = git@github.com:bsladewski/vaults-and-vampires-private.git
