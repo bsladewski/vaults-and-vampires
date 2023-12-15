@@ -22,7 +22,7 @@ The game uses the following dependencies:
 -   ThirdParty/
     -   Feel (Feel, _not yet implemented_)
     -   GSpawn Level Designer (GSpawn, _not yet implemented_)
-    -   Kinematic Character Controller ()
+    -   Kinematic Character Controller (Philippe St-Amand)
     -   QuickOutline (Chris Nolet, _not yet implemented_)
 -   Plugins/
     -   DOTween (Demigiant)
