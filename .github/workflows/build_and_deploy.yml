@@ -46,8 +46,11 @@ jobs:
         with:
           targetPlatform: WebGL
 
-      # Output
-      - uses: actions/upload-artifact@v3
+      # Deploy
+      - name: Upload Build to itch.io
+        uses: robpc/itchio-upload-action@v1
         with:
-          name: Build
           path: build
+          project: ${{ secrets.ITCH_PROJECT }}
+          channel: WebGL
+          api-key: ${{ secrets.ITCH_API_KEY }}
