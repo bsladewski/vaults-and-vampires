@@ -36,11 +36,18 @@ jobs:
         with:
           targetPlatform: WebGL
 
+      # Set variables for version tagging
+      - name: Set release date
+        run: echo "RELEASE_DATE=$(date --rfc-3339=date)" >> ${GITHUB_ENV}
+      - name: Set short hash
+        run: echo "SHORT_HASH=$(git rev-parse --short HEAD)" >> ${GITHUB_ENV}
+
       # Deploy
-      - name: Upload Build to itch.io
+      - name: Upload build to itch.io
         uses: robpc/itchio-upload-action@v1
         with:
           path: build
           project: ${{ secrets.ITCH_PROJECT }}
           channel: webgl
           api-key: ${{ secrets.ITCH_API_KEY }}
+          version: ${{ env.RELEASE_DATE }}-${{ env.SHORT_HASH }}
