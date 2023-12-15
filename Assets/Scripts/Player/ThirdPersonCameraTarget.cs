@@ -71,6 +71,12 @@ public class ThirdPersonCameraTarget : MonoBehaviour
                 transform.Rotate(new Vector3(0f, rotateInput * rotateSpeed * 360f * Time.deltaTime, 0f));
             }
         }
+
+        if (isAimLocked && (lookTween == null || !lookTween.active))
+        {
+            // if we're aim locked and we're not looking keep the camera pointed towards the player forward
+            transform.forward = playerTransform.forward;
+        }
     }
 
     public Vector3 GetCameraForward()

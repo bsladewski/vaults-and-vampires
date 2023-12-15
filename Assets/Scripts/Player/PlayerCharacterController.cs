@@ -90,9 +90,9 @@ public class PlayerCharacterController : MonoBehaviour, ICharacterController
         if (targetDirection != Vector3.zero)
         {
             targetRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
+            currentRotation = Quaternion.Slerp(currentRotation, targetRotation, Time.deltaTime * rotateSpeed);
         }
 
-        currentRotation = Quaternion.Slerp(currentRotation, targetRotation, Time.deltaTime * rotateSpeed);
     }
 
     public void UpdateVelocity(ref Vector3 currentVelocity, float deltaTime)

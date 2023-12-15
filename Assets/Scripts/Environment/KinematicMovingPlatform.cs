@@ -26,6 +26,13 @@ public class KinematicMovingPlatform : MonoBehaviour, IMoverController
 
     private Vector3 targetPosition;
 
+    [Header("Rotation")]
+    [SerializeField]
+    private Vector3 rotationAxis = Vector3.up;
+
+    [SerializeField]
+    private float rotationSpeed = 0f;
+
     private void Awake()
     {
         mover.MoverController = this;
@@ -57,6 +64,10 @@ public class KinematicMovingPlatform : MonoBehaviour, IMoverController
     {
         goalPosition = targetPosition;
         goalRotation = mover.Rigidbody.rotation;
+        if (rotationSpeed > 0f)
+        {
+            goalRotation *= Quaternion.Euler(rotationAxis * rotationSpeed);
+        }
     }
 
     private void HandleWaypointMovement()
