@@ -20,13 +20,13 @@ The game uses the following dependencies:
 -   Unity Input System (Unity Registry)
 -   TextMesh Pro (Unity Registry)
 -   Plugins/
+    -   DOTween (Demigiant)
     -   Feel (Feel, _not yet implemented_)
     -   GSpawn Level Designer (GSpawn, _not yet implemented_)
     -   Kinematic Character Controller (Philippe St-Amand)
-    -   QuickOutline (Chris Nolet, _not yet implemented_)
-    -   DOTween (Demigiant)
-    -   Text Animator (Febucci, _not yet implemented_)
     -   Odin (Sirenix)
+    -   QuickOutline (Chris Nolet, _not yet implemented_)
+    -   Text Animator (Febucci, _not yet implemented_)
 
 ## Licensing
 
