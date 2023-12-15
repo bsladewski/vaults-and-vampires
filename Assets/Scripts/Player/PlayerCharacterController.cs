@@ -1,6 +1,6 @@
+using UnityEngine;
 using KinematicCharacterController;
 using Sirenix.OdinInspector;
-using UnityEngine;
 
 public class PlayerCharacterController : MonoBehaviour, ICharacterController
 {
@@ -49,7 +49,7 @@ public class PlayerCharacterController : MonoBehaviour, ICharacterController
 
     private bool wasGrounded;
 
-    private void Start()
+    private void Awake()
     {
         motor.CharacterController = this;
     }
@@ -146,7 +146,7 @@ public class PlayerCharacterController : MonoBehaviour, ICharacterController
         if (!isGrounded && wasGrounded)
         {
             // if we left the ground, store our lateral momentum
-            jumpInertia = planarMovement * jumpMoveSpeedModifier;
+            jumpInertia = planarMovement * (1f - jumpMoveSpeedModifier);
         }
 
         if (isGrounded)
