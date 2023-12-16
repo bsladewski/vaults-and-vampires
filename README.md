@@ -3,12 +3,17 @@
 ## Overview
 
 Vaults & Vampires is a platform adventure game. The moment-to-moment gameplay is inspired by platform adventure games
-such as Conker's Bad Fur Day and Banjo-Kazooie. The game will also feature mechanics and themes inspired by various DnD
-modules.
+such as Conker's Bad Fur Day and Banjo-Kazooie. The game will also feature mechanics and themes inspired by tabletop
+role-playing games.
 
 The primary goal for this project is for me to evaluate and become familiar with various Unity assets that I would like
-to integrate into my future workflows such as the Odin Inspector & Serializer, Feel, and the GSpawn Level Designer. A
-secondary goal is to create and release a playable demo of the game.
+to integrate into my future workflows. This project will also serve as a way for me to test game development workflows
+and establish pipelines for asset creation.
+
+## Playable Build
+
+The contents of the main branch will automatically be built and deployed to Itch.io whenever new commits are made. A
+playable build will be hosted at https://rcxa.itch.io/vaults-and-vampires.
 
 ## Dependencies
 
@@ -27,8 +32,3 @@ The game uses the following dependencies:
     -   Odin (Sirenix)
     -   QuickOutline (Chris Nolet, _not yet implemented_)
     -   Text Animator (Febucci, _not yet implemented_)
-
-## Licensing
-
-The license for this project is a modified MIT license (see LICENSE.md). In summary, feel free to use any scripts or
-assets from this repository in your own projects, just don't rename the game and sell it :)
