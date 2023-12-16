@@ -30,7 +30,6 @@ public class ThirdPersonMovement : MonoBehaviour
 
     private bool startedJump;
 
-
     private Vector3 lastCameraForward;
 
     private void Awake()

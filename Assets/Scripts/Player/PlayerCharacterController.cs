@@ -21,7 +21,6 @@ public class PlayerCharacterController : MonoBehaviour, ICharacterController
     [SerializeField]
     private float moveAcceleration = 10f;
 
-
     [SerializeField]
     private float rotateSpeed = 10f;
 

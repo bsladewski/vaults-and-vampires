@@ -31,7 +31,7 @@ public class KinematicMovingPlatform : MonoBehaviour, IMoverController
     private Vector3 rotationAxis = Vector3.up;
 
     [SerializeField]
-    private float rotationSpeed = 0f;
+    private float rotationSpeed;
 
     private void Awake()
     {
