@@ -52,15 +52,26 @@ public class ThirdPersonMovement : MonoBehaviour
     {
         // get player movement input
         Vector2 runInput = playerInput.ThirdPersonMovement.Run.ReadValue<Vector2>();
-        if (GetIsAimLocked() && runInput.y < 0f)
+        bool isAimLocked = GetIsAimLocked();
+        if (isAimLocked && runInput.y < 0f)
         {
             // if we're aim locked slow down the player's backwards movement
             runInput.y *= backwardsMovementPenalty;
         }
-        if (GetIsAimLocked())
+
+        if (isAimLocked)
         {
             // if we're aim locked slow down the player's sideways movement
             runInput.x *= strafeMovementPenalty;
+
+            // when we're aim locked we replace camera rotation with player rotation
+            float aimLockRotation = playerInput.ThirdPersonMovement.Rotate.ReadValue<float>();
+            playerCharacterController.SetAimLockRotation(aimLockRotation);
+        }
+        else
+        {
+            // if we're not aim locked, clear aim lock rotation
+            playerCharacterController.SetAimLockRotation(0f);
         }
 
         Vector3 runDirection = new Vector3(runInput.x, 0f, runInput.y);

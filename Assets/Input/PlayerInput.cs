@@ -154,7 +154,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""name"": ""Run"",
                     ""type"": ""Value"",
                     ""id"": ""ff6cf091-bef2-4db8-9c08-f98ce96e963d"",
-                    ""expectedControlType"": ""Vector2"",
+                    ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
@@ -167,6 +167,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Rotate"",
+                    ""type"": ""Value"",
+                    ""id"": ""2445616b-fe43-4844-8cb2-01e6b73a8835"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -257,6 +266,50 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""QE"",
+                    ""id"": ""1d59e789-42ce-4265-9133-a0c0c770520e"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""c655cdff-402a-40d8-a61f-b7e3accaf4fe"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""11ff256b-22de-4842-b1a7-36a670a3cbc4"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e15dfe60-a43f-44f4-90d8-99642f2c5efb"",
+                    ""path"": ""<Gamepad>/rightStick/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -272,6 +325,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_ThirdPersonMovement = asset.FindActionMap("Third-Person Movement", throwIfNotFound: true);
         m_ThirdPersonMovement_Run = m_ThirdPersonMovement.FindAction("Run", throwIfNotFound: true);
         m_ThirdPersonMovement_Jump = m_ThirdPersonMovement.FindAction("Jump", throwIfNotFound: true);
+        m_ThirdPersonMovement_Rotate = m_ThirdPersonMovement.FindAction("Rotate", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -397,12 +451,14 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private List<IThirdPersonMovementActions> m_ThirdPersonMovementActionsCallbackInterfaces = new List<IThirdPersonMovementActions>();
     private readonly InputAction m_ThirdPersonMovement_Run;
     private readonly InputAction m_ThirdPersonMovement_Jump;
+    private readonly InputAction m_ThirdPersonMovement_Rotate;
     public struct ThirdPersonMovementActions
     {
         private @PlayerInput m_Wrapper;
         public ThirdPersonMovementActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Run => m_Wrapper.m_ThirdPersonMovement_Run;
         public InputAction @Jump => m_Wrapper.m_ThirdPersonMovement_Jump;
+        public InputAction @Rotate => m_Wrapper.m_ThirdPersonMovement_Rotate;
         public InputActionMap Get() { return m_Wrapper.m_ThirdPersonMovement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -418,6 +474,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
+            @Rotate.started += instance.OnRotate;
+            @Rotate.performed += instance.OnRotate;
+            @Rotate.canceled += instance.OnRotate;
         }
 
         private void UnregisterCallbacks(IThirdPersonMovementActions instance)
@@ -428,6 +487,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
+            @Rotate.started -= instance.OnRotate;
+            @Rotate.performed -= instance.OnRotate;
+            @Rotate.canceled -= instance.OnRotate;
         }
 
         public void RemoveCallbacks(IThirdPersonMovementActions instance)
@@ -455,5 +517,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     {
         void OnRun(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnRotate(InputAction.CallbackContext context);
     }
 }

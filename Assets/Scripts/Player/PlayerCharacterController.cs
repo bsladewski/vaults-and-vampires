@@ -25,8 +25,6 @@ public class PlayerCharacterController : MonoBehaviour, ICharacterController
     [SerializeField]
     private float rotateSpeed = 10f;
 
-    private Quaternion targetRotation;
-
     [SerializeField]
     private float gravity = 9.81f;
 
@@ -49,6 +47,11 @@ public class PlayerCharacterController : MonoBehaviour, ICharacterController
 
     private bool wasGrounded;
 
+    [SerializeField]
+    private float aimLockRotateSpeed;
+
+    private float aimLockRotation = 0.25f;
+
     private void Awake()
     {
         motor.CharacterController = this;
@@ -64,9 +67,9 @@ public class PlayerCharacterController : MonoBehaviour, ICharacterController
         this.targetDirection = targetDirection;
     }
 
-    public void SetTargetRotation(Quaternion targetRotation)
+    public void SetAimLockRotation(float aimLockRotation)
     {
-        this.targetRotation = targetRotation;
+        this.aimLockRotation = aimLockRotation;
     }
 
     public void SetShouldJump()
@@ -83,13 +86,14 @@ public class PlayerCharacterController : MonoBehaviour, ICharacterController
     {
         if (ThirdPersonCameraTarget.Instance.GetIsAimLocked())
         {
-            // if we're aim locked the player should remain facing their current forward vector
+            float targetAimLockRotation = aimLockRotation * aimLockRotateSpeed * 360f;
+            currentRotation *= Quaternion.Euler(Vector3.up * targetAimLockRotation * Time.deltaTime);
             return;
         }
 
         if (targetDirection != Vector3.zero)
         {
-            targetRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
+            Quaternion targetRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
             currentRotation = Quaternion.Slerp(currentRotation, targetRotation, Time.deltaTime * rotateSpeed);
         }
 

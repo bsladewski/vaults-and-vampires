@@ -1932,6 +1932,7 @@ MonoBehaviour:
   minJumpHeight: 1
   maxJumpHeight: 2
   jumpMoveSpeedModifier: 0.5
+  aimLockRotateSpeed: 0.25
 --- !u!114 &1668587695
 MonoBehaviour:
   m_ObjectHideFlags: 0
