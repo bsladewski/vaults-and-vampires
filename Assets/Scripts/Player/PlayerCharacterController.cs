@@ -9,7 +9,7 @@ public class PlayerCharacterController : MonoBehaviour, ICharacterController
     private KinematicCharacterMotor motor;
 
     [SerializeField]
-    private LayerMask layerMask;
+    private LayerMask collisionLayerMask;
 
     [SerializeField]
     private float moveSpeed = 8f;
@@ -138,9 +138,9 @@ public class PlayerCharacterController : MonoBehaviour, ICharacterController
         }
     }
 
-    public bool IsColliderValidForCollisions(Collider coll)
+    public bool IsColliderValidForCollisions(Collider collider)
     {
-        return layerMask == (layerMask | 1 << coll.gameObject.layer);
+        return CollisionUtils.IsColliderInLayerMask(collider, collisionLayerMask);
     }
 
     public void PostGroundingUpdate(float deltaTime)
