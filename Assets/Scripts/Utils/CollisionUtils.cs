@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CollisionUtils
+public static class CollisionUtils
 {
     public static bool IsColliderInLayerMask(Collider collider, LayerMask layerMask)
     {

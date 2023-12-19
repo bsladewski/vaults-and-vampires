@@ -5,7 +5,19 @@ using UnityEngine;
 public class PickupSO : ScriptableObject
 {
     [Required]
-    public PickupVisual pickupVisualPrefab;
+    [SerializeField]
+    private PickupVisual pickupVisualPrefab;
 
-    public ParticleSystem getPickupParticleSystemPrefab;
+    [SerializeField]
+    private ParticleSystem getPickupParticleSystemPrefab;
+
+    public PickupVisual GetPickupVisualPrefab()
+    {
+        return pickupVisualPrefab;
+    }
+
+    public ParticleSystem GetPickupParticleSystemPrefab()
+    {
+        return getPickupParticleSystemPrefab;
+    }
 }

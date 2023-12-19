@@ -14,19 +14,19 @@ public class Pickup : MonoBehaviour
     private void Awake()
     {
         Instantiate(
-            pickupSO.pickupVisualPrefab,
+            pickupSO.GetPickupVisualPrefab(),
             pickupVisualSpawn.position,
-            pickupSO.pickupVisualPrefab.transform.rotation,
+            pickupSO.GetPickupVisualPrefab().transform.rotation,
             transform
         );
     }
 
     public void GetPickup()
     {
-        if (pickupSO.getPickupParticleSystemPrefab != null)
+        if (pickupSO.GetPickupParticleSystemPrefab() != null)
         {
             Instantiate(
-                pickupSO.getPickupParticleSystemPrefab,
+                pickupSO.GetPickupParticleSystemPrefab(),
                 pickupVisualSpawn.position,
                 Quaternion.identity
             );
