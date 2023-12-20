@@ -5,29 +5,15 @@ public class Pickup : MonoBehaviour
 {
     [Required]
     [SerializeField]
-    private PickupSO pickupSO;
-
-    [Required]
-    [SerializeField]
-    private Transform pickupVisualSpawn;
-
-    private void Awake()
-    {
-        Instantiate(
-            pickupSO.pickupVisualPrefab,
-            pickupVisualSpawn.position,
-            pickupSO.pickupVisualPrefab.transform.rotation,
-            transform
-        );
-    }
+    private PickupVisual pickupVisual;
 
     public void GetPickup()
     {
-        if (pickupSO.getPickupParticleSystemPrefab != null)
+        if (pickupVisual.GetPickupParticleSystemPrefab() != null)
         {
             Instantiate(
-                pickupSO.getPickupParticleSystemPrefab,
-                pickupVisualSpawn.position,
+                pickupVisual.GetPickupParticleSystemPrefab(),
+                pickupVisual.transform.position,
                 Quaternion.identity
             );
         }
