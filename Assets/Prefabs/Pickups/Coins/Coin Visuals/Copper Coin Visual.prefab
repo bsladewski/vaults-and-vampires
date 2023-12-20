@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &8334139988781000335
+--- !u!1001 &7986925957894293448
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -8,10 +8,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5780797602588426986, guid: 4f7ee30a95e5f8f4a81b3e290d960730,
+        type: 3}
+      propertyPath: pickupParticleSystemPrefab
+      value: 
+      objectReference: {fileID: 673489695582292511, guid: 93ff0591441c0d4429c226b52525f78d,
+        type: 3}
     - target: {fileID: 6884547349280187705, guid: 4f7ee30a95e5f8f4a81b3e290d960730,
         type: 3}
       propertyPath: m_Name
-      value: Silver Coin Visual
+      value: Copper Coin Visual
       objectReference: {fileID: 0}
     - target: {fileID: 7059001413754390963, guid: 4f7ee30a95e5f8f4a81b3e290d960730,
         type: 3}
@@ -67,7 +73,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 8a4a6ef6f3e5e8446bfd7d274d404a69, type: 2}
+      objectReference: {fileID: 2100000, guid: 8d27f21634cae864099bd7524118b775, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
