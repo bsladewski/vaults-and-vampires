@@ -26,7 +26,8 @@ The game uses the following dependencies:
 -   TextMesh Pro (Unity Registry)
 -   Plugins/
     -   DOTween (Demigiant)
-    -   Feel (Feel, _not yet implemented_)
+    -   Dynamic Shadow Project (Nyahoon Games, _modified_)
+    -   Feel (Feel, _not yet implemented_, _modified_)
     -   GSpawn Level Designer (GSpawn, _not yet implemented_)
     -   Kinematic Character Controller (Philippe St-Amand)
     -   Odin (Sirenix)
