@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2082167796855556075}
   - component: {fileID: 3839085543090443468}
   - component: {fileID: 4335151043319955094}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Blob Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}

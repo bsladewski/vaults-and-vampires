@@ -250,7 +250,7 @@ GameObject:
   - component: {fileID: 155339094}
   - component: {fileID: 155339097}
   - component: {fileID: 155339096}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -289,7 +289,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
+  m_RenderingLayerMask: 2
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: fccb1f3d698cfec4db782e894e939864, type: 2}
@@ -623,7 +623,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.28978413, y: -0.00000001646809, z: 0.000000004986136, w: 0.95709205}
+  m_LocalRotation: {x: 0.28978413, y: 0.000000016468093, z: -0.0000000049861373, w: 0.95709205}
   m_LocalPosition: {x: 0, y: 5.75, z: -6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1892,7 +1892,7 @@ GameObject:
   - component: {fileID: 1668587694}
   - component: {fileID: 1668587697}
   - component: {fileID: 1668587698}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player Character
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -2286,7 +2286,7 @@ GameObject:
   - component: {fileID: 1845028336}
   - component: {fileID: 1845028339}
   - component: {fileID: 1845028338}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Heading Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2423,7 +2423,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1915220761}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.28978413, y: -0.00000001646809, z: 0.000000004986136, w: 0.95709205}
+  m_LocalRotation: {x: 0.28978413, y: 0.000000016468093, z: -0.0000000049861373, w: 0.95709205}
   m_LocalPosition: {x: 0, y: 5.75, z: -6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2849,7 +2849,7 @@ PrefabInstance:
     - target: {fileID: 2082167796855556075, guid: b3a665467c43bab4d94881167464528c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2082167796855556075, guid: b3a665467c43bab4d94881167464528c,
         type: 3}
@@ -2890,6 +2890,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3839085543090443468, guid: b3a665467c43bab4d94881167464528c,
+        type: 3}
+      propertyPath: m_IgnoreLayers.m_Bits
+      value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 4560905349950818109, guid: b3a665467c43bab4d94881167464528c,
         type: 3}

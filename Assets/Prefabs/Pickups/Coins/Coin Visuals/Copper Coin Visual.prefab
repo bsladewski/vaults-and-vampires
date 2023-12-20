@@ -19,6 +19,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Copper Coin Visual
       objectReference: {fileID: 0}
+    - target: {fileID: 6884547349280187705, guid: 4f7ee30a95e5f8f4a81b3e290d960730,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7059001413754390963, guid: 4f7ee30a95e5f8f4a81b3e290d960730,
         type: 3}
       propertyPath: m_LocalPosition.x
