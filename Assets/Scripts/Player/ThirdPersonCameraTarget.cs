@@ -87,6 +87,12 @@ public class ThirdPersonCameraTarget : MonoBehaviour
         return isAimLocked;
     }
 
+    public void ResetCameraPosition(Vector3 position)
+    {
+        transform.position = position;
+        cameraController.ResetCameraPosition(position);
+    }
+
     private void ZoomCamera(InputAction.CallbackContext ctx)
     {
         cameraController.CycleFollowOffset();

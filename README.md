@@ -24,6 +24,8 @@ The game uses the following dependencies:
 -   Cinemachine (Unity Registry)
 -   Unity Input System (Unity Registry)
 -   TextMesh Pro (Unity Registry)
+-   ProBuilder (Unity Registry)
+-   ProGrids (Unity Registry, _experimental_)
 -   Plugins/
     -   DOTween (Demigiant)
     -   Dynamic Shadow Project (Nyahoon Games, _modified_)
