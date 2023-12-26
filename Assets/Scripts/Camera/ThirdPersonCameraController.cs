@@ -87,6 +87,11 @@ public class ThirdPersonCameraController : MonoBehaviour
         }
     }
 
+    public void ResetCameraPosition(Vector3 position)
+    {
+        transposer.ForceCameraPosition(position + normalFollowOffset, Quaternion.identity);
+    }
+
     private void TweenFollowOffset(Vector3 to)
     {
         if (followOffsetTween != null && followOffsetTween.active)

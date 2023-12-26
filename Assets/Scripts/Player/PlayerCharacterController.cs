@@ -81,6 +81,11 @@ public class PlayerCharacterController : MonoBehaviour, ICharacterController
         this.isJumpHeld = isJumpHeld;
     }
 
+    public void SetPosition(Vector3 position)
+    {
+        motor.SetPosition(position);
+    }
+
     public void UpdateRotation(ref Quaternion currentRotation, float deltaTime)
     {
         if (ThirdPersonCameraTarget.Instance.GetIsAimLocked())
