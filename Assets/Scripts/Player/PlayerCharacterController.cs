@@ -2,6 +2,7 @@ using UnityEngine;
 using KinematicCharacterController;
 using Sirenix.OdinInspector;
 
+[SelectionBase]
 public class PlayerCharacterController : MonoBehaviour, ICharacterController
 {
     [Required]

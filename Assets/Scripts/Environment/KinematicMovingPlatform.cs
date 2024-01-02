@@ -3,6 +3,7 @@ using KinematicCharacterController;
 using Sirenix.OdinInspector;
 using DG.Tweening;
 
+[SelectionBase]
 public class KinematicMovingPlatform : MonoBehaviour, IMoverController
 {
     [Required]
