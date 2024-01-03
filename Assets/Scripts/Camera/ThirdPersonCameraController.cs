@@ -24,7 +24,7 @@ public class ThirdPersonCameraController : MonoBehaviour
     private float zoomDuration = 1f;
 
     [SerializeField]
-    private Ease zoomEase = Ease.InOutBack;
+    private Ease zoomEase = Ease.OutBack;
 
     private enum FollowState
     {

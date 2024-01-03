@@ -1,6 +1,7 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
+[SelectionBase]
 public class Pickup : MonoBehaviour
 {
     [Required]
