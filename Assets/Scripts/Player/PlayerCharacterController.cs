@@ -1,10 +1,15 @@
 using UnityEngine;
 using KinematicCharacterController;
 using Sirenix.OdinInspector;
+using System;
 
 [SelectionBase]
 public class PlayerCharacterController : MonoBehaviour, ICharacterController
 {
+    public Action OnPlayerJumped;
+
+    public Action OnPlayerLanded;
+
     [Required]
     [SerializeField]
     private KinematicCharacterMotor motor;
@@ -43,6 +48,9 @@ public class PlayerCharacterController : MonoBehaviour, ICharacterController
     [SerializeField]
     private float jumpMoveSpeedModifier = 0.5f;
 
+    [SerializeField]
+    private float jumpRotationSpeedModifier = 0.25f;
+
     private Vector3 jumpInertia;
 
     private bool wasGrounded;
@@ -55,6 +63,11 @@ public class PlayerCharacterController : MonoBehaviour, ICharacterController
     private void Awake()
     {
         motor.CharacterController = this;
+    }
+
+    public float GetSpeedNormalized()
+    {
+        return (planarMovement / moveSpeed).magnitude;
     }
 
     public bool GetIsGrounded()
@@ -98,8 +111,9 @@ public class PlayerCharacterController : MonoBehaviour, ICharacterController
 
         if (targetDirection != Vector3.zero)
         {
+            float rotationSpeedModifier = GetIsGrounded() ? rotateSpeed : rotateSpeed * jumpRotationSpeedModifier;
             Quaternion targetRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
-            currentRotation = Quaternion.Slerp(currentRotation, targetRotation, Time.deltaTime * rotateSpeed);
+            currentRotation = Quaternion.Slerp(currentRotation, targetRotation, Time.deltaTime * rotationSpeedModifier);
         }
 
     }
@@ -124,6 +138,7 @@ public class PlayerCharacterController : MonoBehaviour, ICharacterController
             // apply velocity to reach max jump height
             fallVelocity -= Mathf.Sqrt(2 * maxJumpHeight * gravity);
             shouldJump = false;
+            OnPlayerJumped?.Invoke();
         }
 
         else if (!isGrounded)
@@ -160,6 +175,11 @@ public class PlayerCharacterController : MonoBehaviour, ICharacterController
 
         if (isGrounded)
         {
+            if (!wasGrounded)
+            {
+                OnPlayerLanded?.Invoke();
+            }
+
             wasGrounded = true;
             jumpInertia = Vector3.zero;
             fallVelocity = 0f;
