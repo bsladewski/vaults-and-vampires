@@ -56,7 +56,7 @@ public class PlayerCharacterController : MonoBehaviour, ICharacterController
 
     private Vector3 jumpInertia;
 
-    private bool wasGrounded;
+    private bool wasGrounded = true;
 
     [SerializeField]
     private float aimLockRotateSpeed;
