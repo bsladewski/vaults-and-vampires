@@ -68,9 +68,9 @@ public class PlayerCharacterController : MonoBehaviour, ICharacterController
         motor.CharacterController = this;
     }
 
-    public float GetSpeedNormalized()
+    public Vector3 GetPlanarMovementNormalized()
     {
-        return (planarMovement / moveSpeed).magnitude;
+        return planarMovement / moveSpeed;
     }
 
     public bool GetIsGrounded()

@@ -74439,6 +74439,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCharacterController: {fileID: 1668587694}
+  thirdPersonMovement: {fileID: 1668587697}
   animator: {fileID: 1364669269}
   moveAnimationAcceleration: 20
 --- !u!1 &1700499716
