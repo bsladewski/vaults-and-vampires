@@ -2,11 +2,14 @@ using UnityEngine;
 using KinematicCharacterController;
 using Sirenix.OdinInspector;
 using System;
+using System.Collections;
 
 [SelectionBase]
 public class PlayerCharacterController : MonoBehaviour, ICharacterController
 {
     public Action OnPlayerJumped;
+
+    public Action OnPlayerFell;
 
     public Action OnPlayerLanded;
 
@@ -126,6 +129,7 @@ public class PlayerCharacterController : MonoBehaviour, ICharacterController
         {
             // conserve momentum if we are jumping
             planarMovement += jumpInertia;
+            StartCoroutine(FireFallEvent());
         }
 
         currentVelocity = Vector3.Lerp(currentVelocity, planarMovement, Time.deltaTime * moveAcceleration);
@@ -138,7 +142,7 @@ public class PlayerCharacterController : MonoBehaviour, ICharacterController
             // apply velocity to reach max jump height
             fallVelocity -= Mathf.Sqrt(2 * maxJumpHeight * gravity);
             shouldJump = false;
-            OnPlayerJumped?.Invoke();
+            StartCoroutine(FireJumpEvent());
         }
 
         else if (!isGrounded)
@@ -177,7 +181,7 @@ public class PlayerCharacterController : MonoBehaviour, ICharacterController
         {
             if (!wasGrounded)
             {
-                OnPlayerLanded?.Invoke();
+                StartCoroutine(FireLandEvent());
             }
 
             wasGrounded = true;
@@ -188,6 +192,24 @@ public class PlayerCharacterController : MonoBehaviour, ICharacterController
         {
             wasGrounded = false;
         }
+    }
+
+    private IEnumerator FireJumpEvent()
+    {
+        yield return new WaitForEndOfFrame();
+        OnPlayerJumped?.Invoke();
+    }
+
+    private IEnumerator FireFallEvent()
+    {
+        yield return new WaitForEndOfFrame();
+        OnPlayerFell?.Invoke();
+    }
+
+    private IEnumerator FireLandEvent()
+    {
+        yield return new WaitForEndOfFrame();
+        OnPlayerLanded?.Invoke();
     }
 
     public void AfterCharacterUpdate(float deltaTime)

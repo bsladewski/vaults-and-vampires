@@ -16,13 +16,16 @@ public class PlayerAnimationController : MonoBehaviour
 
     private float moveAnimationSpeed;
 
+    private bool isJumping;
+
     private void Start()
     {
         playerCharacterController.OnPlayerJumped += OnPlayerJumped;
+        playerCharacterController.OnPlayerFell += OnPlayerFell;
         playerCharacterController.OnPlayerLanded += OnPlayerLanded;
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         float speedNormalized = playerCharacterController.GetSpeedNormalized();
         moveAnimationSpeed = Mathf.Lerp(
@@ -30,16 +33,29 @@ public class PlayerAnimationController : MonoBehaviour
             speedNormalized,
             Time.deltaTime * moveAnimationAcceleration);
         animator.SetFloat("Speed", moveAnimationSpeed);
+        if (isJumping && playerCharacterController.GetIsGrounded())
+        {
+            // extra check to keep us from getting stuck in the jump state
+            OnPlayerLanded();
+        }
     }
 
     private void OnPlayerJumped()
     {
+        OnPlayerFell();
+    }
+
+    private void OnPlayerFell()
+    {
         animator.ResetTrigger("Land");
         animator.SetTrigger("Jump");
+        isJumping = true;
     }
 
     private void OnPlayerLanded()
     {
+        animator.ResetTrigger("Jump");
         animator.SetTrigger("Land");
+        isJumping = false;
     }
 }
