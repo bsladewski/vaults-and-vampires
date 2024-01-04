@@ -123,13 +123,14 @@ public class PlayerCharacterController : MonoBehaviour, ICharacterController
 
     public void UpdateVelocity(ref Vector3 currentVelocity, float deltaTime)
     {
+        Vector3 initialVelocity = currentVelocity;
+
         bool isGrounded = GetIsGrounded();
         planarMovement = targetDirection * moveSpeed * (isGrounded ? 1f : jumpMoveSpeedModifier);
         if (!isGrounded)
         {
             // conserve momentum if we are jumping
             planarMovement += jumpInertia;
-            StartCoroutine(FireFallEvent());
         }
 
         currentVelocity = Vector3.Lerp(currentVelocity, planarMovement, Time.deltaTime * moveAcceleration);
@@ -160,6 +161,11 @@ public class PlayerCharacterController : MonoBehaviour, ICharacterController
 
             // apply gravity
             currentVelocity.y = -fallVelocity;
+        }
+
+        if (initialVelocity.y >= 0f && currentVelocity.y < 0f)
+        {
+            StartCoroutine(FireFallEvent());
         }
     }
 
