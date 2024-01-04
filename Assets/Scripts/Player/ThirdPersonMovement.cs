@@ -32,6 +32,8 @@ public class ThirdPersonMovement : MonoBehaviour
 
     private Vector3 lastCameraForward;
 
+    private Vector3 movementDirection;
+
     private void Awake()
     {
         playerInput = new PlayerInput();
@@ -51,6 +53,7 @@ public class ThirdPersonMovement : MonoBehaviour
     {
         // get player movement input
         Vector2 runInput = playerInput.ThirdPersonMovement.Run.ReadValue<Vector2>();
+        movementDirection = new Vector3(runInput.x, 0f, runInput.y);
         bool isAimLocked = GetIsAimLocked();
         if (isAimLocked && runInput.y < 0f)
         {
@@ -144,13 +147,18 @@ public class ThirdPersonMovement : MonoBehaviour
         }
     }
 
+    public bool GetIsAimLocked()
+    {
+        return ThirdPersonCameraTarget.Instance.GetIsAimLocked();
+    }
+
+    public Vector3 GetMovementDirection()
+    {
+        return movementDirection;
+    }
+
     private Vector3 GetCameraForward()
     {
         return ThirdPersonCameraTarget.Instance.GetCameraForward();
-    }
-
-    private bool GetIsAimLocked()
-    {
-        return ThirdPersonCameraTarget.Instance.GetIsAimLocked();
     }
 }

@@ -1988,7 +1988,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 9c4ffcd8fea2a4340a47477448b2f777,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.04
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9c4ffcd8fea2a4340a47477448b2f777,
         type: 3}
@@ -74439,6 +74439,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCharacterController: {fileID: 1668587694}
+  thirdPersonMovement: {fileID: 1668587697}
   animator: {fileID: 1364669269}
   moveAnimationAcceleration: 20
 --- !u!1 &1700499716
@@ -76502,6 +76503,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3839085543090443468, guid: b3a665467c43bab4d94881167464528c,
+        type: 3}
+      propertyPath: m_OrthographicSize
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 3839085543090443468, guid: b3a665467c43bab4d94881167464528c,
         type: 3}
