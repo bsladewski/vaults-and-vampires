@@ -22,8 +22,6 @@ public class PlayerAnimationController : MonoBehaviour
 
     private float horizontalAnimationSpeed;
 
-    private bool isJumping;
-
     private bool wasAimLocked;
 
     private void Start()
@@ -49,12 +47,6 @@ public class PlayerAnimationController : MonoBehaviour
         else
         {
             HandleMovementAnimations();
-        }
-
-        if (isJumping && playerCharacterController.GetIsGrounded())
-        {
-            // extra check to keep us from getting stuck in the jump state
-            OnPlayerLanded();
         }
     }
 
@@ -87,20 +79,26 @@ public class PlayerAnimationController : MonoBehaviour
 
     private void OnPlayerJumped()
     {
-        OnPlayerFell();
+        ResetTriggers();
+        animator.SetTrigger("Jump");
     }
 
     private void OnPlayerFell()
     {
-        animator.ResetTrigger("Land");
-        animator.SetTrigger("Jump");
-        isJumping = true;
+        ResetTriggers();
+        animator.SetTrigger("Fall");
     }
 
     private void OnPlayerLanded()
     {
-        animator.ResetTrigger("Jump");
+        ResetTriggers();
         animator.SetTrigger("Land");
-        isJumping = false;
+    }
+
+    private void ResetTriggers()
+    {
+        animator.ResetTrigger("Jump");
+        animator.ResetTrigger("Fall");
+        animator.ResetTrigger("Land");
     }
 }
