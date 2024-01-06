@@ -1,11 +1,11 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-public class ThirdPersonMovement : MonoBehaviour
+public class MovementInputController : MonoBehaviour
 {
     [Required]
     [SerializeField]
-    private PlayerCharacterController playerCharacterController;
+    private MovementController playerCharacterController;
 
     [SerializeField]
     private float strafeMovementPenalty = 0.75f;

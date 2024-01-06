@@ -1,0 +1,19 @@
+{
+    "name": "Progression",
+    "rootNamespace": "Progression",
+    "references": [
+        "GUID:f712756b4303fd84595ced73c2b3c304",
+        "GUID:c929620d37351784b90ab1e668b964c4",
+        "GUID:aa0e0c337e067894fbc4767e8fc0f7e4",
+        "GUID:dd654c28efb5c344490932a1a995ef20"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

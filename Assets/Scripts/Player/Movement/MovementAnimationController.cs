@@ -1,15 +1,15 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-public class PlayerAnimationController : MonoBehaviour
+public class MovementAnimationController : MonoBehaviour
 {
     [Required]
     [SerializeField]
-    private PlayerCharacterController playerCharacterController;
+    private MovementController playerCharacterController;
 
     [Required]
     [SerializeField]
-    private ThirdPersonMovement thirdPersonMovement;
+    private MovementInputController thirdPersonMovement;
 
     [Required]
     [SerializeField]

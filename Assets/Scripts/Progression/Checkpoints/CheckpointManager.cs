@@ -7,7 +7,7 @@ public class CheckpointManager : MonoBehaviour
 {
     [Required]
     [SerializeField]
-    private PlayerCharacterController playerCharacterController;
+    private MovementController playerCharacterController;
 
     [SerializeField]
     private LayerMask checkpointLayerMask;

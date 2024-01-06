@@ -5,7 +5,7 @@ using System;
 using System.Collections;
 
 [SelectionBase]
-public class PlayerCharacterController : MonoBehaviour, ICharacterController
+public class MovementController : MonoBehaviour, ICharacterController
 {
     public Action OnPlayerJumped;
 

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerPickupController : MonoBehaviour
+public class PickupController : MonoBehaviour
 {
     [SerializeField]
     private LayerMask pickupLayerMask;
