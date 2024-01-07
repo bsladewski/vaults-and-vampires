@@ -24,6 +24,8 @@ public class MovementAnimationController : MonoBehaviour
 
     private bool wasAimLocked;
 
+    private bool mirrorJump;
+
     private void Start()
     {
         playerCharacterController.OnPlayerJumped += OnPlayerJumped;
@@ -80,7 +82,9 @@ public class MovementAnimationController : MonoBehaviour
     private void OnPlayerJumped()
     {
         ResetTriggers();
+        animator.SetBool("Mirror Jump", mirrorJump);
         animator.SetTrigger("Jump");
+        mirrorJump = !mirrorJump;
     }
 
     private void OnPlayerFell()
