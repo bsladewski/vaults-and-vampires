@@ -5,7 +5,7 @@ public class MovementInputController : MonoBehaviour
 {
     [Required]
     [SerializeField]
-    private MovementController playerCharacterController;
+    private MovementController movementController;
 
     [SerializeField]
     private float strafeMovementPenalty = 0.75f;
@@ -30,6 +30,11 @@ public class MovementInputController : MonoBehaviour
 
     private bool startedJump;
 
+    [SerializeField]
+    private float hardLandingCooldown = 0.2f;
+
+    private float hardLandingTimer = 0f;
+
     private Vector3 lastCameraForward;
 
     private Vector3 movementDirection;
@@ -42,6 +47,7 @@ public class MovementInputController : MonoBehaviour
     private void Start()
     {
         lastCameraForward = GetCameraForward();
+        movementController.OnHardLanding += OnHardLanding;
     }
 
     private void OnEnable()
@@ -50,6 +56,29 @@ public class MovementInputController : MonoBehaviour
     }
 
     private void Update()
+    {
+        if (hardLandingTimer > 0f)
+        {
+            hardLandingTimer -= Time.deltaTime;
+        }
+        else
+        {
+            HandleMovementInput();
+            HandleJumpInput();
+        }
+    }
+
+    public bool GetIsAimLocked()
+    {
+        return ThirdPersonCameraTarget.Instance.GetIsAimLocked();
+    }
+
+    public Vector3 GetMovementDirection()
+    {
+        return movementDirection;
+    }
+
+    private void HandleMovementInput()
     {
         // get player movement input
         Vector2 runInput = playerInput.ThirdPersonMovement.Run.ReadValue<Vector2>();
@@ -68,12 +97,12 @@ public class MovementInputController : MonoBehaviour
 
             // when we're aim locked we replace camera rotation with player rotation
             float aimLockRotation = playerInput.ThirdPersonMovement.Rotate.ReadValue<float>();
-            playerCharacterController.SetAimLockRotation(aimLockRotation);
+            movementController.SetAimLockRotation(aimLockRotation);
         }
         else
         {
             // if we're not aim locked, clear aim lock rotation
-            playerCharacterController.SetAimLockRotation(0f);
+            movementController.SetAimLockRotation(0f);
         }
 
         Vector3 runDirection = new Vector3(runInput.x, 0f, runInput.y);
@@ -94,13 +123,16 @@ public class MovementInputController : MonoBehaviour
 
         // calculate player's intended velocity
         Vector3 targetDirection = Quaternion.LookRotation(lastCameraForward) * runDirection;
-        playerCharacterController.SetTargetDirection(targetDirection);
+        movementController.SetTargetDirection(targetDirection);
+    }
 
-        bool isGrounded = playerCharacterController.GetIsGrounded();
+    private void HandleJumpInput()
+    {
+        bool isGrounded = movementController.GetIsGrounded();
         bool jumpInput = playerInput.ThirdPersonMovement.Jump.triggered;
         if ((jumpInput && isGrounded) || (jumpInput && coyoteTimeTimer > 0f) || (isGrounded && jumpBufferTimer > 0f))
         {
-            playerCharacterController.SetShouldJump();
+            movementController.SetShouldJump();
             coyoteTimeTimer = 0f;
             jumpBufferTimer = 0f;
             startedJump = true;
@@ -108,12 +140,12 @@ public class MovementInputController : MonoBehaviour
         else if (playerInput.ThirdPersonMovement.Jump.IsPressed())
         {
             // if the player didn't just jump and is pressing the jump button, set is jump held flag
-            playerCharacterController.SetIsJumpHeld(true);
+            movementController.SetIsJumpHeld(true);
         }
         else
         {
             // if the player didn't just jump and is not pressing the jump button, reset is jump held flag
-            playerCharacterController.SetIsJumpHeld(false);
+            movementController.SetIsJumpHeld(false);
         }
 
         if (!isGrounded)
@@ -147,18 +179,22 @@ public class MovementInputController : MonoBehaviour
         }
     }
 
-    public bool GetIsAimLocked()
-    {
-        return ThirdPersonCameraTarget.Instance.GetIsAimLocked();
-    }
-
-    public Vector3 GetMovementDirection()
-    {
-        return movementDirection;
-    }
-
     private Vector3 GetCameraForward()
     {
         return ThirdPersonCameraTarget.Instance.GetCameraForward();
+    }
+
+    private void OnHardLanding()
+    {
+        hardLandingTimer = hardLandingCooldown;
+        ResetMovementInput();
+    }
+
+    private void ResetMovementInput()
+    {
+        movementDirection = Vector3.zero;
+        movementController.SetTargetDirection(Vector3.zero);
+        movementController.SetShouldJump(false);
+        movementController.SetIsJumpHeld(false);
     }
 }

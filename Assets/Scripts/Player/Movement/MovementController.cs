@@ -7,11 +7,13 @@ using System.Collections;
 [SelectionBase]
 public class MovementController : MonoBehaviour, ICharacterController
 {
-    public Action OnPlayerJumped;
+    public Action OnJumped;
 
-    public Action OnPlayerFell;
+    public Action OnFell;
 
-    public Action OnPlayerLanded;
+    public Action OnLanded;
+
+    public Action OnHardLanding;
 
     [Required]
     [SerializeField]
@@ -39,6 +41,11 @@ public class MovementController : MonoBehaviour, ICharacterController
     private float fallVelocity;
 
     [SerializeField]
+    private float hardLandingVelocity = 15f;
+
+    private bool wasHardLanding;
+
+    [SerializeField]
     private float minJumpHeight = 1f;
 
     [SerializeField]
@@ -63,6 +70,8 @@ public class MovementController : MonoBehaviour, ICharacterController
 
     private float aimLockRotation = 0.25f;
 
+    private bool shouldResetVelocity;
+
     private void Awake()
     {
         motor.CharacterController = this;
@@ -78,6 +87,11 @@ public class MovementController : MonoBehaviour, ICharacterController
         return motor.GroundingStatus.IsStableOnGround;
     }
 
+    public bool GetWasHardLanding()
+    {
+        return wasHardLanding;
+    }
+
     public void SetTargetDirection(Vector3 targetDirection)
     {
         this.targetDirection = targetDirection;
@@ -90,7 +104,12 @@ public class MovementController : MonoBehaviour, ICharacterController
 
     public void SetShouldJump()
     {
-        shouldJump = true;
+        SetShouldJump(true);
+    }
+
+    public void SetShouldJump(bool shouldJump)
+    {
+        this.shouldJump = shouldJump;
     }
 
     public void SetIsJumpHeld(bool isJumpHeld)
@@ -123,6 +142,13 @@ public class MovementController : MonoBehaviour, ICharacterController
 
     public void UpdateVelocity(ref Vector3 currentVelocity, float deltaTime)
     {
+        if (shouldResetVelocity)
+        {
+            currentVelocity = Vector3.zero;
+            shouldResetVelocity = false;
+            return;
+        }
+
         Vector3 initialVelocity = currentVelocity;
 
         bool isGrounded = GetIsGrounded();
@@ -187,6 +213,11 @@ public class MovementController : MonoBehaviour, ICharacterController
         {
             if (!wasGrounded)
             {
+                wasHardLanding = fallVelocity >= hardLandingVelocity;
+                if (wasHardLanding)
+                {
+                    shouldResetVelocity = true;
+                }
                 StartCoroutine(FireLandEvent());
             }
 
@@ -203,19 +234,23 @@ public class MovementController : MonoBehaviour, ICharacterController
     private IEnumerator FireJumpEvent()
     {
         yield return new WaitForEndOfFrame();
-        OnPlayerJumped?.Invoke();
+        OnJumped?.Invoke();
     }
 
     private IEnumerator FireFallEvent()
     {
         yield return new WaitForEndOfFrame();
-        OnPlayerFell?.Invoke();
+        OnFell?.Invoke();
     }
 
     private IEnumerator FireLandEvent()
     {
         yield return new WaitForEndOfFrame();
-        OnPlayerLanded?.Invoke();
+        OnLanded?.Invoke();
+        if (wasHardLanding)
+        {
+            OnHardLanding?.Invoke();
+        }
     }
 
     public void AfterCharacterUpdate(float deltaTime)

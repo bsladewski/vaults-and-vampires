@@ -1,11 +1,12 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
+using MoreMountains.Feedbacks;
 
 public class MovementAnimationController : MonoBehaviour
 {
     [Required]
     [SerializeField]
-    private MovementController playerCharacterController;
+    private MovementController movementController;
 
     [Required]
     [SerializeField]
@@ -14,6 +15,18 @@ public class MovementAnimationController : MonoBehaviour
     [Required]
     [SerializeField]
     private Animator animator;
+
+    [Required]
+    [SerializeField]
+    private MMFeedbacks jumpFeedbacks;
+
+    [Required]
+    [SerializeField]
+    private MMFeedbacks softLandingFeedbacks;
+
+    [Required]
+    [SerializeField]
+    private MMFeedbacks hardLandingFeedbacks;
 
     [SerializeField]
     private float moveAnimationAcceleration = 20f;
@@ -24,11 +37,13 @@ public class MovementAnimationController : MonoBehaviour
 
     private bool wasAimLocked;
 
+    private bool mirrorJump;
+
     private void Start()
     {
-        playerCharacterController.OnPlayerJumped += OnPlayerJumped;
-        playerCharacterController.OnPlayerFell += OnPlayerFell;
-        playerCharacterController.OnPlayerLanded += OnPlayerLanded;
+        movementController.OnJumped += OnPlayerJumped;
+        movementController.OnFell += OnPlayerFell;
+        movementController.OnLanded += OnPlayerLanded;
     }
 
     private void LateUpdate()
@@ -80,7 +95,10 @@ public class MovementAnimationController : MonoBehaviour
     private void OnPlayerJumped()
     {
         ResetTriggers();
+        animator.SetBool("Mirror Jump", mirrorJump);
         animator.SetTrigger("Jump");
+        mirrorJump = !mirrorJump;
+        jumpFeedbacks.PlayFeedbacks();
     }
 
     private void OnPlayerFell()
@@ -93,6 +111,14 @@ public class MovementAnimationController : MonoBehaviour
     {
         ResetTriggers();
         animator.SetTrigger("Land");
+        if (movementController.GetWasHardLanding())
+        {
+            hardLandingFeedbacks.PlayFeedbacks();
+        }
+        else
+        {
+            softLandingFeedbacks.PlayFeedbacks();
+        }
     }
 
     private void ResetTriggers()
