@@ -168,18 +168,28 @@ public class WaypointsEditor : Editor
         }
 
         Bounds bounds = collider.bounds;
+        Vector3 center = bounds.center;
+        Quaternion rotation = Quaternion.Euler(waypoint.rotation);
 
         // collider top
-        Vector3 upBackLeft = new Vector3(bounds.min.x, bounds.max.y, bounds.min.z) + waypoint.position;
-        Vector3 upBackRight = new Vector3(bounds.max.x, bounds.max.y, bounds.min.z) + waypoint.position;
-        Vector3 upFrontLeft = new Vector3(bounds.min.x, bounds.max.y, bounds.max.z) + waypoint.position;
-        Vector3 upFrontRight = new Vector3(bounds.max.x, bounds.max.y, bounds.max.z) + waypoint.position;
+        Vector3 upBackLeft = rotation * (new Vector3(bounds.min.x, bounds.max.y, bounds.min.z) - center) +
+            center + waypoint.position;
+        Vector3 upBackRight = rotation * (new Vector3(bounds.max.x, bounds.max.y, bounds.min.z) - center) +
+            center + waypoint.position;
+        Vector3 upFrontLeft = rotation * (new Vector3(bounds.min.x, bounds.max.y, bounds.max.z) - center) +
+            center + waypoint.position;
+        Vector3 upFrontRight = rotation * (new Vector3(bounds.max.x, bounds.max.y, bounds.max.z) - center) +
+            center + waypoint.position;
 
         // collider bottom
-        Vector3 downBackLeft = new Vector3(bounds.min.x, bounds.min.y, bounds.min.z) + waypoint.position;
-        Vector3 downBackRight = new Vector3(bounds.max.x, bounds.min.y, bounds.min.z) + waypoint.position;
-        Vector3 downFrontLeft = new Vector3(bounds.min.x, bounds.min.y, bounds.max.z) + waypoint.position;
-        Vector3 downFrontRight = new Vector3(bounds.max.x, bounds.min.y, bounds.max.z) + waypoint.position;
+        Vector3 downBackLeft = rotation * (new Vector3(bounds.min.x, bounds.min.y, bounds.min.z) - center) +
+            center + waypoint.position;
+        Vector3 downBackRight = rotation * (new Vector3(bounds.max.x, bounds.min.y, bounds.min.z) - center) +
+            center + waypoint.position;
+        Vector3 downFrontLeft = rotation * (new Vector3(bounds.min.x, bounds.min.y, bounds.max.z) - center) +
+            center + waypoint.position;
+        Vector3 downFrontRight = rotation * (new Vector3(bounds.max.x, bounds.min.y, bounds.max.z) - center) +
+            center + waypoint.position;
 
         float screenSpaceSize = 5f;
 
@@ -250,5 +260,4 @@ public class WaypointsEditor : Editor
             );
         }
     }
-
 }

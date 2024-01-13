@@ -13,7 +13,6 @@ public class MovingPlatform : MonoBehaviour, IMoverController
     [SerializeField]
     private Ease defaultWaypointEase = Ease.InOutQuad;
 
-    [Header("Movement")]
     [SerializeField]
     private float moveSpeed = 2f;
 
@@ -26,13 +25,6 @@ public class MovingPlatform : MonoBehaviour, IMoverController
 
     private Vector3 targetRotation;
 
-    [Header("Rotation")]
-    [SerializeField]
-    private Vector3 rotationAxis = Vector3.up;
-
-    [SerializeField]
-    private float rotationSpeed;
-
     private Vector3 initialPosition;
 
     private void Awake()
@@ -43,10 +35,10 @@ public class MovingPlatform : MonoBehaviour, IMoverController
 
     private void Start()
     {
-        if (waypoints != null && waypoints.GetLength() == 1)
+        if (waypoints != null && waypoints.GetLength() <= 1)
         {
             // waypoint based movement requires at least 2 waypoints
-            Debug.LogError("MovingPlatform waypoints should be empty or >1!");
+            Debug.LogError("MovingPlatform waypoints should be >1!");
         }
 
         if (waypoints != null && waypoints.GetLength() > 1)
@@ -74,10 +66,6 @@ public class MovingPlatform : MonoBehaviour, IMoverController
     {
         goalPosition = targetPosition;
         goalRotation = Quaternion.Euler(targetRotation);
-        if (rotationSpeed > 0f)
-        {
-            goalRotation *= Quaternion.Euler(rotationAxis * rotationSpeed);
-        }
     }
 
     private void HandleCircuitWaypointMovement()
