@@ -80,7 +80,7 @@ public class WaypointsEditor : Editor
                 if (EditorGUI.EndChangeCheck())
                 {
                     Undo.RecordObject(waypoints, "Edited waypoint position.");
-                    waypoints.GetWaypoint(i).position = updatedPosition;
+                    waypoints.GetWaypoint(i).SetPosition(updatedPosition);
                 }
             }
 
@@ -95,7 +95,7 @@ public class WaypointsEditor : Editor
                 if (EditorGUI.EndChangeCheck())
                 {
                     Undo.RecordObject(waypoints, "Edited waypoint rotation.");
-                    waypoints.GetWaypoint(i).rotation = updatedRotation.eulerAngles;
+                    waypoints.GetWaypoint(i).SetRotation(updatedRotation.eulerAngles);
                 }
             }
         }
@@ -150,7 +150,7 @@ public class WaypointsEditor : Editor
             // if the path is a circuit connect the end of the path to the beginning
             Vector3 from = waypoints.GetWaypoint(waypoints.GetLength() - 1).position + positionOffset;
             Vector3 to = waypoints.GetWaypoint(0).position + positionOffset;
-            Handles.DrawAAPolyLine(3f, new Color[] { Color.green, Color.green }, new Vector3[] { from, to });
+            Handles.DrawAAPolyLine(3f, new[] { Color.green, Color.green }, new Vector3[] { from, to });
         }
 
         foreach (Waypoint waypoint in waypoints.GetWaypoints())
@@ -160,18 +160,18 @@ public class WaypointsEditor : Editor
 
             Handles.DrawAAPolyLine(
                 6f,
-                new Color[] { Color.blue, Color.blue },
-                new Vector3[] { from, from + Quaternion.Euler(waypoint.rotation) * Vector3.forward }
+                new[] { Color.blue, Color.blue },
+                new[] { from, from + Quaternion.Euler(waypoint.rotation) * Vector3.forward }
             );
             Handles.DrawAAPolyLine(
                 6f,
-                new Color[] { Color.red, Color.red },
-                new Vector3[] { from, from + Quaternion.Euler(waypoint.rotation) * Vector3.right }
+                new[] { Color.red, Color.red },
+                new[] { from, from + Quaternion.Euler(waypoint.rotation) * Vector3.right }
             );
             Handles.DrawAAPolyLine(
                 6f,
-                new Color[] { Color.green, Color.green },
-                new Vector3[] { from, from + Quaternion.Euler(waypoint.rotation) * Vector3.up }
+                new[] { Color.green, Color.green },
+                new[] { from, from + Quaternion.Euler(waypoint.rotation) * Vector3.up }
             );
         }
     }

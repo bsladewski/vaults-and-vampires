@@ -10,6 +10,9 @@ public class MovingPlatform : MonoBehaviour, IMoverController
     [SerializeField]
     private PhysicsMover mover;
 
+    [SerializeField]
+    private Ease defaultWaypointEase = Ease.InOutQuad;
+
     [Header("Movement")]
     [SerializeField]
     private float moveSpeed = 2f;
@@ -119,17 +122,18 @@ public class MovingPlatform : MonoBehaviour, IMoverController
         Waypoint waypoint = waypoints.GetWaypoint(currentWaypointIndex);
         Vector3 nextPosition = waypoint.position + initialPosition;
         Vector3 nextRotation = waypoint.rotation;
+        Ease waypointEase = waypoint.ease == Ease.Unset ? defaultWaypointEase : waypoint.ease;
         DOTween.To(
             () => targetRotation,
             value => targetRotation = value,
             nextRotation,
             Vector3.Distance(targetPosition, nextPosition) / moveSpeed
-        ).SetEase(waypoint.ease).SetDelay(waypoint.delay);
+        ).SetEase(waypointEase).SetDelay(waypoint.delay);
         return DOTween.To(
             () => targetPosition,
             value => targetPosition = value,
             nextPosition,
             Vector3.Distance(targetPosition, nextPosition) / moveSpeed
-        ).SetEase(waypoint.ease).SetDelay(waypoint.delay);
+        ).SetEase(waypointEase).SetDelay(waypoint.delay);
     }
 }
