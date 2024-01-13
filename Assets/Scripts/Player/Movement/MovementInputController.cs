@@ -33,7 +33,7 @@ public class MovementInputController : MonoBehaviour
     [SerializeField]
     private float hardLandingCooldown = 0.2f;
 
-    private float hardLandingTimer = 0f;
+    private float hardLandingTimer;
 
     private Vector3 lastCameraForward;
 

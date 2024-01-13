@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 0.5, z: 3}
+  m_LocalScale: {x: 3, y: 0.5, z: 6}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6520825784037118599}
@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 09d99c563ece221478199975bcd8ee14, type: 2}
+  - {fileID: 2100000, guid: db8ecce71303dc041b51184f9a00aca6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -95,10 +95,9 @@ GameObject:
   - component: {fileID: 4043877391822918941}
   - component: {fileID: 5837598498537986538}
   - component: {fileID: 220381673051316471}
-  - component: {fileID: 213100058943420002}
-  - component: {fileID: 1712954039205159141}
+  - component: {fileID: 7635139731101668}
   m_Layer: 0
-  m_Name: Moving Platform
+  m_Name: Rotating Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -139,7 +138,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3, y: 0.5, z: 3}
+  m_Size: {x: 3, y: 0.5, z: 6}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &5837598498537986538
 Rigidbody:
@@ -182,7 +181,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Rigidbody: {fileID: 5837598498537986538}
   MoveWithPhysics: 1
---- !u!114 &213100058943420002
+--- !u!114 &7635139731101668
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -191,26 +190,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 7252477336556384672}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d043d4507c835f240b8b6e713c8ae5aa, type: 3}
+  m_Script: {fileID: 11500000, guid: c90c904ed6ed9c94c8a1dfcce7649fc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mover: {fileID: 220381673051316471}
-  moveSpeed: 2
-  waypointEase: 7
-  waypointDelay: 0
-  waypoints: {fileID: 1712954039205159141}
   rotationAxis: {x: 0, y: 1, z: 0}
-  rotationSpeed: 0
---- !u!114 &1712954039205159141
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7252477336556384672}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87a66437f461b0447b0cffcc32f873ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  waypoints: []
+  rotationSpeed: 1
