@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 5837598498537986538}
   - component: {fileID: 220381673051316471}
   - component: {fileID: 213100058943420002}
+  - component: {fileID: 1712954039205159141}
   m_Layer: 0
   m_Name: Moving Platform
   m_TagString: Untagged
@@ -111,7 +112,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7252477336556384672}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -196,7 +197,20 @@ MonoBehaviour:
   mover: {fileID: 220381673051316471}
   moveSpeed: 2
   waypointEase: 7
-  waypointDelay: 1
-  waypoints: []
+  waypointDelay: 0
+  waypoints: {fileID: 1712954039205159141}
   rotationAxis: {x: 0, y: 1, z: 0}
   rotationSpeed: 0
+--- !u!114 &1712954039205159141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7252477336556384672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87a66437f461b0447b0cffcc32f873ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waypoints: []
