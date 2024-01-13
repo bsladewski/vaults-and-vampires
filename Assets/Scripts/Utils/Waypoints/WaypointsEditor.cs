@@ -10,33 +10,24 @@ public class WaypointsEditor : Editor
 
     private bool showPositionHandles;
 
+    private bool positionRelativeRotation;
+
     private bool showRotationHandles;
 
     private bool showColliderHints = true;
 
+    private readonly Color buttonEnabledColor = Color.green;
+
+    private readonly Color buttonDisabledColor = new Color(1f, 0.25f, 0.25f, 1f);
+
     public override void OnInspectorGUI()
     {
         base.OnInspectorGUI();
-
-        if (GUILayout.Button("Toggle Position Handles"))
-        {
-            TogglePositionHandles();
-        }
-
-        if (GUILayout.Button("Toggle Rotation Handles"))
-        {
-            ToggleRotationHandles();
-        }
-
-        if (GUILayout.Button("Toggle Collider Hints"))
-        {
-            ToggleColliderHints();
-        }
-
-        if (GUILayout.Button("Hide Handles"))
-        {
-            HideHandles();
-        }
+        DrawPositionControlGUI();
+        GUILayout.Space(2);
+        DrawRotationControlGUI();
+        GUILayout.Space(2);
+        DrawOtherControlGUI();
     }
 
     private void OnEnable()
@@ -94,34 +85,73 @@ public class WaypointsEditor : Editor
         DrawWaypointPath();
     }
 
-    private void TogglePositionHandles()
+    private void DrawPositionControlGUI()
     {
-        showRotationHandles = false;
-        showPositionHandles = !showPositionHandles;
-        Tools.hidden = showPositionHandles;
-        SceneView.RepaintAll();
+        GUILayout.BeginVertical("Position Controls", "window");
+
+        Color initialColor = GUI.color;
+        GUI.color = showPositionHandles ? buttonEnabledColor : buttonDisabledColor;
+        if (GUILayout.Button("Toggle Position Handles"))
+        {
+            showRotationHandles = false;
+            showPositionHandles = !showPositionHandles;
+            Tools.hidden = showPositionHandles;
+            SceneView.RepaintAll();
+        }
+        GUI.color = initialColor;
+
+        bool value = GUILayout.Toggle(positionRelativeRotation, "Relative to Rotation");
+        if (value != positionRelativeRotation)
+        {
+            positionRelativeRotation = value;
+            SceneView.RepaintAll();
+        }
+
+        GUILayout.EndVertical();
     }
 
-    private void ToggleRotationHandles()
+    private void DrawRotationControlGUI()
     {
-        showPositionHandles = false;
-        showRotationHandles = !showRotationHandles;
-        Tools.hidden = showRotationHandles;
-        SceneView.RepaintAll();
+        GUILayout.BeginVertical("Rotation Controls", "window");
+
+        Color initialColor = GUI.color;
+        GUI.color = showRotationHandles ? buttonEnabledColor : buttonDisabledColor;
+        if (GUILayout.Button("Toggle Rotation Handles"))
+        {
+            showPositionHandles = false;
+            showRotationHandles = !showRotationHandles;
+            Tools.hidden = showRotationHandles;
+            SceneView.RepaintAll();
+        }
+        GUI.color = initialColor;
+
+        GUILayout.EndVertical();
     }
 
-    private void ToggleColliderHints()
+    private void DrawOtherControlGUI()
     {
-        showColliderHints = !showColliderHints;
-        SceneView.RepaintAll();
-    }
+        GUILayout.BeginVertical("Other", "window");
 
-    private void HideHandles()
-    {
-        showPositionHandles = false;
-        showRotationHandles = false;
-        Tools.hidden = false;
-        SceneView.RepaintAll();
+        Color initialColor = GUI.color;
+        GUI.color = showColliderHints ? buttonEnabledColor : buttonDisabledColor;
+        if (GUILayout.Button("Toggle Collider Hints"))
+        {
+            showColliderHints = !showColliderHints;
+            SceneView.RepaintAll();
+        }
+        GUI.color = initialColor;
+
+        GUI.enabled = showPositionHandles || showRotationHandles;
+        if (GUILayout.Button("Hide Handles"))
+        {
+            showPositionHandles = false;
+            showRotationHandles = false;
+            Tools.hidden = false;
+            SceneView.RepaintAll();
+        }
+        GUI.enabled = true;
+
+        GUILayout.EndVertical();
     }
 
     private void DrawWaypointLabel(Waypoint waypoint, Vector3 positionOffset, string label)
@@ -136,7 +166,7 @@ public class WaypointsEditor : Editor
         Vector3 position = waypoint.position;
         Vector3 updatedPosition = Handles.PositionHandle(
             position + positionOffset,
-            Quaternion.identity
+            positionRelativeRotation ? Quaternion.Euler(waypoint.rotation) : Quaternion.identity
         ) - positionOffset;
         if (EditorGUI.EndChangeCheck())
         {
