@@ -11,7 +11,7 @@ public class Waypoint
     public Vector3 rotation { get; private set; }
 
     [field: SerializeField]
-    public float delay;
+    public float delay { get; private set; }
 
     [field: SerializeField]
     public Ease ease { get; private set; }

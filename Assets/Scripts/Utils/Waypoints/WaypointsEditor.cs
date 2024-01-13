@@ -225,7 +225,7 @@ public class WaypointsEditor : Editor
             // if the path is a circuit connect the end of the path to the beginning
             Vector3 from = waypoints.GetWaypoint(waypoints.GetLength() - 1).position + positionOffset;
             Vector3 to = waypoints.GetWaypoint(0).position + positionOffset;
-            Handles.DrawAAPolyLine(3f, new[] { Color.green, Color.green }, new Vector3[] { from, to });
+            Handles.DrawAAPolyLine(3f, new[] { Color.green, Color.green }, new[] { from, to });
         }
 
         foreach (Waypoint waypoint in waypoints.GetWaypoints())
