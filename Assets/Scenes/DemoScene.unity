@@ -52682,6 +52682,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 166169346}
     m_Modifications:
+    - target: {fileID: 213100058943420002, guid: e2a1533daa79d824f8fa0cb9bd3c63bb,
+        type: 3}
+      propertyPath: moveSpeed
+      value: 1.75
+      objectReference: {fileID: 0}
     - target: {fileID: 1712954039205159141, guid: e2a1533daa79d824f8fa0cb9bd3c63bb,
         type: 3}
       propertyPath: isCircuit
@@ -52755,12 +52760,17 @@ PrefabInstance:
     - target: {fileID: 1712954039205159141, guid: e2a1533daa79d824f8fa0cb9bd3c63bb,
         type: 3}
       propertyPath: waypoints.Array.data[0].<position>k__BackingField.x
-      value: -4.5
+      value: 7.5
       objectReference: {fileID: 0}
     - target: {fileID: 1712954039205159141, guid: e2a1533daa79d824f8fa0cb9bd3c63bb,
         type: 3}
       propertyPath: waypoints.Array.data[1].<position>k__BackingField.x
-      value: 7.5
+      value: -4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5837598498537986538, guid: e2a1533daa79d824f8fa0cb9bd3c63bb,
+        type: 3}
+      propertyPath: m_Mass
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6087386007206929821, guid: e2a1533daa79d824f8fa0cb9bd3c63bb,
         type: 3}
@@ -86088,6 +86098,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 166169346}
     m_Modifications:
+    - target: {fileID: 213100058943420002, guid: e2a1533daa79d824f8fa0cb9bd3c63bb,
+        type: 3}
+      propertyPath: moveSpeed
+      value: 1.75
+      objectReference: {fileID: 0}
     - target: {fileID: 1712954039205159141, guid: e2a1533daa79d824f8fa0cb9bd3c63bb,
         type: 3}
       propertyPath: waypoints.Array.size
@@ -93540,12 +93555,12 @@ PrefabInstance:
     - target: {fileID: 1712954039205159141, guid: e2a1533daa79d824f8fa0cb9bd3c63bb,
         type: 3}
       propertyPath: waypoints.Array.data[0].<position>k__BackingField.x
-      value: -8
+      value: -6
       objectReference: {fileID: 0}
     - target: {fileID: 1712954039205159141, guid: e2a1533daa79d824f8fa0cb9bd3c63bb,
         type: 3}
       propertyPath: waypoints.Array.data[1].<position>k__BackingField.x
-      value: 8
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6520825784037118599, guid: e2a1533daa79d824f8fa0cb9bd3c63bb,
         type: 3}
