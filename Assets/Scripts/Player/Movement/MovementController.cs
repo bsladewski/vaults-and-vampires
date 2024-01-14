@@ -127,6 +127,11 @@ public class MovementController : MonoBehaviour, ICharacterController
         motor.SetPosition(position);
     }
 
+    public void ResetFallVelocity()
+    {
+        fallVelocity = 0f;
+    }
+
     public void UpdateRotation(ref Quaternion currentRotation, float deltaTime)
     {
         if (ThirdPersonCameraTarget.Instance.GetIsAimLocked())
@@ -176,7 +181,6 @@ public class MovementController : MonoBehaviour, ICharacterController
             shouldJump = false;
             StartCoroutine(FireJumpEvent());
         }
-
         else if (!isGrounded)
         {
             if (!isJumpHeld && fallVelocity < 0f)

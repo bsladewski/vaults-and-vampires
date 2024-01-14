@@ -136,6 +136,7 @@ public class MovementInputController : MonoBehaviour
         if ((jumpInput && isGrounded) || (jumpInput && coyoteTimeTimer > 0f) || (isGrounded && jumpBufferTimer > 0f))
         {
             movementController.SetShouldJump();
+            movementController.ResetFallVelocity();
             coyoteTimeTimer = 0f;
             jumpBufferTimer = 0f;
             startedJump = true;
