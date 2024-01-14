@@ -5,10 +5,12 @@ using UnityEngine;
 
 public class CheckpointManager : MonoBehaviour
 {
+    [Header("Dependencies")]
     [Required]
     [SerializeField]
     private MovementController playerCharacterController;
 
+    [Header("Settings")]
     [SerializeField]
     private LayerMask checkpointLayerMask;
 

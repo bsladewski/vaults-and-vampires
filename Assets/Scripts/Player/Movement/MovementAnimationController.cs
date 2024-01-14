@@ -4,6 +4,7 @@ using MoreMountains.Feedbacks;
 
 public class MovementAnimationController : MonoBehaviour
 {
+    [Header("Dependencies")]
     [Required]
     [SerializeField]
     private MovementController movementController;
@@ -16,18 +17,20 @@ public class MovementAnimationController : MonoBehaviour
     [SerializeField]
     private Animator animator;
 
+    [Header("Feedbacks")]
     [Required]
     [SerializeField]
-    private MMFeedbacks jumpFeedbacks;
+    private MMF_Player jumpFeedbacks;
 
     [Required]
     [SerializeField]
-    private MMFeedbacks softLandingFeedbacks;
+    private MMF_Player softLandingFeedbacks;
 
     [Required]
     [SerializeField]
-    private MMFeedbacks hardLandingFeedbacks;
+    private MMF_Player hardLandingFeedbacks;
 
+    [Header("Settings")]
     [SerializeField]
     private float moveAnimationAcceleration = 20f;
 

@@ -5,12 +5,14 @@ using DG.Tweening;
 
 public class ThirdPersonCameraController : MonoBehaviour
 {
+    [Header("Dependencies")]
     [Required]
     [SerializeField]
     private CinemachineVirtualCamera virtualCamera;
 
     private CinemachineTransposer transposer;
 
+    [Header("Follow Offsets")]
     [SerializeField]
     private Vector3 closeFollowOffset = new Vector3(0f, 1f, -6f);
 
@@ -20,6 +22,7 @@ public class ThirdPersonCameraController : MonoBehaviour
     [SerializeField]
     private Vector3 farFollowOffset = new Vector3(0f, 8f, -8f);
 
+    [Header("Zoom Settings")]
     [SerializeField]
     private float zoomDuration = 1f;
 

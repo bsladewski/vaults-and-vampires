@@ -6,18 +6,20 @@ using DG.Tweening;
 [SelectionBase]
 public class MovingPlatform : MonoBehaviour, IMoverController
 {
+    [Header("Dependencies")]
     [Required]
     [SerializeField]
     private PhysicsMover mover;
 
     [SerializeField]
+    private Waypoints waypoints;
+
+    [Header("Settings")]
+    [SerializeField]
     private Ease defaultWaypointEase = Ease.InOutQuad;
 
     [SerializeField]
     private float moveSpeed = 2f;
-
-    [SerializeField]
-    private Waypoints waypoints;
 
     private int currentWaypointIndex;
 

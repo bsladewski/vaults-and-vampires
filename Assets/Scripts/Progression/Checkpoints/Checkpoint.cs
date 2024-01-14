@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Checkpoint : MonoBehaviour
 {
+    [Header("Dependencies")]
     [Required]
     [SerializeField]
     private Transform checkpointPositionTransform;

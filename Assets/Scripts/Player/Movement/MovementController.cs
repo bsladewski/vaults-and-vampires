@@ -15,13 +15,12 @@ public class MovementController : MonoBehaviour, ICharacterController
 
     public Action OnHardLanding;
 
+    [Header("Dependencies")]
     [Required]
     [SerializeField]
     private KinematicCharacterMotor motor;
 
-    [SerializeField]
-    private LayerMask collisionLayerMask;
-
+    [Header("Movement Settings")]
     [SerializeField]
     private float moveSpeed = 8f;
 
@@ -35,16 +34,7 @@ public class MovementController : MonoBehaviour, ICharacterController
     [SerializeField]
     private float rotateSpeed = 10f;
 
-    [SerializeField]
-    private float gravity = 9.81f;
-
-    private float fallVelocity;
-
-    [SerializeField]
-    private float hardLandingVelocity = 15f;
-
-    private bool wasHardLanding;
-
+    [Header("Jump Settings")]
     [SerializeField]
     private float minJumpHeight = 1f;
 
@@ -64,6 +54,21 @@ public class MovementController : MonoBehaviour, ICharacterController
     private Vector3 jumpInertia;
 
     private bool wasGrounded = true;
+
+    [Header("Fall Settings")]
+    [SerializeField]
+    private float gravity = 9.81f;
+
+    private float fallVelocity;
+
+    [SerializeField]
+    private float hardLandingVelocity = 15f;
+
+    private bool wasHardLanding;
+
+    [Header("Other Settings")]
+    [SerializeField]
+    private LayerMask collisionLayerMask;
 
     [SerializeField]
     private float aimLockRotateSpeed;

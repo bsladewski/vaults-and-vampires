@@ -3,10 +3,12 @@ using UnityEngine;
 
 public class PickupVisual : MonoBehaviour
 {
+    [Header("Prefabs")]
     [Required]
     [SerializeField]
     private ParticleSystem pickupParticleSystemPrefab;
 
+    [Header("Settings")]
     [SerializeField]
     private float rotationSpeed = 1f;
 

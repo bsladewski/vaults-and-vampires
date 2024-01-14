@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PickupController : MonoBehaviour
 {
+    [Header("Settings")]
     [SerializeField]
     private LayerMask pickupLayerMask;
 

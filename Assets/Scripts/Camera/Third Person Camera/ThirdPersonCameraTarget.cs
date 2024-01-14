@@ -5,9 +5,11 @@ public class ThirdPersonCameraTarget : MonoBehaviour
 {
     public static ThirdPersonCameraTarget Instance { get; private set; }
 
+    [Header("Dependencies")]
     [SerializeField]
     private ThirdPersonCameraController cameraController;
 
+    [Header("Settings")]
     [SerializeField]
     private float rotateSpeed = 0.5f;
 

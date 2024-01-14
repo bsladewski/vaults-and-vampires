@@ -96,4 +96,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b641f1c94d8578468f1f1811f0eb320, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pickupParticleSystemPrefab: {fileID: 4208300616255467879, guid: 19d22d800db8fd94ca840fd2d86a662d,
+    type: 3}
   rotationSpeed: 1

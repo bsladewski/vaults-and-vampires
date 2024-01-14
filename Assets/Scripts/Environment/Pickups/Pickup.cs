@@ -4,6 +4,7 @@ using UnityEngine;
 [SelectionBase]
 public class Pickup : MonoBehaviour
 {
+    [Header("Dependencies")]
     [Required]
     [SerializeField]
     private PickupVisual pickupVisual;

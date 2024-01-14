@@ -3,17 +3,20 @@ using UnityEngine;
 
 public class MovementInputController : MonoBehaviour
 {
+    [Header("Dependencies")]
     [Required]
     [SerializeField]
     private MovementController movementController;
 
+    private PlayerInput playerInput;
+
+    [Header("Settings")]
     [SerializeField]
     private float strafeMovementPenalty = 0.75f;
 
     [SerializeField]
     private float backwardsMovementPenalty = 0.5f;
 
-    private PlayerInput playerInput;
 
     [SerializeField]
     private float cameraCorrectionSpeed = 5f;
