@@ -99751,6 +99751,7 @@ GameObject:
   - component: {fileID: 1668587700}
   - component: {fileID: 1668587698}
   - component: {fileID: 1668587699}
+  - component: {fileID: 1668587701}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -99787,18 +99788,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   motor: {fileID: 1668587695}
-  collisionLayerMask:
-    serializedVersion: 2
-    m_Bits: 383
   moveSpeed: 8
   moveAcceleration: 10
   rotateSpeed: 10
-  gravity: 15
-  hardLandingVelocity: 15
   minJumpHeight: 1
   maxJumpHeight: 2
   jumpMoveSpeedModifier: 0.5
   jumpRotationSpeedModifier: 0.25
+  gravity: 15
+  hardLandingVelocity: 15
+  collisionLayerMask:
+    serializedVersion: 2
+    m_Bits: 383
   aimLockRotateSpeed: 0.25
 --- !u!114 &1668587695
 MonoBehaviour:
@@ -99911,11 +99912,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1f3e9c67eb6d6c46bb956ead0515335, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCharacterController: {fileID: 1668587694}
   checkpointLayerMask:
     serializedVersion: 2
     m_Bits: 256
-  respawnHeight: -10
 --- !u!114 &1668587700
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -99935,6 +99934,21 @@ MonoBehaviour:
   softLandingFeedbacks: {fileID: 2102833984}
   hardLandingFeedbacks: {fileID: 1642268762}
   moveAnimationAcceleration: 20
+--- !u!114 &1668587701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1668587691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a1bd5c07f50d204694932ff17845a67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementController: {fileID: 1668587694}
+  checkpointManager: {fileID: 1668587699}
+  minMapHeight: -10
 --- !u!1 &1700499716
 GameObject:
   m_ObjectHideFlags: 0
