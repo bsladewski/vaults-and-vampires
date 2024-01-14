@@ -1,12 +1,17 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 using MoreMountains.Feedbacks;
+using Utils;
 
 namespace Player
 {
     public class MovementAnimationController : MonoBehaviour
     {
         [Header("Dependencies")]
+        [Required]
+        [SerializeField]
+        private Animator animator;
+
         [Required]
         [SerializeField]
         private MovementController movementController;
@@ -17,7 +22,11 @@ namespace Player
 
         [Required]
         [SerializeField]
-        private Animator animator;
+        private HealthManager healthManager;
+
+        [Required]
+        [SerializeField]
+        private RespawnController respawnController;
 
         [Header("Feedbacks")]
         [Required]
@@ -46,9 +55,11 @@ namespace Player
 
         private void Start()
         {
-            movementController.OnJumped += OnPlayerJumped;
-            movementController.OnFell += OnPlayerFell;
-            movementController.OnLanded += OnPlayerLanded;
+            movementController.OnJumped += OnJumped;
+            movementController.OnFell += OnFell;
+            movementController.OnLanded += OnLanded;
+            healthManager.OnDeath += OnDeath;
+            respawnController.OnRespawn += OnRespawn;
         }
 
         private void LateUpdate()
@@ -97,7 +108,7 @@ namespace Player
             animator.SetFloat("Horizontal Speed", horizontalAnimationSpeed);
         }
 
-        private void OnPlayerJumped()
+        private void OnJumped()
         {
             ResetTriggers();
             animator.SetBool("Mirror Jump", mirrorJump);
@@ -106,13 +117,13 @@ namespace Player
             jumpFeedbacks.PlayFeedbacks();
         }
 
-        private void OnPlayerFell()
+        private void OnFell()
         {
             ResetTriggers();
             animator.SetTrigger("Fall");
         }
 
-        private void OnPlayerLanded()
+        private void OnLanded()
         {
             ResetTriggers();
             animator.SetTrigger("Land");
@@ -126,11 +137,25 @@ namespace Player
             }
         }
 
+        private void OnDeath()
+        {
+            ResetTriggers();
+            animator.SetTrigger("Die");
+        }
+
+        private void OnRespawn()
+        {
+            ResetTriggers();
+            animator.SetTrigger("Respawn");
+        }
+
         private void ResetTriggers()
         {
             animator.ResetTrigger("Jump");
             animator.ResetTrigger("Fall");
             animator.ResetTrigger("Land");
+            animator.ResetTrigger("Die");
+            animator.ResetTrigger("Respawn");
         }
     }
 }

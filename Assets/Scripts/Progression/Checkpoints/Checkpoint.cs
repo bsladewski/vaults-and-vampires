@@ -10,9 +10,18 @@ namespace Progression
         [SerializeField]
         private Transform checkpointPositionTransform;
 
+        [Header("Settings")]
+        [SerializeField]
+        private bool isMajorCheckpoint;
+
         public Vector3 GetCheckpointPosition()
         {
             return checkpointPositionTransform.position;
+        }
+
+        public bool GetIsMajorCheckpoint()
+        {
+            return isMajorCheckpoint;
         }
     }
 }

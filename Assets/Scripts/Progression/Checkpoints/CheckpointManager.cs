@@ -12,12 +12,14 @@ namespace Progression
 
         private Vector3 respawnPoint;
 
+        private Vector3 majorRespawnPoint;
+
         private HashSet<Vector3> visitedCheckpoints;
 
         private void Start()
         {
             visitedCheckpoints = new HashSet<Vector3>();
-            SetRespawnPoint(transform.position);
+            SetRespawnPoint(transform.position, true);
         }
 
         private void OnTriggerEnter(Collider collider)
@@ -34,7 +36,7 @@ namespace Progression
                     Vector3 checkpointPosition = checkpoint.GetCheckpointPosition();
                     if (!visitedCheckpoints.Contains(checkpointPosition))
                     {
-                        SetRespawnPoint(checkpointPosition);
+                        SetRespawnPoint(checkpointPosition, checkpoint.GetIsMajorCheckpoint());
                     }
                 }
             }
@@ -45,10 +47,19 @@ namespace Progression
             return respawnPoint;
         }
 
-        private void SetRespawnPoint(Vector3 respawnPoint)
+        public Vector3 GetMajorRespawnPoint()
+        {
+            return majorRespawnPoint;
+        }
+
+        private void SetRespawnPoint(Vector3 respawnPoint, bool isMajorCheckpoint)
         {
             visitedCheckpoints.Add(respawnPoint);
             this.respawnPoint = respawnPoint;
+            if (isMajorCheckpoint)
+            {
+                majorRespawnPoint = respawnPoint;
+            }
         }
     }
 }

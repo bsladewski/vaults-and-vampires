@@ -2353,6 +2353,11 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1032513157}
+    - target: {fileID: 8482087073602569043, guid: 8ed9a01369fcbb04b8285d8e30701d26,
+        type: 3}
+      propertyPath: isMajorCheckpoint
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -48315,7 +48320,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.28978413, y: 0.000000016468093, z: -0.0000000049861373, w: 0.95709205}
+  m_LocalRotation: {x: 0.28978413, y: -0.00000001646809, z: 0.000000004986136, w: 0.95709205}
   m_LocalPosition: {x: 0, y: 5.75, z: -26}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -99752,6 +99757,7 @@ GameObject:
   - component: {fileID: 1668587698}
   - component: {fileID: 1668587699}
   - component: {fileID: 1668587701}
+  - component: {fileID: 1668587702}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -99788,6 +99794,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   motor: {fileID: 1668587695}
+  healthManager: {fileID: 1668587702}
   moveSpeed: 8
   moveAcceleration: 10
   rotateSpeed: 10
@@ -99879,6 +99886,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementController: {fileID: 1668587694}
+  healthManager: {fileID: 1668587702}
+  respawnController: {fileID: 1668587701}
   strafeMovementPenalty: 0.75
   backwardsMovementPenalty: 0.5
   cameraCorrectionSpeed: 5
@@ -99927,9 +99936,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e539c7a6677e8d84bbe9dde13531e328, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 1364669269}
   movementController: {fileID: 1668587694}
   thirdPersonMovement: {fileID: 1668587697}
-  animator: {fileID: 1364669269}
+  healthManager: {fileID: 1668587702}
+  respawnController: {fileID: 1668587701}
   jumpFeedbacks: {fileID: 974448949}
   softLandingFeedbacks: {fileID: 2102833984}
   hardLandingFeedbacks: {fileID: 1642268762}
@@ -99947,8 +99958,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementController: {fileID: 1668587694}
+  healthManager: {fileID: 1668587702}
   checkpointManager: {fileID: 1668587699}
   minMapHeight: -10
+  majorRespawnDelay: 3
+--- !u!114 &1668587702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1668587691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c519da04246cc642aa8b92c170e95bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 3
 --- !u!1 &1700499716
 GameObject:
   m_ObjectHideFlags: 0
@@ -100617,7 +100643,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1915220761}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.28978413, y: 0.000000016468093, z: -0.0000000049861373, w: 0.95709205}
+  m_LocalRotation: {x: 0.28978413, y: -0.00000001646809, z: 0.000000004986136, w: 0.95709205}
   m_LocalPosition: {x: 0, y: 5.75, z: -26}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

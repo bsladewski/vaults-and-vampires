@@ -24,6 +24,10 @@ namespace Player
         [SerializeField]
         private KinematicCharacterMotor motor;
 
+        [Required]
+        [SerializeField]
+        private HealthManager healthManager;
+
         [Header("Movement Settings")]
         [SerializeField]
         private float moveSpeed = 8f;
@@ -263,6 +267,7 @@ namespace Player
             if (wasHardLanding)
             {
                 OnHardLanding?.Invoke();
+                healthManager.UpdateHealth(-1);
             }
         }
 

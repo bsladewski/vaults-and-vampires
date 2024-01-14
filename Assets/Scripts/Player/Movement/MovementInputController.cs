@@ -1,6 +1,7 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 using Cameras;
+using Utils;
 
 namespace Player
 {
@@ -10,6 +11,14 @@ namespace Player
         [Required]
         [SerializeField]
         private MovementController movementController;
+
+        [Required]
+        [SerializeField]
+        private HealthManager healthManager;
+
+        [Required]
+        [SerializeField]
+        private RespawnController respawnController;
 
         private PlayerInput playerInput;
 
@@ -45,6 +54,8 @@ namespace Player
 
         private Vector3 movementDirection;
 
+        private bool isMovementLocked;
+
         private void Awake()
         {
             playerInput = new PlayerInput();
@@ -54,6 +65,8 @@ namespace Player
         {
             lastCameraForward = GetCameraForward();
             movementController.OnHardLanding += OnHardLanding;
+            healthManager.OnDeath += OnDeath;
+            respawnController.OnRespawn += OnRespawn;
         }
 
         private void OnEnable()
@@ -67,7 +80,7 @@ namespace Player
             {
                 hardLandingTimer -= Time.deltaTime;
             }
-            else
+            else if (!isMovementLocked)
             {
                 HandleMovementInput();
                 HandleJumpInput();
@@ -195,6 +208,17 @@ namespace Player
         {
             hardLandingTimer = hardLandingCooldown;
             ResetMovementInput();
+        }
+
+        private void OnDeath()
+        {
+            isMovementLocked = true;
+            ResetMovementInput();
+        }
+
+        private void OnRespawn()
+        {
+            isMovementLocked = false;
         }
 
         private void ResetMovementInput()
