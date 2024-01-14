@@ -1,50 +1,54 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Utils;
 
-public class CheckpointManager : MonoBehaviour
+namespace Progression
 {
-    [Header("Settings")]
-    [SerializeField]
-    private LayerMask checkpointLayerMask;
-
-    private Vector3 respawnPoint;
-
-    private HashSet<Vector3> visitedCheckpoints;
-
-    private void Start()
+    public class CheckpointManager : MonoBehaviour
     {
-        visitedCheckpoints = new HashSet<Vector3>();
-        SetRespawnPoint(transform.position);
-    }
+        [Header("Settings")]
+        [SerializeField]
+        private LayerMask checkpointLayerMask;
 
-    private void OnTriggerEnter(Collider collider)
-    {
-        if (CollisionUtils.IsColliderInLayerMask(collider, checkpointLayerMask))
+        private Vector3 respawnPoint;
+
+        private HashSet<Vector3> visitedCheckpoints;
+
+        private void Start()
         {
-            Checkpoint checkpoint = collider.GetComponent<Checkpoint>();
-            if (checkpoint == null)
+            visitedCheckpoints = new HashSet<Vector3>();
+            SetRespawnPoint(transform.position);
+        }
+
+        private void OnTriggerEnter(Collider collider)
+        {
+            if (CollisionUtils.IsColliderInLayerMask(collider, checkpointLayerMask))
             {
-                Debug.LogError("Checkpoint is missing Checkpoint component!");
-            }
-            else
-            {
-                Vector3 checkpointPosition = checkpoint.GetCheckpointPosition();
-                if (!visitedCheckpoints.Contains(checkpointPosition))
+                Checkpoint checkpoint = collider.GetComponent<Checkpoint>();
+                if (checkpoint == null)
                 {
-                    SetRespawnPoint(checkpointPosition);
+                    Debug.LogError("Checkpoint is missing Checkpoint component!");
+                }
+                else
+                {
+                    Vector3 checkpointPosition = checkpoint.GetCheckpointPosition();
+                    if (!visitedCheckpoints.Contains(checkpointPosition))
+                    {
+                        SetRespawnPoint(checkpointPosition);
+                    }
                 }
             }
         }
-    }
 
-    public Vector3 GetRespawnPoint()
-    {
-        return respawnPoint;
-    }
+        public Vector3 GetRespawnPoint()
+        {
+            return respawnPoint;
+        }
 
-    private void SetRespawnPoint(Vector3 respawnPoint)
-    {
-        visitedCheckpoints.Add(respawnPoint);
-        this.respawnPoint = respawnPoint;
+        private void SetRespawnPoint(Vector3 respawnPoint)
+        {
+            visitedCheckpoints.Add(respawnPoint);
+            this.respawnPoint = respawnPoint;
+        }
     }
 }

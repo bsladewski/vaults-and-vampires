@@ -1,15 +1,18 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-public class Checkpoint : MonoBehaviour
+namespace Progression
 {
-    [Header("Dependencies")]
-    [Required]
-    [SerializeField]
-    private Transform checkpointPositionTransform;
-
-    public Vector3 GetCheckpointPosition()
+    public class Checkpoint : MonoBehaviour
     {
-        return checkpointPositionTransform.position;
+        [Header("Dependencies")]
+        [Required]
+        [SerializeField]
+        private Transform checkpointPositionTransform;
+
+        public Vector3 GetCheckpointPosition()
+        {
+            return checkpointPositionTransform.position;
+        }
     }
 }

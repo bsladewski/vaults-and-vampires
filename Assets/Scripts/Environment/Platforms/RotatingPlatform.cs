@@ -2,30 +2,33 @@ using UnityEngine;
 using KinematicCharacterController;
 using Sirenix.OdinInspector;
 
-[SelectionBase]
-public class RotatingPlatform : MonoBehaviour, IMoverController
+namespace Environment
 {
-    [Header("Dependencies")]
-    [Required]
-    [SerializeField]
-    private PhysicsMover mover;
-
-    [Header("Settings")]
-    [SerializeField]
-    private Vector3 rotationAxis = Vector3.up;
-
-    [SerializeField]
-    private float rotationSpeed;
-
-    private void Awake()
+    [SelectionBase]
+    public class RotatingPlatform : MonoBehaviour, IMoverController
     {
-        mover.MoverController = this;
-    }
+        [Header("Dependencies")]
+        [Required]
+        [SerializeField]
+        private PhysicsMover mover;
 
-    public void UpdateMovement(out Vector3 goalPosition, out Quaternion goalRotation, float deltaTime)
-    {
-        goalPosition = mover.transform.position;
-        goalRotation = mover.transform.rotation;
-        goalRotation *= Quaternion.Euler(rotationAxis * rotationSpeed);
+        [Header("Settings")]
+        [SerializeField]
+        private Vector3 rotationAxis = Vector3.up;
+
+        [SerializeField]
+        private float rotationSpeed;
+
+        private void Awake()
+        {
+            mover.MoverController = this;
+        }
+
+        public void UpdateMovement(out Vector3 goalPosition, out Quaternion goalRotation, float deltaTime)
+        {
+            goalPosition = mover.transform.position;
+            goalRotation = mover.transform.rotation;
+            goalRotation *= Quaternion.Euler(rotationAxis * rotationSpeed);
+        }
     }
 }
