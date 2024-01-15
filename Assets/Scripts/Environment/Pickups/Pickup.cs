@@ -1,24 +1,28 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-[SelectionBase]
-public class Pickup : MonoBehaviour
+namespace Environment
 {
-    [Required]
-    [SerializeField]
-    private PickupVisual pickupVisual;
-
-    public void GetPickup()
+    [SelectionBase]
+    public class Pickup : MonoBehaviour
     {
-        if (pickupVisual.GetPickupParticleSystemPrefab() != null)
-        {
-            Instantiate(
-                pickupVisual.GetPickupParticleSystemPrefab(),
-                pickupVisual.transform.position,
-                Quaternion.identity
-            );
-        }
+        [Header("Dependencies")]
+        [Required]
+        [SerializeField]
+        private PickupVisual pickupVisual;
 
-        Destroy(gameObject);
+        public void GetPickup()
+        {
+            if (pickupVisual.GetPickupParticleSystemPrefab() != null)
+            {
+                Instantiate(
+                    pickupVisual.GetPickupParticleSystemPrefab(),
+                    pickupVisual.transform.position,
+                    Quaternion.identity
+                );
+            }
+
+            Destroy(gameObject);
+        }
     }
 }

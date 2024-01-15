@@ -1,9 +1,12 @@
 using UnityEngine;
 
-public static class CollisionUtils
+namespace Utils
 {
-    public static bool IsColliderInLayerMask(Collider collider, LayerMask layerMask)
+    public static class CollisionUtils
     {
-        return layerMask == (layerMask | 1 << collider.gameObject.layer);
+        public static bool IsColliderInLayerMask(Collider collider, LayerMask layerMask)
+        {
+            return layerMask == (layerMask | 1 << collider.gameObject.layer);
+        }
     }
 }

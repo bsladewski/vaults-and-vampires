@@ -1,68 +1,65 @@
-using System.Collections;
 using System.Collections.Generic;
-using Sirenix.OdinInspector;
 using UnityEngine;
+using Utils;
 
-public class CheckpointManager : MonoBehaviour
+namespace Progression
 {
-    [Required]
-    [SerializeField]
-    private MovementController playerCharacterController;
-
-    [SerializeField]
-    private LayerMask checkpointLayerMask;
-
-    [SerializeField]
-    private float respawnHeight = -10f;
-
-    private Vector3 respawnPoint;
-
-    private HashSet<Vector3> visitedCheckpoints;
-
-    private void Start()
+    public class CheckpointManager : MonoBehaviour
     {
-        visitedCheckpoints = new HashSet<Vector3>();
-        SetRespawnPoint(transform.position);
-    }
+        [Header("Settings")]
+        [SerializeField]
+        private LayerMask checkpointLayerMask;
 
-    private void LateUpdate()
-    {
-        if (transform.position.y < respawnHeight)
+        private Vector3 respawnPoint;
+
+        private Vector3 majorRespawnPoint;
+
+        private HashSet<Vector3> visitedCheckpoints;
+
+        private void Start()
         {
-            StartCoroutine(RespawnCharacterCoroutine());
+            visitedCheckpoints = new HashSet<Vector3>();
+            SetRespawnPoint(transform.position, true);
         }
-    }
 
-    private void OnTriggerEnter(Collider collider)
-    {
-        if (CollisionUtils.IsColliderInLayerMask(collider, checkpointLayerMask))
+        private void OnTriggerEnter(Collider collider)
         {
-            Checkpoint checkpoint = collider.GetComponent<Checkpoint>();
-            if (checkpoint == null)
+            if (CollisionUtils.IsColliderInLayerMask(collider, checkpointLayerMask))
             {
-                Debug.LogError("Checkpoint is missing Checkpoint component!");
-            }
-            else
-            {
-                Vector3 checkpointPosition = checkpoint.GetCheckpointPosition();
-                if (!visitedCheckpoints.Contains(checkpointPosition))
+                Checkpoint checkpoint = collider.GetComponent<Checkpoint>();
+                if (checkpoint == null)
                 {
-                    SetRespawnPoint(checkpointPosition);
+                    Debug.LogError("Checkpoint is missing Checkpoint component!");
+                }
+                else
+                {
+                    Vector3 checkpointPosition = checkpoint.GetCheckpointPosition();
+                    if (!visitedCheckpoints.Contains(checkpointPosition))
+                    {
+                        SetRespawnPoint(checkpointPosition, checkpoint.GetIsMajorCheckpoint());
+                    }
                 }
             }
         }
-    }
 
-    private void SetRespawnPoint(Vector3 respawnPoint)
-    {
-        visitedCheckpoints.Add(respawnPoint);
-        this.respawnPoint = respawnPoint;
-    }
+        public Vector3 GetRespawnPoint()
+        {
+            return respawnPoint;
+        }
 
-    private IEnumerator RespawnCharacterCoroutine()
-    {
-        yield return new WaitForEndOfFrame();
-        playerCharacterController.SetPosition(respawnPoint);
-        ThirdPersonCameraTarget.Instance.ResetCameraPosition(respawnPoint);
+        public Vector3 GetMajorRespawnPoint()
+        {
+            return majorRespawnPoint;
+        }
+
+        private void SetRespawnPoint(Vector3 respawnPoint, bool isMajorCheckpoint)
+        {
+            visitedCheckpoints.Add(respawnPoint);
+            this.respawnPoint = respawnPoint;
+            if (isMajorCheckpoint)
+            {
+                majorRespawnPoint = respawnPoint;
+            }
+        }
     }
 }

@@ -1,22 +1,27 @@
 using UnityEngine;
+using Utils;
 
-public class PickupController : MonoBehaviour
+namespace Environment
 {
-    [SerializeField]
-    private LayerMask pickupLayerMask;
-
-    private void OnTriggerEnter(Collider collider)
+    public class PickupController : MonoBehaviour
     {
-        if (CollisionUtils.IsColliderInLayerMask(collider, pickupLayerMask))
+        [Header("Settings")]
+        [SerializeField]
+        private LayerMask pickupLayerMask;
+
+        private void OnTriggerEnter(Collider collider)
         {
-            Pickup pickup = collider.GetComponent<Pickup>();
-            if (pickup == null)
+            if (CollisionUtils.IsColliderInLayerMask(collider, pickupLayerMask))
             {
-                Debug.LogError("Pickup is missing Pickup component!");
-            }
-            else
-            {
-                pickup.GetPickup();
+                Pickup pickup = collider.GetComponent<Pickup>();
+                if (pickup == null)
+                {
+                    Debug.LogError("Pickup is missing Pickup component!");
+                }
+                else
+                {
+                    pickup.GetPickup();
+                }
             }
         }
     }

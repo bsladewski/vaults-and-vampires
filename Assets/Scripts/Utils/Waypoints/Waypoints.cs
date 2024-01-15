@@ -1,35 +1,38 @@
 using UnityEngine;
 
-public class Waypoints : MonoBehaviour
+namespace Utils
 {
-    [SerializeField]
-    private bool isCircuit;
-
-    [SerializeField]
-    private Waypoint[] waypoints;
-
-    public bool GetIsCircuit()
+    public class Waypoints : MonoBehaviour
     {
-        return isCircuit;
-    }
+        [SerializeField]
+        private bool isCircuit;
 
-    public Waypoint[] GetWaypoints()
-    {
-        return waypoints;
-    }
+        [SerializeField]
+        private Waypoint[] waypoints;
 
-    public int GetLength()
-    {
-        if (waypoints == null)
+        public bool GetIsCircuit()
         {
-            return 0;
+            return isCircuit;
         }
 
-        return waypoints.Length;
-    }
+        public Waypoint[] GetWaypoints()
+        {
+            return waypoints;
+        }
 
-    public Waypoint GetWaypoint(int index)
-    {
-        return waypoints[index];
+        public int GetLength()
+        {
+            if (waypoints == null)
+            {
+                return 0;
+            }
+
+            return waypoints.Length;
+        }
+
+        public Waypoint GetWaypoint(int index)
+        {
+            return waypoints[index];
+        }
     }
 }
