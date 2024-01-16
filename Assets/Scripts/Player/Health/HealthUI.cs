@@ -43,6 +43,10 @@ namespace Player
 
         private void OnHealthLost()
         {
+            foreach (HealthIconUI healthIcon in healthIcons)
+            {
+                healthIcon.PlayHealthLostFeedbacks();
+            }
             UpdateHealthIcons();
         }
 
