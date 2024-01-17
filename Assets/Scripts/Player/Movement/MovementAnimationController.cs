@@ -53,13 +53,22 @@ namespace Player
 
         private bool mirrorJump;
 
-        private void Start()
+        private void OnEnable()
         {
             movementController.OnJumped += OnJumped;
             movementController.OnFell += OnFell;
             movementController.OnLanded += OnLanded;
             healthManager.OnDeath += OnDeath;
             respawnController.OnRespawn += OnRespawn;
+        }
+
+        private void OnDisable()
+        {
+            movementController.OnJumped -= OnJumped;
+            movementController.OnFell -= OnFell;
+            movementController.OnLanded -= OnLanded;
+            healthManager.OnDeath -= OnDeath;
+            respawnController.OnRespawn -= OnRespawn;
         }
 
         private void LateUpdate()

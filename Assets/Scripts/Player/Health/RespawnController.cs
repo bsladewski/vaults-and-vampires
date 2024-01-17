@@ -32,9 +32,14 @@ namespace Player
         [SerializeField]
         private float majorRespawnDelay = 3f;
 
-        private void Start()
+        private void OnEnable()
         {
             healthManager.OnDeath += OnDeath;
+        }
+
+        private void OnDisable()
+        {
+            healthManager.OnDeath -= OnDeath;
         }
 
         private void Update()

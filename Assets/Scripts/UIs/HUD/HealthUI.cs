@@ -31,9 +31,18 @@ namespace Player
                 healthIcons.Add(healthIcon);
             }
             UpdateHealthIcons();
+        }
 
+        private void OnEnable()
+        {
             healthManager.OnHealthGained += OnHealthGained;
             healthManager.OnHealthLost += OnHealthLost;
+        }
+
+        private void OnDisable()
+        {
+            healthManager.OnHealthGained -= OnHealthGained;
+            healthManager.OnHealthLost -= OnHealthLost;
         }
 
         private void OnHealthGained()
