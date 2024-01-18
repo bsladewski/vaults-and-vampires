@@ -2054,7 +2054,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 1960d553e10a52f45b76437ea188bbb4, type: 2}
+      objectReference: {fileID: 2100000, guid: ea6bfeffa76cac94388668b822951ba8, type: 2}
     - target: {fileID: -6370085079684087283, guid: 9c4ffcd8fea2a4340a47477448b2f777,
         type: 3}
       propertyPath: m_Layer
@@ -52765,6 +52765,12 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!23 &387981514 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 1f4e4d65bd98c1b41b1741f1819e5ce2,
+    type: 3}
+  m_PrefabInstance: {fileID: 1734232023}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &387981516 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1f4e4d65bd98c1b41b1741f1819e5ce2,
@@ -100545,7 +100551,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: d0d420ef28ffd06479a5914b2fa7e0e9, type: 2}
+      objectReference: {fileID: 2100000, guid: 132846a4e5d2073429428cbeaefbacc3, type: 2}
     - target: {fileID: 919132149155446097, guid: 1f4e4d65bd98c1b41b1741f1819e5ce2,
         type: 3}
       propertyPath: m_Name
@@ -101747,6 +101753,7 @@ MonoBehaviour:
   DebugActive: 0
   FeedbacksList:
   - rid: 8264138713142657024
+  - rid: 8264138713142657031
   KeepPlayModeChanges: 0
   PerformanceMode: 0
   StopFeedbacksOnDisable: 0
@@ -101866,6 +101873,83 @@ MonoBehaviour:
           m_PropagationSpeed: 343
         Velocity: {x: 1, y: 1, z: 1}
         ClearImpulseOnStop: 0
+    - rid: 8264138713142657031
+      type: {class: MMF_Flicker, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
+      data:
+        Active: 1
+        UniqueID: -683395858
+        Label: Flicker
+        ChannelMode: 0
+        Channel: 0
+        MMChannelDefinition: {fileID: 0}
+        Chance: 100
+        DisplayColor: {r: 0, g: 0, b: 0, a: 1}
+        Timing:
+          TimescaleMode: 0
+          ExcludeFromHoldingPauses: 0
+          ContributeToTotalDuration: 1
+          InitialDelay: 0
+          CooldownDuration: 0
+          InterruptsOnStop: 1
+          NumberOfRepeats: 0
+          RepeatForever: 0
+          DelayBetweenRepeats: 1
+          MMFeedbacksDirectionCondition: 0
+          PlayDirection: 0
+          ConstantIntensity: 0
+          UseIntensityInterval: 0
+          IntensityIntervalMin: 0
+          IntensityIntervalMax: 0
+          Sequence: {fileID: 0}
+          TrackID: 0
+          Quantized: 0
+          TargetBPM: 120
+        AutomatedTargetAcquisition:
+          Mode: 0
+          ChildIndex: 0
+        RandomizeOutput: 0
+        RandomMultiplier: {x: 0.8, y: 1}
+        RandomizeDuration: 0
+        RandomDurationMultiplier: {x: 0.5, y: 2}
+        UseRange: 0
+        RangeDistance: 5
+        UseRangeFalloff: 0
+        RangeFalloff:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        RemapRangeFalloff: {x: 0, y: 1}
+        Owner: {fileID: 2074309908}
+        DebugActive: 0
+        BoundRenderer: {fileID: 387981514}
+        Mode: 1
+        PropertyName: _Tint
+        FlickerDuration: 0.2
+        FlickerOctave: 0.04
+        FlickerColor: {r: 1, g: 0.078431375, b: 0.078431375, a: 1}
+        MaterialIndexes: 
+        UseMaterialPropertyBlocks: 0
+        SpriteRendererTextureProperty: _MainTex
 --- !u!4 &2093792327 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4471811071007317, guid: 74786e88646c5e44e8501a6111be58da,
