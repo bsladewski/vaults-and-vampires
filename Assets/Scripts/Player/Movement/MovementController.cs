@@ -28,6 +28,10 @@ namespace Player
         [SerializeField]
         private HealthManager healthManager;
 
+        [Required]
+        [SerializeField]
+        private DamageReceiver damageReceiver;
+
         [Header("Movement Settings")]
         [SerializeField]
         private float moveSpeed = 8f;
@@ -271,6 +275,22 @@ namespace Player
             }
         }
 
+        public void OnGroundHit(Collider hitCollider, Vector3 hitNormal, Vector3 hitPoint, ref HitStabilityReport hitStabilityReport)
+        {
+            if (!healthManager.IsDead() && !damageReceiver.IsInvulnerable() && hitCollider.gameObject.tag == "Ground Hazard")
+            {
+                DamageSource damageSource = hitCollider.gameObject.GetComponent<DamageSource>();
+                if (damageSource != null)
+                {
+                    damageReceiver.TakeDamage(damageSource);
+                }
+                else
+                {
+                    Debug.LogError("Ground hazard is missing damage source!");
+                }
+            }
+        }
+
         public void AfterCharacterUpdate(float deltaTime)
         {
             // Not needed at this time
@@ -282,11 +302,6 @@ namespace Player
         }
 
         public void OnDiscreteCollisionDetected(Collider hitCollider)
-        {
-            // Not needed at this time
-        }
-
-        public void OnGroundHit(Collider hitCollider, Vector3 hitNormal, Vector3 hitPoint, ref HitStabilityReport hitStabilityReport)
         {
             // Not needed at this time
         }

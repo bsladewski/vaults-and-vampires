@@ -21,6 +21,11 @@ namespace Utils
             currentHealth = maxHealth;
         }
 
+        public bool IsDead()
+        {
+            return currentHealth <= 0;
+        }
+
         public void UpdateHealth(int amount)
         {
             currentHealth = Math.Clamp(currentHealth + amount, 0, maxHealth);

@@ -1,7 +1,6 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 using MoreMountains.Feedbacks;
-using Utils;
 
 namespace Player
 {
@@ -19,14 +18,6 @@ namespace Player
         [Required]
         [SerializeField]
         private MovementInputController thirdPersonMovement;
-
-        [Required]
-        [SerializeField]
-        private HealthManager healthManager;
-
-        [Required]
-        [SerializeField]
-        private RespawnController respawnController;
 
         [Header("Feedbacks")]
         [Required]
@@ -58,8 +49,6 @@ namespace Player
             movementController.OnJumped += OnJumped;
             movementController.OnFell += OnFell;
             movementController.OnLanded += OnLanded;
-            healthManager.OnDeath += OnDeath;
-            respawnController.OnRespawn += OnRespawn;
         }
 
         private void OnDisable()
@@ -67,8 +56,6 @@ namespace Player
             movementController.OnJumped -= OnJumped;
             movementController.OnFell -= OnFell;
             movementController.OnLanded -= OnLanded;
-            healthManager.OnDeath -= OnDeath;
-            respawnController.OnRespawn -= OnRespawn;
         }
 
         private void LateUpdate()
@@ -146,25 +133,11 @@ namespace Player
             }
         }
 
-        private void OnDeath()
-        {
-            ResetTriggers();
-            animator.SetTrigger("Die");
-        }
-
-        private void OnRespawn()
-        {
-            ResetTriggers();
-            animator.SetTrigger("Respawn");
-        }
-
         private void ResetTriggers()
         {
             animator.ResetTrigger("Jump");
             animator.ResetTrigger("Fall");
             animator.ResetTrigger("Land");
-            animator.ResetTrigger("Die");
-            animator.ResetTrigger("Respawn");
         }
     }
 }
