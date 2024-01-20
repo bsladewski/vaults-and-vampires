@@ -10,7 +10,7 @@ namespace Utils
         private HealthManager healthManager;
 
         [SerializeField]
-        private float iFrameDuration = 1f;
+        private float iFrameDuration = 0.8f;
 
         private float iFrameTimer;
 
