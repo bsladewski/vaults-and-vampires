@@ -1,6 +1,7 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
+using MoreMountains.Feedbacks;
 
 namespace Player
 {
@@ -19,6 +20,10 @@ namespace Player
         [SerializeField]
         private Sprite emptySprite;
 
+        [Required]
+        [SerializeField]
+        private MMF_Player healthLostFeedbacks;
+
         public void ShowFilled()
         {
             image.sprite = filledSprite;
@@ -27,6 +32,11 @@ namespace Player
         public void ShowEmpty()
         {
             image.sprite = emptySprite;
+        }
+
+        public void PlayHealthLostFeedbacks()
+        {
+            healthLostFeedbacks.PlayFeedbacks();
         }
     }
 }

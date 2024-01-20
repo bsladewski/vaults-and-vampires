@@ -64,14 +64,21 @@ namespace Player
         private void Start()
         {
             lastCameraForward = GetCameraForward();
-            movementController.OnHardLanding += OnHardLanding;
-            healthManager.OnDeath += OnDeath;
-            respawnController.OnRespawn += OnRespawn;
         }
 
         private void OnEnable()
         {
             playerInput.Enable();
+            movementController.OnHardLanding += OnHardLanding;
+            healthManager.OnDeath += OnDeath;
+            respawnController.OnRespawn += OnRespawn;
+        }
+
+        private void OnDisable()
+        {
+            movementController.OnHardLanding -= OnHardLanding;
+            healthManager.OnDeath -= OnDeath;
+            respawnController.OnRespawn -= OnRespawn;
         }
 
         private void Update()

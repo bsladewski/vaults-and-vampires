@@ -32,9 +32,14 @@ namespace Player
         [SerializeField]
         private float majorRespawnDelay = 3f;
 
-        private void Start()
+        private void OnEnable()
         {
             healthManager.OnDeath += OnDeath;
+        }
+
+        private void OnDisable()
+        {
+            healthManager.OnDeath -= OnDeath;
         }
 
         private void Update()
@@ -61,8 +66,12 @@ namespace Player
         {
             yield return new WaitForSeconds(majorRespawnDelay);
             yield return new WaitForEndOfFrame();
-            movementController.SetPosition(checkpointManager.GetMajorRespawnPoint());
-            ThirdPersonCameraTarget.Instance.ResetCameraPosition(checkpointManager.GetMajorRespawnPoint());
+
+            Vector3 respawnPoint = checkpointManager.GetMajorRespawnPoint();
+            movementController.SetPosition(respawnPoint);
+            ThirdPersonCameraTarget.Instance.ResetCameraPosition(respawnPoint);
+
+            checkpointManager.ClearMinorCheckpoints();
             healthManager.ResetHealth();
             OnRespawn?.Invoke();
         }

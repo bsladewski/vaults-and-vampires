@@ -28,6 +28,10 @@ namespace Player
         [SerializeField]
         private HealthManager healthManager;
 
+        [Required]
+        [SerializeField]
+        private DamageReceiver damageReceiver;
+
         [Header("Movement Settings")]
         [SerializeField]
         private float moveSpeed = 8f;
@@ -83,11 +87,33 @@ namespace Player
 
         private float aimLockRotation = 0.25f;
 
+        [SerializeField]
+        private float lateralKnockbackSpeed = 50f;
+
+        [SerializeField]
+        private float maxKnockbackHeight = 1f;
+
         private bool shouldResetVelocity;
+
+        private Vector3 knockbackDirection;
+
+        private float knockbackIntensity;
+
+        private bool wasKnockedBack;
 
         private void Awake()
         {
             motor.CharacterController = this;
+        }
+
+        private void OnEnable()
+        {
+            damageReceiver.OnKnockback += OnKnockback;
+        }
+
+        private void OnDisable()
+        {
+            damageReceiver.OnKnockback -= OnKnockback;
         }
 
         public Vector3 GetPlanarMovementNormalized()
@@ -167,6 +193,39 @@ namespace Player
                 return;
             }
 
+            if (knockbackIntensity > 0f)
+            {
+                // calculate lateral knockback
+                Vector3 currentLateralVelocity = new Vector3(
+                    currentVelocity.x,
+                    0f,
+                    currentVelocity.z
+                );
+                Vector3 lateralKnockback = new Vector3(
+                    knockbackDirection.x,
+                    0f,
+                    knockbackDirection.z
+                );
+
+                lateralKnockback *= Vector3.Dot(-currentLateralVelocity, lateralKnockback);
+                lateralKnockback = (lateralKnockback - currentLateralVelocity).normalized;
+
+                lateralKnockback *= lateralKnockbackSpeed * knockbackIntensity;
+                currentVelocity = lateralKnockback;
+
+                // calculate vertical knockback
+                motor.ForceUnground();
+                fallVelocity -= Mathf.Sqrt(2f * maxKnockbackHeight * gravity * 2f);
+
+                jumpInertia = lateralKnockback;
+                wasKnockedBack = true;
+
+                // reset knockback
+                knockbackDirection = Vector3.zero;
+                knockbackIntensity = 0f;
+                return;
+            }
+
             Vector3 initialVelocity = currentVelocity;
 
             bool isGrounded = GetIsGrounded();
@@ -185,7 +244,7 @@ namespace Player
                 motor.ForceUnground();
 
                 // apply velocity to reach max jump height
-                fallVelocity -= Mathf.Sqrt(2 * maxJumpHeight * gravity);
+                fallVelocity -= Mathf.Sqrt(2f * maxJumpHeight * gravity);
                 shouldJump = false;
                 StartCoroutine(FireJumpEvent());
             }
@@ -220,7 +279,7 @@ namespace Player
         public void PostGroundingUpdate(float deltaTime)
         {
             bool isGrounded = GetIsGrounded();
-            if (!isGrounded && wasGrounded)
+            if (!isGrounded && wasGrounded && !wasKnockedBack)
             {
                 // if we left the ground, store our lateral momentum
                 jumpInertia = planarMovement * (1f - jumpMoveSpeedModifier);
@@ -246,6 +305,8 @@ namespace Player
             {
                 wasGrounded = false;
             }
+
+            wasKnockedBack = false;
         }
 
         private IEnumerator FireJumpEvent()
@@ -271,6 +332,28 @@ namespace Player
             }
         }
 
+        public void OnGroundHit(Collider hitCollider, Vector3 hitNormal, Vector3 hitPoint, ref HitStabilityReport hitStabilityReport)
+        {
+            if (!healthManager.IsDead() && !damageReceiver.IsInvulnerable() && hitCollider.gameObject.tag == "Ground Hazard")
+            {
+                DamageSource damageSource = hitCollider.gameObject.GetComponent<DamageSource>();
+                if (damageSource != null)
+                {
+                    damageReceiver.TakeDamage(damageSource);
+                }
+                else
+                {
+                    Debug.LogError("Ground hazard is missing damage source!");
+                }
+            }
+        }
+
+        private void OnKnockback(Vector3 direction, float intensity)
+        {
+            knockbackDirection = direction;
+            knockbackIntensity = intensity;
+        }
+
         public void AfterCharacterUpdate(float deltaTime)
         {
             // Not needed at this time
@@ -282,11 +365,6 @@ namespace Player
         }
 
         public void OnDiscreteCollisionDetected(Collider hitCollider)
-        {
-            // Not needed at this time
-        }
-
-        public void OnGroundHit(Collider hitCollider, Vector3 hitNormal, Vector3 hitPoint, ref HitStabilityReport hitStabilityReport)
         {
             // Not needed at this time
         }

@@ -1,0 +1,17 @@
+{
+    "name": "UIs",
+    "rootNamespace": "UIs",
+    "references": [
+        "GUID:8087d854c1f812e4b9a74437dfc524e0",
+        "GUID:dd654c28efb5c344490932a1a995ef20"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

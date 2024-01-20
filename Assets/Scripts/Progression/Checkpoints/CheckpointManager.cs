@@ -14,11 +14,11 @@ namespace Progression
 
         private Vector3 majorRespawnPoint;
 
-        private HashSet<Vector3> visitedCheckpoints;
+        private List<Vector3> visitedCheckpoints;
 
         private void Start()
         {
-            visitedCheckpoints = new HashSet<Vector3>();
+            visitedCheckpoints = new List<Vector3>();
             SetRespawnPoint(transform.position, true);
         }
 
@@ -50,6 +50,23 @@ namespace Progression
         public Vector3 GetMajorRespawnPoint()
         {
             return majorRespawnPoint;
+        }
+
+        public void ClearMinorCheckpoints()
+        {
+            for (int i = visitedCheckpoints.Count - 1; i >= 0; i--)
+            {
+                if (!visitedCheckpoints[i].Equals(majorRespawnPoint))
+                {
+                    visitedCheckpoints.RemoveAt(i);
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            respawnPoint = majorRespawnPoint;
         }
 
         private void SetRespawnPoint(Vector3 respawnPoint, bool isMajorCheckpoint)

@@ -18,7 +18,12 @@ namespace Utils
 
         private void Awake()
         {
-            ResetHealth();
+            currentHealth = maxHealth;
+        }
+
+        public bool IsDead()
+        {
+            return currentHealth <= 0;
         }
 
         public void UpdateHealth(int amount)
