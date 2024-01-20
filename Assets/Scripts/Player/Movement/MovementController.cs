@@ -101,6 +101,8 @@ namespace Player
 
         private bool wasKnockedBack;
 
+        private bool knockbackMovementLock;
+
         private void Awake()
         {
             motor.CharacterController = this;
@@ -219,6 +221,7 @@ namespace Player
 
                 jumpInertia = lateralKnockback;
                 wasKnockedBack = true;
+                knockbackMovementLock = true;
 
                 // reset knockback
                 knockbackDirection = Vector3.zero;
@@ -229,6 +232,7 @@ namespace Player
             Vector3 initialVelocity = currentVelocity;
 
             bool isGrounded = GetIsGrounded();
+            targetDirection = knockbackMovementLock ? Vector3.zero : targetDirection;
             planarMovement = targetDirection * moveSpeed * (isGrounded ? 1f : jumpMoveSpeedModifier);
             if (!isGrounded)
             {
@@ -289,6 +293,7 @@ namespace Player
             {
                 if (!wasGrounded)
                 {
+                    knockbackMovementLock = false;
                     wasHardLanding = fallVelocity >= hardLandingVelocity;
                     if (wasHardLanding)
                     {

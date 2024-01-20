@@ -100292,7 +100292,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 383
   aimLockRotateSpeed: 0.25
-  lateralKnockbackSpeed: 5
+  lateralKnockbackSpeed: 8
   maxKnockbackHeight: 1
 --- !u!114 &1668587695
 MonoBehaviour:
