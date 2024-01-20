@@ -100283,11 +100283,11 @@ MonoBehaviour:
   moveAcceleration: 10
   rotateSpeed: 10
   minJumpHeight: 1
-  maxJumpHeight: 2
+  maxJumpHeight: 2.5
   jumpMoveSpeedModifier: 0.5
   jumpRotationSpeedModifier: 0.25
-  gravity: 15
-  hardLandingVelocity: 15
+  gravity: 30
+  hardLandingVelocity: 22
   collisionLayerMask:
     serializedVersion: 2
     m_Bits: 383
