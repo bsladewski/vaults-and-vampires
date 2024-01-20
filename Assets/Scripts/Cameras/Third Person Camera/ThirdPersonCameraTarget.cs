@@ -16,6 +16,9 @@ namespace Cameras
         private float rotateSpeed = 0.5f;
 
         [SerializeField]
+        private int fixedRotateIncrement = 45;
+
+        [SerializeField]
         private float yOffset = 0.75f;
 
         [SerializeField]
@@ -43,11 +46,13 @@ namespace Cameras
             playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
             playerInput.Enable();
             playerInput.ThirdPersonCamera.Zoom.started += ZoomCamera;
+            playerInput.ThirdPersonCamera.FixedRotate.started += FixedRotate;
         }
 
         private void OnDisable()
         {
             playerInput.ThirdPersonCamera.Zoom.started -= ZoomCamera;
+            playerInput.ThirdPersonCamera.FixedRotate.started -= FixedRotate;
         }
 
         private void LateUpdate()
@@ -100,6 +105,31 @@ namespace Cameras
         private void ZoomCamera(InputAction.CallbackContext ctx)
         {
             cameraController.CycleFollowOffset();
+        }
+
+        private void FixedRotate(InputAction.CallbackContext ctx)
+        {
+            if (isAimLocked)
+            {
+                return;
+            }
+
+            float value = ctx.ReadValue<float>();
+            float fixedRotation = CalculateCurrentRotationIncrement() + value * fixedRotateIncrement;
+
+            transform.rotation = Quaternion.Euler(new Vector3(0f, fixedRotation, 0f));
+        }
+
+        private float CalculateCurrentRotationIncrement()
+        {
+            int currentRotation = (int)transform.rotation.eulerAngles.y;
+            int incrementRotation = currentRotation % fixedRotateIncrement;
+            if (incrementRotation < fixedRotateIncrement / 2f)
+            {
+                return (float)currentRotation - incrementRotation;
+            }
+
+            return (float)currentRotation - incrementRotation + fixedRotateIncrement;
         }
     }
 }
