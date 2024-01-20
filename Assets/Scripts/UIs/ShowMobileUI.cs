@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -5,6 +6,9 @@ namespace UIs
 {
     public class ShowMobileUI : MonoBehaviour
     {
+        [DllImport("__Internal")]
+        private static extern bool IsMobile();
+
         [Required]
         [SerializeField]
         private GameObject mobileControls;
@@ -12,9 +16,9 @@ namespace UIs
         [SerializeField]
         private bool showOnAllPlatforms;
 
-        void Start()
+        private void Start()
         {
-            if (showOnAllPlatforms || Application.isMobilePlatform)
+            if (showOnAllPlatforms || CheckIsMobile())
             {
                 mobileControls.SetActive(true);
             }
@@ -22,6 +26,20 @@ namespace UIs
             {
                 gameObject.SetActive(false);
             }
+        }
+
+        private bool CheckIsMobile()
+        {
+            if (Application.isMobilePlatform)
+            {
+                return true;
+            }
+
+#if !UNITY_EDITOR && UNITY_WEBGL
+            return IsMobile();
+#endif
+
+            return false;
         }
     }
 }
