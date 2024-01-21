@@ -26,6 +26,10 @@ namespace Player
 
         [Required]
         [SerializeField]
+        private MMF_Player doubleJumpFeedbacks;
+
+        [Required]
+        [SerializeField]
         private MMF_Player softLandingFeedbacks;
 
         [Required]
@@ -47,6 +51,7 @@ namespace Player
         private void OnEnable()
         {
             movementController.OnJumped += OnJumped;
+            movementController.OnDoubleJumped += OnDoubleJumped;
             movementController.OnFell += OnFell;
             movementController.OnLanded += OnLanded;
         }
@@ -54,6 +59,7 @@ namespace Player
         private void OnDisable()
         {
             movementController.OnJumped -= OnJumped;
+            movementController.OnDoubleJumped -= OnDoubleJumped;
             movementController.OnFell -= OnFell;
             movementController.OnLanded -= OnLanded;
         }
@@ -106,11 +112,22 @@ namespace Player
 
         private void OnJumped()
         {
+            OnAnyJump();
+            jumpFeedbacks.PlayFeedbacks();
+        }
+
+        private void OnDoubleJumped()
+        {
+            OnAnyJump();
+            doubleJumpFeedbacks.PlayFeedbacks();
+        }
+
+        private void OnAnyJump()
+        {
             ResetTriggers();
             animator.SetBool("Mirror Jump", mirrorJump);
             animator.SetTrigger("Jump");
             mirrorJump = !mirrorJump;
-            jumpFeedbacks.PlayFeedbacks();
         }
 
         private void OnFell()

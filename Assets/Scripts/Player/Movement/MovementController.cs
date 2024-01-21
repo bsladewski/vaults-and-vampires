@@ -13,6 +13,8 @@ namespace Player
     {
         public Action OnJumped;
 
+        public Action OnDoubleJumped;
+
         public Action OnFell;
 
         public Action OnLanded;
@@ -54,6 +56,8 @@ namespace Player
         private float maxJumpHeight = 2f;
 
         private bool shouldJump;
+
+        private bool shouldDoubleJump;
 
         private bool isJumpHeld;
 
@@ -153,6 +157,16 @@ namespace Player
             this.shouldJump = shouldJump;
         }
 
+        public void SetShouldDoubleJump()
+        {
+            SetShouldDoubleJump(true);
+        }
+
+        public void SetShouldDoubleJump(bool shouldDoubleJump)
+        {
+            this.shouldDoubleJump = shouldDoubleJump;
+        }
+
         public void SetIsJumpHeld(bool isJumpHeld)
         {
             this.isJumpHeld = isJumpHeld;
@@ -233,7 +247,8 @@ namespace Player
 
             bool isGrounded = GetIsGrounded();
             targetDirection = knockbackMovementLock ? Vector3.zero : targetDirection;
-            planarMovement = targetDirection * moveSpeed * (isGrounded ? 1f : jumpMoveSpeedModifier);
+            Vector3 basePlanarMovement = targetDirection * moveSpeed;
+            planarMovement = basePlanarMovement * (isGrounded ? 1f : jumpMoveSpeedModifier);
             if (!isGrounded)
             {
                 // conserve momentum if we are jumping
@@ -242,15 +257,25 @@ namespace Player
 
             currentVelocity = Vector3.Lerp(currentVelocity, planarMovement, Time.deltaTime * moveAcceleration);
 
-            if (shouldJump)
+            if (shouldJump || shouldDoubleJump)
             {
                 // initiate a jump
                 motor.ForceUnground();
 
                 // apply velocity to reach max jump height
                 fallVelocity -= Mathf.Sqrt(2f * maxJumpHeight * gravity);
+                if (shouldJump)
+                {
+                    StartCoroutine(FireJumpEvent());
+                }
+                else
+                {
+                    jumpInertia = basePlanarMovement * (1f - jumpMoveSpeedModifier);
+                    StartCoroutine(FireDoubleJumpEvent());
+                }
+
                 shouldJump = false;
-                StartCoroutine(FireJumpEvent());
+                shouldDoubleJump = false;
             }
             else if (!isGrounded)
             {
@@ -318,6 +343,12 @@ namespace Player
         {
             yield return new WaitForEndOfFrame();
             OnJumped?.Invoke();
+        }
+
+        private IEnumerator FireDoubleJumpEvent()
+        {
+            yield return new WaitForEndOfFrame();
+            OnDoubleJumped?.Invoke();
         }
 
         private IEnumerator FireFallEvent()

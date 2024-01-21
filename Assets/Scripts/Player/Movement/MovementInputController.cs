@@ -56,6 +56,12 @@ namespace Player
 
         private bool isMovementLocked;
 
+        private bool canDoubleJump;
+
+        private bool hasDoubleJumped;
+
+        private bool startedDoubleJump;
+
         private void Awake()
         {
             playerInput = new PlayerInput();
@@ -69,6 +75,9 @@ namespace Player
         private void OnEnable()
         {
             playerInput.Enable();
+            movementController.OnJumped += OnJumped;
+            movementController.OnFell += OnFell;
+            movementController.OnLanded += OnLanded;
             movementController.OnHardLanding += OnHardLanding;
             healthManager.OnDeath += OnDeath;
             respawnController.OnRespawn += OnRespawn;
@@ -76,6 +85,9 @@ namespace Player
 
         private void OnDisable()
         {
+            movementController.OnJumped -= OnJumped;
+            movementController.OnFell -= OnFell;
+            movementController.OnLanded -= OnLanded;
             movementController.OnHardLanding -= OnHardLanding;
             healthManager.OnDeath -= OnDeath;
             respawnController.OnRespawn -= OnRespawn;
@@ -164,6 +176,13 @@ namespace Player
                 jumpBufferTimer = 0f;
                 startedJump = true;
             }
+            else if (jumpInput && canDoubleJump && !hasDoubleJumped)
+            {
+                movementController.SetShouldDoubleJump();
+                movementController.ResetFallVelocity();
+                hasDoubleJumped = true;
+                startedDoubleJump = true;
+            }
             else if (playerInput.ThirdPersonMovement.Jump.IsPressed())
             {
                 // if the player didn't just jump and is pressing the jump button, set is jump held flag
@@ -194,9 +213,10 @@ namespace Player
                 coyoteTimeTimer -= Time.deltaTime;
             }
 
-            if (jumpInput && !isGrounded)
+            if (jumpInput && !isGrounded && !startedDoubleJump)
             {
-                // if the player tried to jump and we're not grounded, reset the jump buffer
+                // if the player tried to jump, we're not grounded, and we didn't just double jump,
+                // reset the jump buffer
                 jumpBufferTimer = jumpBuffer;
             }
             else if (jumpBufferTimer > 0f)
@@ -204,11 +224,29 @@ namespace Player
                 // if the player didn't try to jump or the player is grounded, burn down the jump buffer
                 jumpBufferTimer -= Time.deltaTime;
             }
+
+            startedDoubleJump = false;
         }
 
         private Vector3 GetCameraForward()
         {
             return ThirdPersonCameraTarget.Instance.GetCameraForward();
+        }
+
+        private void OnJumped()
+        {
+            canDoubleJump = true;
+        }
+
+        private void OnFell()
+        {
+            canDoubleJump = true;
+        }
+
+        private void OnLanded()
+        {
+            canDoubleJump = false;
+            hasDoubleJumped = false;
         }
 
         private void OnHardLanding()
@@ -233,6 +271,7 @@ namespace Player
             movementDirection = Vector3.zero;
             movementController.SetTargetDirection(Vector3.zero);
             movementController.SetShouldJump(false);
+            movementController.SetShouldDoubleJump(false);
             movementController.SetIsJumpHeld(false);
         }
     }
