@@ -53688,7 +53688,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.28978413, y: 0.000000016468093, z: -0.0000000049861373, w: 0.95709205}
+  m_LocalRotation: {x: 0.28978413, y: -0.00000001646809, z: 0.000000004986136, w: 0.95709205}
   m_LocalPosition: {x: 0, y: 5.75, z: -26}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -82809,6 +82809,74 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1118839537}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1137652889
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4406380344631714846, guid: 1b74ecab055391448a68146fe9c51142,
+        type: 3}
+      propertyPath: m_Name
+      value: Double Jump Powerup Sphere (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5378440891864303350, guid: 1b74ecab055391448a68146fe9c51142,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5378440891864303350, guid: 1b74ecab055391448a68146fe9c51142,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5378440891864303350, guid: 1b74ecab055391448a68146fe9c51142,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5378440891864303350, guid: 1b74ecab055391448a68146fe9c51142,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5378440891864303350, guid: 1b74ecab055391448a68146fe9c51142,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5378440891864303350, guid: 1b74ecab055391448a68146fe9c51142,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5378440891864303350, guid: 1b74ecab055391448a68146fe9c51142,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5378440891864303350, guid: 1b74ecab055391448a68146fe9c51142,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5378440891864303350, guid: 1b74ecab055391448a68146fe9c51142,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5378440891864303350, guid: 1b74ecab055391448a68146fe9c51142,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1b74ecab055391448a68146fe9c51142, type: 3}
 --- !u!43 &1184728744
 Mesh:
   m_ObjectHideFlags: 0
@@ -88120,6 +88188,74 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1234747772}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1258890738
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4406380344631714846, guid: 1b74ecab055391448a68146fe9c51142,
+        type: 3}
+      propertyPath: m_Name
+      value: Double Jump Powerup Sphere (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5378440891864303350, guid: 1b74ecab055391448a68146fe9c51142,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5378440891864303350, guid: 1b74ecab055391448a68146fe9c51142,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5378440891864303350, guid: 1b74ecab055391448a68146fe9c51142,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5378440891864303350, guid: 1b74ecab055391448a68146fe9c51142,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5378440891864303350, guid: 1b74ecab055391448a68146fe9c51142,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5378440891864303350, guid: 1b74ecab055391448a68146fe9c51142,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5378440891864303350, guid: 1b74ecab055391448a68146fe9c51142,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5378440891864303350, guid: 1b74ecab055391448a68146fe9c51142,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5378440891864303350, guid: 1b74ecab055391448a68146fe9c51142,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5378440891864303350, guid: 1b74ecab055391448a68146fe9c51142,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1b74ecab055391448a68146fe9c51142, type: 3}
 --- !u!43 &1259575829
 Mesh:
   m_ObjectHideFlags: 0
@@ -107516,6 +107652,7 @@ GameObject:
   - component: {fileID: 1668587703}
   - component: {fileID: 1668587704}
   - component: {fileID: 1668587705}
+  - component: {fileID: 1668587706}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -107565,7 +107702,7 @@ MonoBehaviour:
   hardLandingVelocity: 22
   collisionLayerMask:
     serializedVersion: 2
-    m_Bits: 383
+    m_Bits: 895
   aimLockRotateSpeed: 0.25
   lateralKnockbackSpeed: 8
   maxKnockbackHeight: 1
@@ -107781,6 +107918,36 @@ MonoBehaviour:
   skinnedMeshRenderer: {fileID: 35171862}
   hurtFlickerMaterial: {fileID: 2100000, guid: a5daf38cc88f7704192b4e79189e4f97, type: 2}
   hurtFlickerFrequency: 0.3
+--- !u!114 &1668587706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1668587691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4645b21ffdfa0c45a27cc28d1f223ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doubleJumpEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1668587697}
+        m_TargetAssemblyTypeName: Player.MovementInputController, PlayerAssembly
+        m_MethodName: TriggerDoubleJump
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  powerupSphereLayerMask:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!1 &1697173269
 GameObject:
   m_ObjectHideFlags: 0
@@ -109520,7 +109687,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1915220761}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.28978413, y: 0.000000016468093, z: -0.0000000049861373, w: 0.95709205}
+  m_LocalRotation: {x: 0.28978413, y: -0.00000001646809, z: 0.000000004986136, w: 0.95709205}
   m_LocalPosition: {x: 0, y: 5.75, z: -26}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -111153,6 +111320,74 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 52344c09971e31141a3e7e74b64e1b5b, type: 3}
+--- !u!1001 &5664092111785212630
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4406380344631714846, guid: 1b74ecab055391448a68146fe9c51142,
+        type: 3}
+      propertyPath: m_Name
+      value: Double Jump Powerup Sphere
+      objectReference: {fileID: 0}
+    - target: {fileID: 5378440891864303350, guid: 1b74ecab055391448a68146fe9c51142,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5378440891864303350, guid: 1b74ecab055391448a68146fe9c51142,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5378440891864303350, guid: 1b74ecab055391448a68146fe9c51142,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5378440891864303350, guid: 1b74ecab055391448a68146fe9c51142,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5378440891864303350, guid: 1b74ecab055391448a68146fe9c51142,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5378440891864303350, guid: 1b74ecab055391448a68146fe9c51142,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5378440891864303350, guid: 1b74ecab055391448a68146fe9c51142,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5378440891864303350, guid: 1b74ecab055391448a68146fe9c51142,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5378440891864303350, guid: 1b74ecab055391448a68146fe9c51142,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5378440891864303350, guid: 1b74ecab055391448a68146fe9c51142,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1b74ecab055391448a68146fe9c51142, type: 3}
 --- !u!1001 &6008158428626341381
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -111258,3 +111493,6 @@ SceneRoots:
   - {fileID: 832575519}
   - {fileID: 1668587693}
   - {fileID: 925718346}
+  - {fileID: 5664092111785212630}
+  - {fileID: 1137652889}
+  - {fileID: 1258890738}

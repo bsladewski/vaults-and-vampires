@@ -116,6 +116,14 @@ namespace Player
             return movementDirection;
         }
 
+        public void TriggerDoubleJump()
+        {
+            movementController.SetShouldDoubleJump();
+            movementController.ResetFallVelocity();
+            hasDoubleJumped = true;
+            startedDoubleJump = true;
+        }
+
         private void HandleMovementInput()
         {
             // get player movement input
@@ -178,10 +186,7 @@ namespace Player
             }
             else if (jumpInput && canDoubleJump && !hasDoubleJumped)
             {
-                movementController.SetShouldDoubleJump();
-                movementController.ResetFallVelocity();
-                hasDoubleJumped = true;
-                startedDoubleJump = true;
+                TriggerDoubleJump();
             }
             else if (playerInput.ThirdPersonMovement.Jump.IsPressed())
             {

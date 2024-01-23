@@ -17,11 +17,10 @@ namespace Environment
                 if (pickup == null)
                 {
                     Debug.LogError("Pickup is missing Pickup component!");
+                    return;
                 }
-                else
-                {
-                    pickup.GetPickup();
-                }
+
+                pickup.GetPickup();
             }
         }
     }
