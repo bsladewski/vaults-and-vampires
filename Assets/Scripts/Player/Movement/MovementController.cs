@@ -327,7 +327,7 @@ namespace Player
         public void PostGroundingUpdate(float deltaTime)
         {
             bool isGrounded = GetIsGrounded();
-            if (!isGrounded && wasGrounded && !wasKnockedBack & !ignoreJumpMoveSpeedModifier)
+            if (!isGrounded && wasGrounded && !wasKnockedBack && !ignoreJumpMoveSpeedModifier)
             {
                 // if we left the ground, store our lateral momentum
                 jumpInertia = planarMovement * (1f - jumpMoveSpeedModifier);
