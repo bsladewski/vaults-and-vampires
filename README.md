@@ -17,7 +17,7 @@ playable build will be hosted at https://rcxa.itch.io/vaults-and-vampires.
 
 ## Dependencies
 
-The game is built in Unity 2022.3.8f1.
+The game is built in Unity 2022.3.18f1.
 
 The game uses the following dependencies:
 

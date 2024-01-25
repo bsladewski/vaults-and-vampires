@@ -61,8 +61,12 @@ namespace Player
 
         private bool isJumpHeld;
 
+        private bool ensureMaxJumpHeight;
+
         [SerializeField]
         private float jumpMoveSpeedModifier = 0.5f;
+
+        private bool ignoreJumpMoveSpeedModifier;
 
         [SerializeField]
         private float jumpRotationSpeedModifier = 0.25f;
@@ -157,13 +161,19 @@ namespace Player
             this.shouldJump = shouldJump;
         }
 
-        public void SetShouldDoubleJump()
+        public void SetShouldDoubleJump(bool fromUserInput, bool shouldDoubleJump)
         {
-            SetShouldDoubleJump(true);
-        }
+            if (!fromUserInput)
+            {
+                ensureMaxJumpHeight = true;
+                ignoreJumpMoveSpeedModifier = true;
+            }
+            else
+            {
+                ensureMaxJumpHeight = false;
+                ignoreJumpMoveSpeedModifier = false;
+            }
 
-        public void SetShouldDoubleJump(bool shouldDoubleJump)
-        {
             this.shouldDoubleJump = shouldDoubleJump;
         }
 
@@ -248,7 +258,7 @@ namespace Player
             bool isGrounded = GetIsGrounded();
             targetDirection = knockbackMovementLock ? Vector3.zero : targetDirection;
             Vector3 basePlanarMovement = targetDirection * moveSpeed;
-            planarMovement = basePlanarMovement * (isGrounded ? 1f : jumpMoveSpeedModifier);
+            planarMovement = basePlanarMovement * (isGrounded || ignoreJumpMoveSpeedModifier ? 1f : jumpMoveSpeedModifier);
             if (!isGrounded)
             {
                 // conserve momentum if we are jumping
@@ -270,7 +280,14 @@ namespace Player
                 }
                 else
                 {
-                    jumpInertia = basePlanarMovement * (1f - jumpMoveSpeedModifier);
+                    if (ignoreJumpMoveSpeedModifier)
+                    {
+                        jumpInertia = Vector3.zero;
+                    }
+                    else
+                    {
+                        jumpInertia = basePlanarMovement * (1f - jumpMoveSpeedModifier);
+                    }
                     StartCoroutine(FireDoubleJumpEvent());
                 }
 
@@ -279,7 +296,7 @@ namespace Player
             }
             else if (!isGrounded)
             {
-                if (!isJumpHeld && fallVelocity < 0f)
+                if (!isJumpHeld && !ensureMaxJumpHeight && fallVelocity < 0f)
                 {
                     // if the player releases the jump button, adjust gravity so we hit the target jump height
                     fallVelocity += gravity * (maxJumpHeight / minJumpHeight) * Time.deltaTime;
@@ -319,6 +336,9 @@ namespace Player
                 if (!wasGrounded)
                 {
                     knockbackMovementLock = false;
+                    ensureMaxJumpHeight = false;
+                    ignoreJumpMoveSpeedModifier = false;
+
                     wasHardLanding = fallVelocity >= hardLandingVelocity;
                     if (wasHardLanding)
                     {

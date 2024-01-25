@@ -116,11 +116,14 @@ namespace Player
             return movementDirection;
         }
 
-        public void TriggerDoubleJump()
+        public void TriggerDoubleJump(bool fromUserInput)
         {
-            movementController.SetShouldDoubleJump();
+            movementController.SetShouldDoubleJump(fromUserInput, true);
             movementController.ResetFallVelocity();
-            hasDoubleJumped = true;
+            if (fromUserInput)
+            {
+                hasDoubleJumped = true;
+            }
             startedDoubleJump = true;
         }
 
@@ -186,7 +189,7 @@ namespace Player
             }
             else if (jumpInput && canDoubleJump && !hasDoubleJumped)
             {
-                TriggerDoubleJump();
+                TriggerDoubleJump(true);
             }
             else if (playerInput.ThirdPersonMovement.Jump.IsPressed())
             {
@@ -276,7 +279,7 @@ namespace Player
             movementDirection = Vector3.zero;
             movementController.SetTargetDirection(Vector3.zero);
             movementController.SetShouldJump(false);
-            movementController.SetShouldDoubleJump(false);
+            movementController.SetShouldDoubleJump(false, false);
             movementController.SetIsJumpHeld(false);
         }
     }
