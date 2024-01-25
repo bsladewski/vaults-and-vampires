@@ -17,7 +17,7 @@ namespace Player
 
         [Required]
         [SerializeField]
-        private MovementInputController thirdPersonMovement;
+        private MovementInputController movementInputController;
 
         [Header("Feedbacks")]
         [Required]
@@ -66,7 +66,7 @@ namespace Player
 
         private void LateUpdate()
         {
-            bool isAimLocked = thirdPersonMovement.GetIsAimLocked();
+            bool isAimLocked = movementInputController.GetIsAimLocked();
             if (isAimLocked != wasAimLocked)
             {
                 wasAimLocked = isAimLocked;
@@ -85,7 +85,7 @@ namespace Player
 
         private void HandleMovementAnimations()
         {
-            float speedNormalized = thirdPersonMovement.GetMovementDirection().magnitude;
+            float speedNormalized = movementInputController.GetMovementDirection().magnitude;
             moveAnimationSpeed = Mathf.Lerp(
                 moveAnimationSpeed,
                 speedNormalized,
@@ -95,7 +95,7 @@ namespace Player
 
         private void HandleAimLockedMovementAnimations()
         {
-            Vector3 movementDirection = thirdPersonMovement.GetMovementDirection();
+            Vector3 movementDirection = movementInputController.GetMovementDirection();
             moveAnimationSpeed = Mathf.Lerp(
                 moveAnimationSpeed,
                 movementDirection.x,

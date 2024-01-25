@@ -38,15 +38,15 @@ namespace Player
         [SerializeField]
         private float moveSpeed = 8f;
 
-        private Vector3 targetDirection;
-
-        private Vector3 planarMovement;
-
         [SerializeField]
         private float moveAcceleration = 10f;
 
         [SerializeField]
         private float rotateSpeed = 10f;
+
+        private Vector3 targetDirection;
+
+        private Vector3 planarMovement;
 
         [Header("Jump Settings")]
         [SerializeField]
@@ -54,6 +54,14 @@ namespace Player
 
         [SerializeField]
         private float maxJumpHeight = 2f;
+
+        [SerializeField]
+        private float jumpMoveSpeedModifier = 0.5f;
+
+        [SerializeField]
+        private float jumpRotateSpeedModifier = 0.25f;
+
+        private Vector3 jumpInertia;
 
         private bool shouldJump;
 
@@ -63,15 +71,7 @@ namespace Player
 
         private bool ensureMaxJumpHeight;
 
-        [SerializeField]
-        private float jumpMoveSpeedModifier = 0.5f;
-
         private bool ignoreJumpMoveSpeedModifier;
-
-        [SerializeField]
-        private float jumpRotationSpeedModifier = 0.25f;
-
-        private Vector3 jumpInertia;
 
         private bool wasGrounded = true;
 
@@ -79,10 +79,10 @@ namespace Player
         [SerializeField]
         private float gravity = 9.81f;
 
-        private float fallVelocity;
-
         [SerializeField]
         private float hardLandingVelocity = 15f;
+
+        private float fallVelocity;
 
         private bool wasHardLanding;
 
@@ -93,13 +93,13 @@ namespace Player
         [SerializeField]
         private float aimLockRotateSpeed;
 
-        private float aimLockRotation = 0.25f;
-
         [SerializeField]
         private float lateralKnockbackSpeed = 50f;
 
         [SerializeField]
         private float maxKnockbackHeight = 1f;
+
+        private float aimLockRotation = 0.25f;
 
         private bool shouldResetVelocity;
 
@@ -151,20 +151,16 @@ namespace Player
             this.aimLockRotation = aimLockRotation;
         }
 
-        public void SetShouldJump()
-        {
-            SetShouldJump(true);
-        }
-
         public void SetShouldJump(bool shouldJump)
         {
             this.shouldJump = shouldJump;
         }
 
-        public void SetShouldDoubleJump(bool fromUserInput, bool shouldDoubleJump)
+        public void SetShouldDoubleJump(bool shouldDoubleJump, bool fromEnvironmentTrigger)
         {
-            if (!fromUserInput)
+            if (fromEnvironmentTrigger)
             {
+                // this removes some input driven double jump mechanics to make environmental triggers easier to use
                 ensureMaxJumpHeight = true;
                 ignoreJumpMoveSpeedModifier = true;
             }
@@ -196,6 +192,8 @@ namespace Player
         {
             if (ThirdPersonCameraTarget.Instance.GetIsAimLocked())
             {
+                // if the player is aim locked, rotation from input should be directly applied to the player rather than
+                // being derived from movement
                 float targetAimLockRotation = aimLockRotation * aimLockRotateSpeed * 360f;
                 currentRotation *= Quaternion.Euler(Vector3.up * targetAimLockRotation * Time.deltaTime);
                 return;
@@ -203,7 +201,8 @@ namespace Player
 
             if (targetDirection != Vector3.zero)
             {
-                float rotationSpeedModifier = GetIsGrounded() ? rotateSpeed : rotateSpeed * jumpRotationSpeedModifier;
+                // calculate player rotation based on player movement
+                float rotationSpeedModifier = GetIsGrounded() ? rotateSpeed : rotateSpeed * jumpRotateSpeedModifier;
                 Quaternion targetRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
                 currentRotation = Quaternion.Slerp(currentRotation, targetRotation, Time.deltaTime * rotationSpeedModifier);
             }
@@ -214,6 +213,7 @@ namespace Player
         {
             if (shouldResetVelocity)
             {
+                // if the flag to reset velocity is set, zero out velocity and return early
                 currentVelocity = Vector3.zero;
                 shouldResetVelocity = false;
                 return;
@@ -313,6 +313,8 @@ namespace Player
 
             if (initialVelocity.y >= 0f && currentVelocity.y < 0f)
             {
+                // if the player's velocity was zero or positive but has become negative, fire an event to indicate that
+                // the player has begun falling
                 StartCoroutine(FireFallEvent());
             }
         }
@@ -335,6 +337,7 @@ namespace Player
             {
                 if (!wasGrounded)
                 {
+                    // if the player has just become grounded, reset jump/fall related flags
                     knockbackMovementLock = false;
                     ensureMaxJumpHeight = false;
                     ignoreJumpMoveSpeedModifier = false;
@@ -342,6 +345,8 @@ namespace Player
                     wasHardLanding = fallVelocity >= hardLandingVelocity;
                     if (wasHardLanding)
                     {
+                        // if the player takes fall damage, reset their velocity on the next frame
+                        // this is because we temporarily block movement input after a hard landing
                         shouldResetVelocity = true;
                     }
                     StartCoroutine(FireLandEvent());
@@ -392,6 +397,7 @@ namespace Player
         {
             if (!healthManager.IsDead() && !damageReceiver.IsInvulnerable() && hitCollider.gameObject.tag == "Ground Hazard")
             {
+                // if we land on a ground hazard and the player can take damage, damage the player
                 DamageSource damageSource = hitCollider.gameObject.GetComponent<DamageSource>();
                 if (damageSource != null)
                 {
@@ -406,6 +412,7 @@ namespace Player
 
         private void OnKnockback(Vector3 direction, float intensity)
         {
+            // set the values needed to calculate knockback movement
             knockbackDirection = direction;
             knockbackIntensity = intensity;
         }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2971581239202730515}
   - component: {fileID: 5175999656806121006}
   m_Layer: 0
-  m_Name: Double Jump Magic Circle
+  m_Name: Double Jump Spell Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

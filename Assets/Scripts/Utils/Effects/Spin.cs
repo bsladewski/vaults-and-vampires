@@ -4,6 +4,7 @@ namespace Utils
 {
     public class Spin : MonoBehaviour
     {
+        [Header("Settings")]
         [SerializeField]
         private Vector3 rotationAxis = Vector3.up;
 

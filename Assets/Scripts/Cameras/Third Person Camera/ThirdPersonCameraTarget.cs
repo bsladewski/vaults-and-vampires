@@ -19,10 +19,10 @@ namespace Cameras
         private int fixedRotateIncrement = 45;
 
         [SerializeField]
-        private float yOffset = 0.75f;
+        private float aimSpeed = 15f;
 
         [SerializeField]
-        private float aimSpeed = 15f;
+        private float yOffset = 0.75f;
 
         private bool isAimLocked;
 

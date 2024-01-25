@@ -5,9 +5,9 @@ using UnityEngine;
 namespace Environment
 {
     [SelectionBase]
-    public class PowerupSphere : MonoBehaviour
+    public class SpellOrb : MonoBehaviour
     {
-        public enum PowerupSphereType
+        public enum SpellOrbType
         {
             DoubleJump
         }
@@ -15,20 +15,22 @@ namespace Environment
         [Header("Dependencies")]
         [Required]
         [SerializeField]
-        private GameObject powerupSphereVisual;
+        private GameObject spellOrbVisual;
 
-        [SerializeField]
-        private PowerupSphereType powerupSphereType;
+
 
         [Header("Settings")]
+        [SerializeField]
+        private SpellOrbType spellOrbType;
+
         [SerializeField]
         private float respawnDuration = 5f;
 
         private bool isActive = true;
 
-        public PowerupSphereType GetPowerupSphereType()
+        public SpellOrbType GetSpellOrbType()
         {
-            return powerupSphereType;
+            return spellOrbType;
         }
 
         public bool GetIsActive()
@@ -36,22 +38,22 @@ namespace Environment
             return isActive;
         }
 
-        public void ConsumePowerupSphere()
+        public void ConsumeSpellOrb()
         {
             if (!isActive)
             {
                 return;
             }
 
-            powerupSphereVisual.SetActive(false);
+            spellOrbVisual.SetActive(false);
             isActive = false;
-            StartCoroutine(RespawnPowerupSphere());
+            StartCoroutine(RespawnSpellOrb());
         }
 
-        private IEnumerator RespawnPowerupSphere()
+        private IEnumerator RespawnSpellOrb()
         {
             yield return new WaitForSeconds(respawnDuration);
-            powerupSphereVisual.SetActive(true);
+            spellOrbVisual.SetActive(true);
             isActive = true;
         }
     }

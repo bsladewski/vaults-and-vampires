@@ -5,6 +5,7 @@ namespace Utils
     [SelectionBase]
     public class DamageSource : MonoBehaviour
     {
+        [Header("Settings")]
         [SerializeField]
         private int damageAmount = 1;
 

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4213455071196081999}
   - component: {fileID: 8103904064239803974}
   m_Layer: 6
-  m_Name: Gold Coin Pickup
+  m_Name: Gold Coin Collectible
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4915e3253bb7204689e663b9b9433f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickupVisual: {fileID: 2319098073285623768}
+  collectibleVisual: {fileID: 2319098073285623768}
 --- !u!1001 &4932897671699575069
 PrefabInstance:
   m_ObjectHideFlags: 0

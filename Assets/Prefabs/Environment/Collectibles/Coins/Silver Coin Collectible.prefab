@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4213455071196081999}
   - component: {fileID: 8103904064239803974}
   m_Layer: 6
-  m_Name: Silver Coin Pickup
+  m_Name: Silver Coin Collectible
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4915e3253bb7204689e663b9b9433f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickupVisual: {fileID: 9027868581709483493}
+  collectibleVisual: {fileID: 9027868581709483493}
 --- !u!1001 &6834276515256592768
 PrefabInstance:
   m_ObjectHideFlags: 0

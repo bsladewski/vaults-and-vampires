@@ -20,15 +20,12 @@ namespace Player
         [SerializeField]
         private RespawnController respawnController;
 
-        private PlayerInput playerInput;
-
         [Header("Settings")]
         [SerializeField]
         private float strafeMovementPenalty = 0.75f;
 
         [SerializeField]
         private float backwardsMovementPenalty = 0.5f;
-
 
         [SerializeField]
         private float cameraCorrectionSpeed = 5f;
@@ -43,16 +40,18 @@ namespace Player
 
         private float jumpBufferTimer;
 
-        private bool startedJump;
-
         [SerializeField]
         private float hardLandingCooldown = 0.2f;
 
         private float hardLandingTimer;
 
+        private PlayerInput playerInput;
+
         private Vector3 lastCameraForward;
 
         private Vector3 movementDirection;
+
+        private bool startedJump;
 
         private bool isMovementLocked;
 
@@ -116,11 +115,11 @@ namespace Player
             return movementDirection;
         }
 
-        public void TriggerDoubleJump(bool fromUserInput)
+        public void TriggerDoubleJump(bool fromEnvironmentTrigger)
         {
-            movementController.SetShouldDoubleJump(fromUserInput, true);
+            movementController.SetShouldDoubleJump(true, fromEnvironmentTrigger);
             movementController.ResetFallVelocity();
-            if (fromUserInput)
+            if (!fromEnvironmentTrigger)
             {
                 hasDoubleJumped = true;
             }
@@ -170,18 +169,22 @@ namespace Player
                 );
             }
 
-            // calculate player's intended velocity
+            // calculate player's intended velocity and update movement controller
             Vector3 targetDirection = Quaternion.LookRotation(lastCameraForward) * runDirection;
             movementController.SetTargetDirection(targetDirection);
         }
 
         private void HandleJumpInput()
         {
+            // get player jump input
             bool isGrounded = movementController.GetIsGrounded();
             bool jumpInput = playerInput.ThirdPersonMovement.Jump.triggered;
             if ((jumpInput && isGrounded) || (jumpInput && coyoteTimeTimer > 0f) || (isGrounded && jumpBufferTimer > 0f))
             {
-                movementController.SetShouldJump();
+                // if the player presses jump while grounded, initiate a jump
+                // coyote time honors player jump input slightly after becoming ungrounded
+                // jump buffer honors player jump input slightly before becoming grounded
+                movementController.SetShouldJump(true);
                 movementController.ResetFallVelocity();
                 coyoteTimeTimer = 0f;
                 jumpBufferTimer = 0f;
@@ -189,7 +192,8 @@ namespace Player
             }
             else if (jumpInput && canDoubleJump && !hasDoubleJumped)
             {
-                TriggerDoubleJump(true);
+                // if the player pressed jump and they are able to double jump, initiate a double jump
+                TriggerDoubleJump(false);
             }
             else if (playerInput.ThirdPersonMovement.Jump.IsPressed())
             {
@@ -243,39 +247,46 @@ namespace Player
 
         private void OnJumped()
         {
+            // when the player jumps, set the flag to allow them to double jump
             canDoubleJump = true;
         }
 
         private void OnFell()
         {
+            // when the player falls, set the flag to allow them to double jump
             canDoubleJump = true;
         }
 
         private void OnLanded()
         {
+            // when the player lands, reset the flags for double jumping
             canDoubleJump = false;
             hasDoubleJumped = false;
         }
 
         private void OnHardLanding()
         {
+            // if the player takes fall damage, temporarily block movement input
             hardLandingTimer = hardLandingCooldown;
             ResetMovementInput();
         }
 
         private void OnDeath()
         {
+            // if the player dies, temporarily block movement input
             isMovementLocked = true;
             ResetMovementInput();
         }
 
         private void OnRespawn()
         {
+            // if the player respawns, remove the temporary block on movement input
             isMovementLocked = false;
         }
 
         private void ResetMovementInput()
         {
+            // reset any ongoing movement input
             movementDirection = Vector3.zero;
             movementController.SetTargetDirection(Vector3.zero);
             movementController.SetShouldJump(false);

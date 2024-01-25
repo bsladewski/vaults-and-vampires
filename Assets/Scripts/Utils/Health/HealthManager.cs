@@ -11,6 +11,7 @@ namespace Utils
 
         public Action OnDeath;
 
+        [Header("Settings")]
         [SerializeField]
         private int maxHealth;
 

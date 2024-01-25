@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4208300616255467879}
   - component: {fileID: 1919197716094076620}
   m_Layer: 0
-  m_Name: _Coin Get Pickup Particle System
+  m_Name: _Coin Pickup Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

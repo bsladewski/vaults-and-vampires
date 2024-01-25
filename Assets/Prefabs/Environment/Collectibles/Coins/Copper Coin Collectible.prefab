@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4213455071196081999}
   - component: {fileID: 8103904064239803974}
   m_Layer: 6
-  m_Name: Copper Coin Pickup
+  m_Name: Copper Coin Collectible
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4915e3253bb7204689e663b9b9433f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickupVisual: {fileID: 3328270651596759624}
+  collectibleVisual: {fileID: 3328270651596759624}
 --- !u!1001 &1215587736641873770
 PrefabInstance:
   m_ObjectHideFlags: 0

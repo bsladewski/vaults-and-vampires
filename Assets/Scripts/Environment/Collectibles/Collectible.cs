@@ -4,20 +4,20 @@ using UnityEngine;
 namespace Environment
 {
     [SelectionBase]
-    public class Pickup : MonoBehaviour
+    public class Collectible : MonoBehaviour
     {
         [Header("Dependencies")]
         [Required]
         [SerializeField]
-        private PickupVisual pickupVisual;
+        private CollectibleVisual collectibleVisual;
 
-        public void GetPickup()
+        public void Pickup()
         {
-            if (pickupVisual.GetPickupParticleSystemPrefab() != null)
+            if (collectibleVisual.GetPickupParticleSystemPrefab() != null)
             {
                 Instantiate(
-                    pickupVisual.GetPickupParticleSystemPrefab(),
-                    pickupVisual.transform.position,
+                    collectibleVisual.GetPickupParticleSystemPrefab(),
+                    collectibleVisual.transform.position,
                     Quaternion.identity
                 );
             }

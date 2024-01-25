@@ -4,6 +4,7 @@ namespace Utils
 {
     public class Bob : MonoBehaviour
     {
+        [Header("Settings")]
         [SerializeField]
         private float bobSpeed = 2f;
 

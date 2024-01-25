@@ -4,7 +4,7 @@ using Utils;
 
 namespace Progression
 {
-    public class CheckpointManager : MonoBehaviour
+    public class CheckpointInteractionController : MonoBehaviour
     {
         [Header("Settings")]
         [SerializeField]

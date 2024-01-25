@@ -127,7 +127,7 @@ GameObject:
   - component: {fileID: 5653890943229361813}
   - component: {fileID: 6370999135235936313}
   m_Layer: 9
-  m_Name: Double Jump Powerup Sphere
+  m_Name: Double Jump Spell Orb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -163,8 +163,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 104520c34143b8248aec226764d2a8b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerupSphereVisual: {fileID: 1962491489621209400}
-  powerupSphereType: 0
+  spellOrbVisual: {fileID: 1962491489621209400}
+  spellOrbType: 0
   respawnDuration: 5
 --- !u!135 &5653890943229361813
 SphereCollider:

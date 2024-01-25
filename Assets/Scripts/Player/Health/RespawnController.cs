@@ -23,14 +23,14 @@ namespace Player
 
         [Required]
         [SerializeField]
-        private CheckpointManager checkpointManager;
+        private CheckpointInteractionController checkpointManager;
 
         [Header("Settings")]
         [SerializeField]
         private float minMapHeight = -10f;
 
         [SerializeField]
-        private float majorRespawnDelay = 3f;
+        private float majorRespawnDelay = 4f;
 
         private void OnEnable()
         {

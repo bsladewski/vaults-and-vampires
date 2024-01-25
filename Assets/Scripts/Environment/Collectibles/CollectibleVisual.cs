@@ -1,11 +1,12 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
+// TODO: This script can be replaced with a scriptable object and the Spin utility script
 namespace Environment
 {
-    public class PickupVisual : MonoBehaviour
+    public class CollectibleVisual : MonoBehaviour
     {
-        [Header("Prefabs")]
+        [Header("Dependencies")]
         [Required]
         [SerializeField]
         private ParticleSystem pickupParticleSystemPrefab;
