@@ -112492,7 +112492,7 @@ MonoBehaviour:
   cameraController: {fileID: 1915220765}
   rotateSpeed: 0.5
   fixedRotateIncrement: 45
-  aimSpeed: 15
+  aimSpeed: 600
   yOffset: 0.75
 --- !u!1 &1704466274
 GameObject:

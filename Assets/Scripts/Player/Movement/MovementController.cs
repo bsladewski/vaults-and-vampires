@@ -196,17 +196,14 @@ namespace Player
                 // being derived from movement
                 float targetAimLockRotation = aimLockRotation * aimLockRotateSpeed * 360f;
                 currentRotation *= Quaternion.Euler(Vector3.up * targetAimLockRotation * Time.deltaTime);
-                return;
             }
-
-            if (targetDirection != Vector3.zero)
+            else if (targetDirection != Vector3.zero)
             {
                 // calculate player rotation based on player movement
                 float rotationSpeedModifier = GetIsGrounded() ? rotateSpeed : rotateSpeed * jumpRotateSpeedModifier;
                 Quaternion targetRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
                 currentRotation = Quaternion.Slerp(currentRotation, targetRotation, Time.deltaTime * rotationSpeedModifier);
             }
-
         }
 
         public void UpdateVelocity(ref Vector3 currentVelocity, float deltaTime)

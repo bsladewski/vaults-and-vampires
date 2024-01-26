@@ -170,7 +170,8 @@ namespace Player
             }
 
             // calculate player's intended velocity and update movement controller
-            Vector3 targetDirection = Quaternion.LookRotation(lastCameraForward) * runDirection;
+            Vector3 targetForward = isAimLocked ? transform.forward : lastCameraForward;
+            Vector3 targetDirection = Quaternion.LookRotation(targetForward) * runDirection;
             movementController.SetTargetDirection(targetDirection);
         }
 
