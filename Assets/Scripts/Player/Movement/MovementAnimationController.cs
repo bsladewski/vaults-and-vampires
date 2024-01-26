@@ -69,8 +69,13 @@ namespace Player
             bool isAimLocked = movementInputController.GetIsAimLocked();
             if (isAimLocked != wasAimLocked)
             {
+                if (!wasAimLocked)
+                {
+                    horizontalAnimationSpeed = 0f;
+                }
+
                 wasAimLocked = isAimLocked;
-                animator.SetBool("Is Aim Locked", isAimLocked);
+                animator.SetFloat("Aim Lock", isAimLocked ? 1f : 0f);
             }
 
             if (isAimLocked)
@@ -90,7 +95,10 @@ namespace Player
                 moveAnimationSpeed,
                 speedNormalized,
                 Time.deltaTime * moveAnimationAcceleration);
-            animator.SetFloat("Speed", moveAnimationSpeed);
+
+            animator.SetFloat("Forward Speed", moveAnimationSpeed);
+            animator.SetFloat("Total Speed", moveAnimationSpeed);
+            animator.SetFloat("Rotation", 0f);
         }
 
         private void HandleAimLockedMovementAnimations()
@@ -98,16 +106,20 @@ namespace Player
             Vector3 movementDirection = movementInputController.GetMovementDirection();
             moveAnimationSpeed = Mathf.Lerp(
                 moveAnimationSpeed,
-                movementDirection.x,
-                Time.deltaTime * moveAnimationAcceleration
-            );
-            horizontalAnimationSpeed = Mathf.Lerp(
-                horizontalAnimationSpeed,
                 movementDirection.z,
                 Time.deltaTime * moveAnimationAcceleration
             );
-            animator.SetFloat("Speed", moveAnimationSpeed);
+
+            horizontalAnimationSpeed = Mathf.Lerp(
+                horizontalAnimationSpeed,
+                movementDirection.x,
+                Time.deltaTime * moveAnimationAcceleration
+            );
+
+            animator.SetFloat("Forward Speed", moveAnimationSpeed);
             animator.SetFloat("Horizontal Speed", horizontalAnimationSpeed);
+            animator.SetFloat("Total Speed", moveAnimationSpeed + horizontalAnimationSpeed);
+            animator.SetFloat("Rotation", movementInputController.GetAimLockRotation());
         }
 
         private void OnJumped()

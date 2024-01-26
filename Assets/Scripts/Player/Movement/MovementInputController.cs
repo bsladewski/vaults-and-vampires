@@ -61,6 +61,8 @@ namespace Player
 
         private bool startedDoubleJump;
 
+        private float aimLockRotation;
+
         private void Awake()
         {
             playerInput = new PlayerInput();
@@ -115,6 +117,11 @@ namespace Player
             return movementDirection;
         }
 
+        public float GetAimLockRotation()
+        {
+            return aimLockRotation;
+        }
+
         public void TriggerDoubleJump(bool fromEnvironmentTrigger)
         {
             movementController.SetShouldDoubleJump(true, fromEnvironmentTrigger);
@@ -144,7 +151,7 @@ namespace Player
                 runInput.x *= strafeMovementPenalty;
 
                 // when we're aim locked we replace camera rotation with player rotation
-                float aimLockRotation = playerInput.ThirdPersonMovement.Rotate.ReadValue<float>();
+                aimLockRotation = playerInput.ThirdPersonMovement.Rotate.ReadValue<float>();
                 movementController.SetAimLockRotation(aimLockRotation);
             }
             else

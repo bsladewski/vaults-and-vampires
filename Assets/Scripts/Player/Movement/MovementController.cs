@@ -126,11 +126,6 @@ namespace Player
             damageReceiver.OnKnockback -= OnKnockback;
         }
 
-        public Vector3 GetPlanarMovementNormalized()
-        {
-            return planarMovement / moveSpeed;
-        }
-
         public bool GetIsGrounded()
         {
             return motor.GroundingStatus.IsStableOnGround;
