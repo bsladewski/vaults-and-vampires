@@ -1,36 +1,30 @@
 using System.Collections;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using Utils;
 
 namespace Environment
 {
     [SelectionBase]
     public class SpellOrb : MonoBehaviour
     {
-        public enum SpellOrbType
-        {
-            DoubleJump
-        }
-
         [Header("Dependencies")]
         [Required]
         [SerializeField]
         private GameObject spellOrbVisual;
 
-
-
         [Header("Settings")]
         [SerializeField]
-        private SpellOrbType spellOrbType;
+        private SpellType spellType;
 
         [SerializeField]
         private float respawnDuration = 5f;
 
         private bool isActive = true;
 
-        public SpellOrbType GetSpellOrbType()
+        public SpellType GetSpellType()
         {
-            return spellOrbType;
+            return spellType;
         }
 
         public bool GetIsActive()

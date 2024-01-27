@@ -32,15 +32,15 @@ namespace Environment
                     return;
                 }
 
-                SpellOrb.SpellOrbType spellOrbType = spellOrb.GetSpellOrbType();
-                switch (spellOrbType)
+                SpellType spellType = spellOrb.GetSpellType();
+                switch (spellType)
                 {
-                    case SpellOrb.SpellOrbType.DoubleJump:
+                    case SpellType.DoubleJump:
                         spellOrb.ConsumeSpellOrb();
                         doubleJumpEvent.Invoke();
                         break;
                     default:
-                        Debug.LogErrorFormat("Unimplemented spell orb type {0}!", spellOrbType);
+                        Debug.LogErrorFormat("Unimplemented spell orb type {0}!", spellType);
                         break;
                 }
             }

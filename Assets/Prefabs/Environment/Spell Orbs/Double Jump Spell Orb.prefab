@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 3069174728552909219}
   - component: {fileID: 422026362624154912}
   - component: {fileID: 3684913284099844941}
-  m_Layer: 0
-  m_Name: Double Jump Powerup Sphere Visual
+  m_Layer: 9
+  m_Name: Double Jump Spell Orb Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,7 +33,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5378440891864303350}
+  m_Father: {fileID: 1769491698114802291}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6438636356501506821
 MeshFilter:
@@ -99,6 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationAxis: {x: 0, y: 1, z: 0}
   spinSpeed: 60
+  worldSpace: 1
 --- !u!114 &3684913284099844941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,9 +147,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4275709365471682184}
-  - {fileID: 8002490572362545577}
-  - {fileID: 7423563068015238506}
+  - {fileID: 1769491698114802291}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4391618517628322770
@@ -164,7 +163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spellOrbVisual: {fileID: 1962491489621209400}
-  spellOrbType: 0
+  spellType: 0
   respawnDuration: 5
 --- !u!135 &5653890943229361813
 SphereCollider:
@@ -227,7 +226,7 @@ GameObject:
   - component: {fileID: 1022858506333816250}
   - component: {fileID: 6538673936885718324}
   m_Layer: 9
-  m_Name: Double Jump Powerup Sphere Core Visual
+  m_Name: Double Jump Spell Orb Core Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -241,12 +240,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7012786945290765445}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5378440891864303350}
+  m_Father: {fileID: 1769491698114802291}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4526164101706164406
 MeshFilter:
@@ -313,13 +312,47 @@ MonoBehaviour:
   bobSpeed: 2
   bobHeight: 0.1
   phaseOffset: 0.5
+--- !u!1 &7453496442150288112
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1769491698114802291}
+  m_Layer: 9
+  m_Name: Double Jump Spell Orb Visual Root
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1769491698114802291
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7453496442150288112}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4275709365471682184}
+  - {fileID: 8002490572362545577}
+  - {fileID: 7423563068015238506}
+  m_Father: {fileID: 5378440891864303350}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &8926296995938998913
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 5378440891864303350}
+    m_TransformParent: {fileID: 1769491698114802291}
     m_Modifications:
     - target: {fileID: 2082167796855556075, guid: b3a665467c43bab4d94881167464528c,
         type: 3}
@@ -329,7 +362,7 @@ PrefabInstance:
     - target: {fileID: 2082167796855556075, guid: b3a665467c43bab4d94881167464528c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.1
+      value: 0.099999905
       objectReference: {fileID: 0}
     - target: {fileID: 2082167796855556075, guid: b3a665467c43bab4d94881167464528c,
         type: 3}
@@ -349,12 +382,12 @@ PrefabInstance:
     - target: {fileID: 2082167796855556075, guid: b3a665467c43bab4d94881167464528c,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2082167796855556075, guid: b3a665467c43bab4d94881167464528c,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2082167796855556075, guid: b3a665467c43bab4d94881167464528c,
         type: 3}
@@ -385,6 +418,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Blob Shadow
+      objectReference: {fileID: 0}
+    - target: {fileID: 4560905349950818109, guid: b3a665467c43bab4d94881167464528c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -11,9 +11,15 @@ namespace Utils
         [SerializeField]
         private float spinSpeed = 60f;
 
+        [SerializeField]
+        private bool worldSpace = true;
+
         public void Update()
         {
-            transform.Rotate(rotationAxis * spinSpeed * Time.deltaTime);
+            transform.Rotate(
+                rotationAxis * spinSpeed * Time.deltaTime,
+                worldSpace ? Space.World : Space.Self
+            );
         }
     }
 }

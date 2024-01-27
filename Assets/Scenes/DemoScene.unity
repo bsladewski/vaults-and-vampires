@@ -53067,10 +53067,20 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 592099424}
     m_Modifications:
+    - target: {fileID: 1962491489621209400, guid: 1b74ecab055391448a68146fe9c51142,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 4406380344631714846, guid: 1b74ecab055391448a68146fe9c51142,
         type: 3}
       propertyPath: m_Name
-      value: Double Jump Spell Orb (2)
+      value: Double Jump Spell Orb
+      objectReference: {fileID: 0}
+    - target: {fileID: 4948053646201576892, guid: 1b74ecab055391448a68146fe9c51142,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 5378440891864303350, guid: 1b74ecab055391448a68146fe9c51142,
         type: 3}
@@ -54631,7 +54641,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.28978413, y: 0.000000016468093, z: -0.0000000049861373, w: 0.95709205}
+  m_LocalRotation: {x: 0.28978413, y: -0.00000001646809, z: 0.000000004986136, w: 0.95709205}
   m_LocalPosition: {x: 0, y: 5.75, z: -26}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -60887,7 +60897,7 @@ PrefabInstance:
     - target: {fileID: 4406380344631714846, guid: 1b74ecab055391448a68146fe9c51142,
         type: 3}
       propertyPath: m_Name
-      value: Double Jump Spell Orb (1)
+      value: Double Jump Spell Orb
       objectReference: {fileID: 0}
     - target: {fileID: 5378440891864303350, guid: 1b74ecab055391448a68146fe9c51142,
         type: 3}
@@ -86398,10 +86408,20 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 592099424}
     m_Modifications:
+    - target: {fileID: 1962491489621209400, guid: 1b74ecab055391448a68146fe9c51142,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 4406380344631714846, guid: 1b74ecab055391448a68146fe9c51142,
         type: 3}
       propertyPath: m_Name
       value: Double Jump Spell Orb
+      objectReference: {fileID: 0}
+    - target: {fileID: 4948053646201576892, guid: 1b74ecab055391448a68146fe9c51142,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 5378440891864303350, guid: 1b74ecab055391448a68146fe9c51142,
         type: 3}
@@ -92021,10 +92041,20 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 592099424}
     m_Modifications:
+    - target: {fileID: 1962491489621209400, guid: 1b74ecab055391448a68146fe9c51142,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 4406380344631714846, guid: 1b74ecab055391448a68146fe9c51142,
         type: 3}
       propertyPath: m_Name
       value: Double Jump Spell Orb
+      objectReference: {fileID: 0}
+    - target: {fileID: 4948053646201576892, guid: 1b74ecab055391448a68146fe9c51142,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 5378440891864303350, guid: 1b74ecab055391448a68146fe9c51142,
         type: 3}
@@ -106024,6 +106054,7 @@ Transform:
   - {fileID: 894536770}
   - {fileID: 1566390357}
   - {fileID: 285075842}
+  - {fileID: 2110814508}
   m_Father: {fileID: 1201394268}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &1619965941
@@ -111927,6 +111958,7 @@ GameObject:
   - component: {fileID: 1668587704}
   - component: {fileID: 1668587705}
   - component: {fileID: 1668587706}
+  - component: {fileID: 1668587707}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -111976,7 +112008,7 @@ MonoBehaviour:
   hardLandingVelocity: 22
   collisionLayerMask:
     serializedVersion: 2
-    m_Bits: 895
+    m_Bits: 1919
   aimLockRotateSpeed: 0.25
   lateralKnockbackSpeed: 8
   maxKnockbackHeight: 1
@@ -112222,6 +112254,24 @@ MonoBehaviour:
   spellOrbLayerMask:
     serializedVersion: 2
     m_Bits: 512
+--- !u!114 &1668587707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1668587691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85184239b4618d44c9c3defac3d39e12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unlockEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  spellUnlockLayerMask:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!1001 &1677815113
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -112492,7 +112542,7 @@ MonoBehaviour:
   cameraController: {fileID: 1915220765}
   rotateSpeed: 0.5
   fixedRotateIncrement: 45
-  aimSpeed: 600
+  aimSpeed: 15
   yOffset: 0.75
 --- !u!1 &1704466274
 GameObject:
@@ -113791,7 +113841,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1915220761}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.28978413, y: 0.000000016468093, z: -0.0000000049861373, w: 0.95709205}
+  m_LocalRotation: {x: 0.28978413, y: -0.00000001646809, z: 0.000000004986136, w: 0.95709205}
   m_LocalPosition: {x: 0, y: 5.75, z: -26}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -115230,6 +115280,12 @@ MonoBehaviour:
         DeclaredDuration: 0
         ForceSimulationSpeed: 0
         ForcedSimulationSpeed: {x: 0.1, y: 1}
+--- !u!4 &2110814508 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4288147145077133747, guid: 164841910ad8b47438d404693aeeaf78,
+    type: 3}
+  m_PrefabInstance: {fileID: 8271447102246411227}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2113531855
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -115238,10 +115294,20 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 592099424}
     m_Modifications:
+    - target: {fileID: 1962491489621209400, guid: 1b74ecab055391448a68146fe9c51142,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 4406380344631714846, guid: 1b74ecab055391448a68146fe9c51142,
         type: 3}
       propertyPath: m_Name
       value: Double Jump Spell Orb
+      objectReference: {fileID: 0}
+    - target: {fileID: 4948053646201576892, guid: 1b74ecab055391448a68146fe9c51142,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 5378440891864303350, guid: 1b74ecab055391448a68146fe9c51142,
         type: 3}
@@ -115717,6 +115783,74 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b3a665467c43bab4d94881167464528c, type: 3}
+--- !u!1001 &8271447102246411227
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1590534430}
+    m_Modifications:
+    - target: {fileID: 4288147145077133747, guid: 164841910ad8b47438d404693aeeaf78,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4288147145077133747, guid: 164841910ad8b47438d404693aeeaf78,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4288147145077133747, guid: 164841910ad8b47438d404693aeeaf78,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 24.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4288147145077133747, guid: 164841910ad8b47438d404693aeeaf78,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4288147145077133747, guid: 164841910ad8b47438d404693aeeaf78,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4288147145077133747, guid: 164841910ad8b47438d404693aeeaf78,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4288147145077133747, guid: 164841910ad8b47438d404693aeeaf78,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4288147145077133747, guid: 164841910ad8b47438d404693aeeaf78,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4288147145077133747, guid: 164841910ad8b47438d404693aeeaf78,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4288147145077133747, guid: 164841910ad8b47438d404693aeeaf78,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8621349606724237814, guid: 164841910ad8b47438d404693aeeaf78,
+        type: 3}
+      propertyPath: m_Name
+      value: Double Jump Spell Unlock
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 164841910ad8b47438d404693aeeaf78, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
