@@ -12,11 +12,11 @@ TagManager:
   - Ground
   - Water
   - UI
-  - Pickups
+  - Collectible
   - Player
   - Checkpoint
-  - 
-  - 
+  - Spell Orb
+  - SpellUnlock
   - 
   - 
   - 

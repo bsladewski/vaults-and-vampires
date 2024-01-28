@@ -9,10 +9,12 @@ namespace UIs
         [DllImport("__Internal")]
         private static extern bool IsMobile();
 
+        [Header("Dependencies")]
         [Required]
         [SerializeField]
         private GameObject mobileControls;
 
+        [Header("Settings")]
         [SerializeField]
         private bool showOnAllPlatforms;
 

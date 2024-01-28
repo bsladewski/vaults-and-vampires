@@ -20,6 +20,7 @@ namespace Player
         [SerializeField]
         private Sprite emptySprite;
 
+        [Header("Feedbacks")]
         [Required]
         [SerializeField]
         private MMF_Player healthLostFeedbacks;

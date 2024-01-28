@@ -17,12 +17,16 @@ namespace Player
 
         [Required]
         [SerializeField]
-        private MovementInputController thirdPersonMovement;
+        private MovementInputController movementInputController;
 
         [Header("Feedbacks")]
         [Required]
         [SerializeField]
         private MMF_Player jumpFeedbacks;
+
+        [Required]
+        [SerializeField]
+        private MMF_Player doubleJumpFeedbacks;
 
         [Required]
         [SerializeField]
@@ -47,6 +51,7 @@ namespace Player
         private void OnEnable()
         {
             movementController.OnJumped += OnJumped;
+            movementController.OnDoubleJumped += OnDoubleJumped;
             movementController.OnFell += OnFell;
             movementController.OnLanded += OnLanded;
         }
@@ -54,17 +59,23 @@ namespace Player
         private void OnDisable()
         {
             movementController.OnJumped -= OnJumped;
+            movementController.OnDoubleJumped -= OnDoubleJumped;
             movementController.OnFell -= OnFell;
             movementController.OnLanded -= OnLanded;
         }
 
         private void LateUpdate()
         {
-            bool isAimLocked = thirdPersonMovement.GetIsAimLocked();
+            bool isAimLocked = movementInputController.GetIsAimLocked();
             if (isAimLocked != wasAimLocked)
             {
+                if (!wasAimLocked)
+                {
+                    horizontalAnimationSpeed = 0f;
+                }
+
                 wasAimLocked = isAimLocked;
-                animator.SetBool("Is Aim Locked", isAimLocked);
+                animator.SetFloat("Aim Lock", isAimLocked ? 1f : 0f);
             }
 
             if (isAimLocked)
@@ -79,38 +90,56 @@ namespace Player
 
         private void HandleMovementAnimations()
         {
-            float speedNormalized = thirdPersonMovement.GetMovementDirection().magnitude;
+            float speedNormalized = movementInputController.GetMovementDirection().magnitude;
             moveAnimationSpeed = Mathf.Lerp(
                 moveAnimationSpeed,
                 speedNormalized,
                 Time.deltaTime * moveAnimationAcceleration);
-            animator.SetFloat("Speed", moveAnimationSpeed);
+
+            animator.SetFloat("Forward Speed", moveAnimationSpeed);
+            animator.SetFloat("Total Speed", moveAnimationSpeed);
+            animator.SetFloat("Rotation", 0f);
         }
 
         private void HandleAimLockedMovementAnimations()
         {
-            Vector3 movementDirection = thirdPersonMovement.GetMovementDirection();
+            Vector3 movementDirection = movementInputController.GetMovementDirection();
             moveAnimationSpeed = Mathf.Lerp(
                 moveAnimationSpeed,
-                movementDirection.x,
-                Time.deltaTime * moveAnimationAcceleration
-            );
-            horizontalAnimationSpeed = Mathf.Lerp(
-                horizontalAnimationSpeed,
                 movementDirection.z,
                 Time.deltaTime * moveAnimationAcceleration
             );
-            animator.SetFloat("Speed", moveAnimationSpeed);
+
+            horizontalAnimationSpeed = Mathf.Lerp(
+                horizontalAnimationSpeed,
+                movementDirection.x,
+                Time.deltaTime * moveAnimationAcceleration
+            );
+
+            animator.SetFloat("Forward Speed", moveAnimationSpeed);
             animator.SetFloat("Horizontal Speed", horizontalAnimationSpeed);
+            animator.SetFloat("Total Speed", moveAnimationSpeed + horizontalAnimationSpeed);
+            animator.SetFloat("Rotation", movementInputController.GetAimLockRotation());
         }
 
         private void OnJumped()
+        {
+            OnAnyJump();
+            jumpFeedbacks.PlayFeedbacks();
+        }
+
+        private void OnDoubleJumped()
+        {
+            OnAnyJump();
+            doubleJumpFeedbacks.PlayFeedbacks();
+        }
+
+        private void OnAnyJump()
         {
             ResetTriggers();
             animator.SetBool("Mirror Jump", mirrorJump);
             animator.SetTrigger("Jump");
             mirrorJump = !mirrorJump;
-            jumpFeedbacks.PlayFeedbacks();
         }
 
         private void OnFell()

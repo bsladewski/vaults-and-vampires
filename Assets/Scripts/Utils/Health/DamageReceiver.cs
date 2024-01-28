@@ -8,10 +8,12 @@ namespace Utils
     {
         public Action<Vector3, float> OnKnockback;
 
+        [Header("Dependencies")]
         [Required]
         [SerializeField]
         private HealthManager healthManager;
 
+        [Header("Settings")]
         [SerializeField]
         private float iFrameDuration = 0.8f;
 

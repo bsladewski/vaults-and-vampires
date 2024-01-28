@@ -18,6 +18,7 @@ namespace Utils
         [SerializeField]
         private Material hurtFlickerMaterial;
 
+        [Header("Settings")]
         [SerializeField]
         private float hurtFlickerFrequency = 0.3f;
 
