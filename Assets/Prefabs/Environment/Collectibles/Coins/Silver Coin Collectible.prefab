@@ -30,6 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5514224590371227324}
+  - {fileID: 3122688402835235439}
   - {fileID: 8140105694736183844}
   m_Father: {fileID: 4471811071007317}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -130,7 +131,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4915e3253bb7204689e663b9b9433f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collectibleVisual: {fileID: 9027868581709483493}
+  pickupParticleSystemPrefab: {fileID: 6795636169929459853, guid: 6047c77f1a3313f4698065eff1909f4f,
+    type: 3}
+  particleSystemSpawnPoint: {fileID: 3122688402835235439}
+--- !u!1 &4209732271847117543
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3122688402835235439}
+  m_Layer: 6
+  m_Name: Particle System Spawn Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3122688402835235439
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4209732271847117543}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2617202336242550343}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &6834276515256592768
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -215,18 +249,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 6834276515256592768}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &9027868581709483493 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2562922998077973605, guid: 8274b8f79fdac104280903212da04117,
-    type: 3}
-  m_PrefabInstance: {fileID: 6834276515256592768}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b641f1c94d8578468f1f1811f0eb320, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &7787339018491344335
 PrefabInstance:
   m_ObjectHideFlags: 0

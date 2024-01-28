@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7059001413754390963}
   - component: {fileID: 4492037709498080417}
   - component: {fileID: 7893194165985725525}
-  - component: {fileID: 5780797602588426986}
+  - component: {fileID: 1322339938805302374}
   m_Layer: 0
   m_Name: _Coin Visual
   m_TagString: Untagged
@@ -84,7 +84,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &5780797602588426986
+--- !u!114 &1322339938805302374
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -93,9 +93,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6884547349280187705}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b641f1c94d8578468f1f1811f0eb320, type: 3}
+  m_Script: {fileID: 11500000, guid: 813e42a83d977a64c801727d72e23919, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickupParticleSystemPrefab: {fileID: 4208300616255467879, guid: 19d22d800db8fd94ca840fd2d86a662d,
-    type: 3}
-  rotationSpeed: 1
+  rotationAxis: {x: 0, y: 1, z: 0}
+  spinSpeed: 180
+  worldSpace: 1

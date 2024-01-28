@@ -9,18 +9,19 @@ namespace Environment
         [Header("Dependencies")]
         [Required]
         [SerializeField]
-        private CollectibleVisual collectibleVisual;
+        private ParticleSystem pickupParticleSystemPrefab;
+
+        [Required]
+        [SerializeField]
+        private Transform particleSystemSpawnPoint;
 
         public void Pickup()
         {
-            if (collectibleVisual.GetPickupParticleSystemPrefab() != null)
-            {
-                Instantiate(
-                    collectibleVisual.GetPickupParticleSystemPrefab(),
-                    collectibleVisual.transform.position,
-                    Quaternion.identity
-                );
-            }
+            Instantiate(
+                pickupParticleSystemPrefab,
+                particleSystemSpawnPoint.position,
+                Quaternion.identity
+            );
 
             Destroy(gameObject);
         }
