@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,8 +9,13 @@ namespace Cameras
         public static ThirdPersonCameraTarget Instance { get; private set; }
 
         [Header("Dependencies")]
+        [Required]
         [SerializeField]
         private ThirdPersonCameraController cameraController;
+
+        [Required]
+        [SerializeField]
+        private Transform targetTransform;
 
         [Header("Settings")]
         [SerializeField]
@@ -26,8 +32,6 @@ namespace Cameras
 
         private bool isAimLocked;
 
-        private Transform playerTransform;
-
         private PlayerInput playerInput;
 
         private void Awake()
@@ -38,12 +42,12 @@ namespace Cameras
             }
             Instance = this;
 
+            transform.position = targetTransform.position + Vector3.up * yOffset;
             playerInput = new PlayerInput();
         }
 
         private void OnEnable()
         {
-            playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
             playerInput.Enable();
             playerInput.ThirdPersonCamera.Zoom.started += ZoomCamera;
             playerInput.ThirdPersonCamera.FixedRotate.started += FixedRotate;
@@ -57,7 +61,7 @@ namespace Cameras
 
         private void LateUpdate()
         {
-            transform.position = playerTransform.position + Vector3.up * yOffset;
+            transform.position = targetTransform.position + Vector3.up * yOffset;
             if (playerInput.ThirdPersonCamera.Aim.IsPressed())
             {
                 // if the player is holding down the Aim button, set the aim lock
@@ -80,7 +84,7 @@ namespace Cameras
                 // if we're aim locked keep the camera pointed towards the player forward
                 transform.forward = Vector3.Lerp(
                     transform.forward,
-                    playerTransform.forward,
+                    targetTransform.forward,
                     aimSpeed * Time.deltaTime
                 );
             }

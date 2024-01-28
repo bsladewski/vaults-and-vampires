@@ -18,6 +18,10 @@ namespace Player
 
         [Required]
         [SerializeField]
+        private AbilityController abilityController;
+
+        [Required]
+        [SerializeField]
         private RespawnController respawnController;
 
         [Header("Settings")]
@@ -55,7 +59,7 @@ namespace Player
 
         private bool isMovementLocked;
 
-        private bool canDoubleJump;
+        private bool isDoubleJumpValid;
 
         private bool hasDoubleJumped;
 
@@ -198,7 +202,7 @@ namespace Player
                 jumpBufferTimer = 0f;
                 startedJump = true;
             }
-            else if (jumpInput && canDoubleJump && !hasDoubleJumped)
+            else if (abilityController.GetCanDoubleJump() && isDoubleJumpValid && !hasDoubleJumped && jumpInput)
             {
                 // if the player pressed jump and they are able to double jump, initiate a double jump
                 TriggerDoubleJump(false);
@@ -256,19 +260,19 @@ namespace Player
         private void OnJumped()
         {
             // when the player jumps, set the flag to allow them to double jump
-            canDoubleJump = true;
+            isDoubleJumpValid = true;
         }
 
         private void OnFell()
         {
             // when the player falls, set the flag to allow them to double jump
-            canDoubleJump = true;
+            isDoubleJumpValid = true;
         }
 
         private void OnLanded()
         {
             // when the player lands, reset the flags for double jumping
-            canDoubleJump = false;
+            isDoubleJumpValid = false;
             hasDoubleJumped = false;
         }
 
