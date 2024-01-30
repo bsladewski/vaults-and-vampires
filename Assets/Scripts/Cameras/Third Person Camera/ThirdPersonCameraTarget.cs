@@ -106,19 +106,19 @@ namespace Cameras
             cameraController.ResetCameraPosition(position);
         }
 
-        private void ZoomCamera(InputAction.CallbackContext ctx)
+        private void ZoomCamera(InputAction.CallbackContext context)
         {
             cameraController.CycleFollowOffset();
         }
 
-        private void FixedRotate(InputAction.CallbackContext ctx)
+        private void FixedRotate(InputAction.CallbackContext context)
         {
             if (isAimLocked)
             {
                 return;
             }
 
-            float value = ctx.ReadValue<float>();
+            float value = context.ReadValue<float>();
             float fixedRotation = CalculateCurrentRotationIncrement() + value * fixedRotateIncrement;
 
             transform.rotation = Quaternion.Euler(new Vector3(0f, fixedRotation, 0f));

@@ -5798,6 +5798,8 @@ GameObject:
   - component: {fileID: 7923082062037086599}
   - component: {fileID: 104812612911383411}
   - component: {fileID: 7972228378554023522}
+  - component: {fileID: 8658734397153716432}
+  - component: {fileID: 3558783404654428447}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -6137,6 +6139,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canDoubleJump: 0
+--- !u!114 &8658734397153716432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4801990856083898967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b17fc0d506b7b94aa99e59f40e09187, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  combatTimeout: 6
+--- !u!114 &3558783404654428447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4801990856083898967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef1db93ce9ccd9a4b8a5cad53ec32bf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 4761224501854602802}
+  combatInputController: {fileID: 8658734397153716432}
+  movementInputController: {fileID: 8365202205595169075}
+  legsCombatSpeedThreshold: 0.01
+  legsCombatLayerWeight: 0.75
+  layerWeightTweenDuration: 0.25
 --- !u!1 &5237172692716744932
 GameObject:
   m_ObjectHideFlags: 0
