@@ -19,6 +19,14 @@ namespace Player
         [SerializeField]
         private MovementInputController movementInputController;
 
+        [Required]
+        [SerializeField]
+        private GameObject leftHandItem;
+
+        [Required]
+        [SerializeField]
+        private GameObject rightHandItem;
+
         [Header("Settings")]
         [SerializeField]
         private float armsCombatLayerWeight = 0.75f;
@@ -72,12 +80,20 @@ namespace Player
                 TweenAnimationLayerWeight(leftArmCombatLayerIndex, 0f);
                 TweenAnimationLayerWeight(rightArmCombatLayerIndex, 0f);
                 TweenAnimationLayerWeight(legsCombatLayerIndex, 0f);
+
+                // hide equipment
+                leftHandItem.SetActive(false);
+                rightHandItem.SetActive(false);
             }
             else if (!wasInCombat && isInCombat)
             {
                 // if we just entered combat, move arms to combat position
                 TweenAnimationLayerWeight(leftArmCombatLayerIndex, armsCombatLayerWeight);
                 TweenAnimationLayerWeight(rightArmCombatLayerIndex, armsCombatLayerWeight);
+
+                // show equipment
+                leftHandItem.SetActive(true);
+                rightHandItem.SetActive(true);
             }
 
             if (isInCombat)
