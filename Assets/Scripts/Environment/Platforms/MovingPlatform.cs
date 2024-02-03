@@ -9,20 +9,28 @@ namespace Environment
     [SelectionBase]
     public class MovingPlatform : MonoBehaviour, IMoverController
     {
-        [Header("Dependencies")]
+        [FoldoutGroup("Dependencies", expanded: true)]
+        [Tooltip("Manages the movement of the kinematic rigidbody.")]
         [Required]
         [SerializeField]
         private PhysicsMover mover;
 
+        [FoldoutGroup("Dependencies")]
+        [Tooltip("Determines the path that the moving platform will follow.")]
+        [Required]
         [SerializeField]
         private Waypoints waypoints;
 
-        [Header("Settings")]
-        [SerializeField]
-        private Ease defaultWaypointEase = Ease.InOutQuad;
-
+        [FoldoutGroup("Settings")]
+        [Tooltip("How quickly the moving platform should move per second.")]
+        [MinValue(0f)]
         [SerializeField]
         private float moveSpeed = 2f;
+
+        [FoldoutGroup("Settings")]
+        [Tooltip("How the platform should ease its position between waypoints if no waypoint specific ease is set.")]
+        [SerializeField]
+        private Ease defaultWaypointEase = Ease.InOutQuad;
 
         private int currentWaypointIndex;
 

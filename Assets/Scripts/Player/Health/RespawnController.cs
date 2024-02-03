@@ -12,23 +12,32 @@ namespace Player
     {
         public Action OnRespawn;
 
-        [Header("Dependencies")]
+        [FoldoutGroup("Dependencies", expanded: true)]
+        [Tooltip("Handles movement of player kinematic rigidbody.")]
         [Required]
         [SerializeField]
         private MovementController movementController;
 
+        [FoldoutGroup("Dependencies")]
+        [Tooltip("Tracks health and emits health related events.")]
         [Required]
         [SerializeField]
         private HealthManager healthManager;
 
+        [FoldoutGroup("Dependencies")]
+        [Tooltip("Tracks checkpoints visited by the player.")]
         [Required]
         [SerializeField]
         private CheckpointInteractionController checkpointManager;
 
-        [Header("Settings")]
+        [FoldoutGroup("Settings")]
+        [Tooltip("The height a which we consider the player to have fallen off the map.")]
         [SerializeField]
         private float minMapHeight = -10f;
 
+        [FoldoutGroup("Settings")]
+        [Tooltip("How long in seconds before the player respawns after dying.")]
+        [MinValue(0f)]
         [SerializeField]
         private float majorRespawnDelay = 4f;
 

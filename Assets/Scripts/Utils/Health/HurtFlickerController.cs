@@ -5,20 +5,27 @@ namespace Utils
 {
     public class HurtFlickerController : MonoBehaviour
     {
-        [Header("Dependencies")]
+        [FoldoutGroup("Dependencies", expanded: true)]
+        [Tooltip("Handles receiving damage from damage sources.")]
         [Required]
         [SerializeField]
         private DamageReceiver damageReceiver;
 
+        [FoldoutGroup("Dependencies")]
+        [Tooltip("The mesh renderer whose material will be used for the flicker.")]
         [Required]
         [SerializeField]
         private SkinnedMeshRenderer skinnedMeshRenderer;
 
+        [FoldoutGroup("Dependencies")]
+        [Tooltip("The material for the flicker effect.")]
         [Required]
         [SerializeField]
         private Material hurtFlickerMaterial;
 
-        [Header("Settings")]
+        [FoldoutGroup("Settings")]
+        [Tooltip("The amount of time in seconds it takes to complete one on/off cycle of the flicker.")]
+        [MinValue(0f)]
         [SerializeField]
         private float hurtFlickerFrequency = 0.3f;
 

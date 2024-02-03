@@ -8,12 +8,14 @@ namespace Utils
     {
         public Action<Vector3, float> OnKnockback;
 
-        [Header("Dependencies")]
+        [FoldoutGroup("Dependencies", expanded: true)]
+        [Tooltip("Tracks health and emits health related events.")]
         [Required]
         [SerializeField]
         private HealthManager healthManager;
 
-        [Header("Settings")]
+        [FoldoutGroup("Settings")]
+        [Tooltip("How long in seconds before the object can take damage after receiving damage.")]
         [SerializeField]
         private float iFrameDuration = 0.8f;
 

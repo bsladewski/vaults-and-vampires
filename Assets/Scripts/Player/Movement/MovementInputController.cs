@@ -7,45 +7,66 @@ namespace Player
 {
     public class MovementInputController : MonoBehaviour
     {
-        [Header("Dependencies")]
+        [FoldoutGroup("Dependencies", expanded: true)]
+        [Tooltip("Handles movement of player kinematic rigidbody.")]
         [Required]
         [SerializeField]
         private MovementController movementController;
 
+        [FoldoutGroup("Dependencies")]
+        [Tooltip("Handles taking damage from damage sources.")]
         [Required]
         [SerializeField]
         private HealthManager healthManager;
 
+        [FoldoutGroup("Dependencies")]
+        [Tooltip("Tracks the abilities that the player has unlocked.")]
         [Required]
         [SerializeField]
         private AbilityController abilityController;
 
+        [FoldoutGroup("Dependencies")]
+        [Tooltip("Handles respawning the player after falling off the map or dying.")]
         [Required]
         [SerializeField]
         private RespawnController respawnController;
 
-        [Header("Settings")]
+        [FoldoutGroup("Aim Locked Movement Settings")]
+        [Tooltip("Adjusts player movement while strafing.")]
+        [MinValue(0f)]
         [SerializeField]
         private float strafeMovementPenalty = 0.75f;
 
+        [FoldoutGroup("Aim Locked Movement Settings")]
+        [Tooltip("Adjusts player movement while moving backwards.")]
+        [MinValue(0f)]
         [SerializeField]
         private float backwardsMovementPenalty = 0.5f;
 
+        [FoldoutGroup("Aim Locked Movement Settings")]
+        [Tooltip("Determines how quickly the camera should adjust its rotation while aim locked.")]
+        [MinValue(0f)]
         [SerializeField]
         private float cameraCorrectionSpeed = 5f;
 
+        [FoldoutGroup("Other Settings")]
+        [Tooltip("A grace period in seconds after becoming ungrounded where the player can jump.")]
         [SerializeField]
         private float coyoteTime = 0.15f;
 
-        private float coyoteTimeTimer;
-
+        [FoldoutGroup("Other Settings")]
+        [Tooltip("A grace period in seconds before becoming grounded where the player can jump.")]
         [SerializeField]
         private float jumpBuffer = 0.15f;
 
-        private float jumpBufferTimer;
-
+        [FoldoutGroup("Other Settings")]
+        [Tooltip("The time in seconds after taking fall damage before the player can move again.")]
         [SerializeField]
         private float hardLandingCooldown = 0.2f;
+
+        private float coyoteTimeTimer;
+
+        private float jumpBufferTimer;
 
         private float hardLandingTimer;
 

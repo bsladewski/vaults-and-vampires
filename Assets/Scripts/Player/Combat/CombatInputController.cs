@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -5,7 +6,8 @@ namespace Player
 {
     public class CombatInputController : MonoBehaviour
     {
-        [Header("Settings")]
+        [FoldoutGroup("Settings", expanded: true)]
+        [Tooltip("The time without combat actions before the player exits the combat state.")]
         [SerializeField]
         private float combatTimeout = 6f;
 

@@ -6,37 +6,53 @@ namespace Player
 {
     public class CombatAnimationController : MonoBehaviour
     {
-        [Header("Dependencies")]
+        [FoldoutGroup("Dependencies", expanded: true)]
+        [Tooltip("Controls player animations states for combat.")]
         [Required]
         [SerializeField]
         private Animator animator;
 
+        [FoldoutGroup("Dependencies")]
+        [Tooltip("Handles player input related to combat.")]
         [Required]
         [SerializeField]
         private CombatInputController combatInputController;
 
+        [FoldoutGroup("Dependencies")]
+        [Tooltip("Handles input related to movement.")]
         [Required]
         [SerializeField]
         private MovementInputController movementInputController;
 
+        [FoldoutGroup("Dependencies")]
+        [Tooltip("The item held in the player's left hand.")]
         [Required]
         [SerializeField]
         private GameObject leftHandItem;
 
+        [FoldoutGroup("Dependencies")]
+        [Tooltip("The item held in the player's right hand.")]
         [Required]
         [SerializeField]
         private GameObject rightHandItem;
 
-        [Header("Settings")]
+        [FoldoutGroup("Settings")]
+        [Tooltip("The override weight applied to arm animations during combat.")]
         [SerializeField]
         private float armsCombatLayerWeight = 0.75f;
 
-        [SerializeField]
-        private float legsCombatSpeedThreshold = 0.01f;
-
+        [FoldoutGroup("Settings")]
+        [Tooltip("The override weight applied to leg animations during combat.")]
         [SerializeField]
         private float legsCombatLayerWeight = 0.75f;
 
+        [FoldoutGroup("Settings")]
+        [Tooltip("The speed at which idle combat leg animations should transition to normal movement animations.")]
+        [SerializeField]
+        private float legsCombatSpeedThreshold = 0.01f;
+
+        [FoldoutGroup("Settings")]
+        [Tooltip("The duration in seconds for smoothing combat animations.")]
         [SerializeField]
         private float layerWeightTweenDuration = 0.25f;
 

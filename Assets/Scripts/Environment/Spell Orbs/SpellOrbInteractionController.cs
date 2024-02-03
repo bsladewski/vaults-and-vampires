@@ -7,12 +7,14 @@ namespace Environment
 {
     public class SpellOrbInteractionController : MonoBehaviour
     {
-        [Header("Dependencies")]
+        [FoldoutGroup("Dependencies", expanded: true)]
+        [Tooltip("The event fired when a player consumes a double jump spell orb.")]
         [Required]
         [SerializeField]
         private UnityEvent doubleJumpEvent;
 
-        [Header("Settings")]
+        [FoldoutGroup("Settings")]
+        [Tooltip("Collision layer used for spell orb triggers.")]
         [SerializeField]
         private LayerMask spellOrbLayerMask;
 

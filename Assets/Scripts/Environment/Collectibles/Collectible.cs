@@ -6,19 +6,22 @@ namespace Environment
     [SelectionBase]
     public class Collectible : MonoBehaviour
     {
-        [Header("Dependencies")]
+        [FoldoutGroup("Dependencies", expanded: true)]
+        [Tooltip("Spawned when a collectible is picked up.")]
         [Required]
         [SerializeField]
-        private ParticleSystem pickupParticleSystemPrefab;
+        private ParticleSystem pickUpParticleSystemPrefab;
 
+        [FoldoutGroup("Dependencies")]
+        [Tooltip("The spawn point for the pick up particle effect.")]
         [Required]
         [SerializeField]
         private Transform particleSystemSpawnPoint;
 
-        public void Pickup()
+        public void PickUp()
         {
             Instantiate(
-                pickupParticleSystemPrefab,
+                pickUpParticleSystemPrefab,
                 particleSystemSpawnPoint.position,
                 Quaternion.identity
             );

@@ -8,15 +8,19 @@ namespace Environment
     [SelectionBase]
     public class SpellOrb : MonoBehaviour
     {
-        [Header("Dependencies")]
+        [FoldoutGroup("Dependencies", expanded: true)]
+        [Tooltip("A reference to the visual that is displayed when a spell orb is active.")]
         [Required]
         [SerializeField]
         private GameObject spellOrbVisual;
 
-        [Header("Settings")]
+        [FoldoutGroup("Settings")]
+        [Tooltip("The type of spell triggered when this spell orb is consumed.")]
         [SerializeField]
         private SpellType spellType;
 
+        [FoldoutGroup("Settings")]
+        [Tooltip("How long it takes for the spell orb to respawn after consumption.")]
         [SerializeField]
         private float respawnDuration = 5f;
 

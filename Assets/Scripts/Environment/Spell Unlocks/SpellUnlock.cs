@@ -7,15 +7,19 @@ namespace Environment
     [SelectionBase]
     public class SpellUnlock : MonoBehaviour
     {
-        [Header("Dependencies")]
+        [FoldoutGroup("Dependencies", expanded: true)]
+        [Tooltip("Spawned when a player picks up the unlock.")]
         [Required]
         [SerializeField]
         private ParticleSystem unlockParticleSystemPrefab;
 
-        [Header("Settings")]
+        [FoldoutGroup("Settings")]
+        [Tooltip("The type of spell unlocked when picked up.")]
         [SerializeField]
         private SpellType spellType;
 
+        [FoldoutGroup("Settings")]
+        [Tooltip("The spawn point for the pick up particle effect.")]
         [SerializeField]
         private Transform particleSystemSpawnPoint;
 

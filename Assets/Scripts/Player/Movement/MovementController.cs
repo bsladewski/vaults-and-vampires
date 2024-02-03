@@ -21,45 +21,93 @@ namespace Player
 
         public Action OnHardLanding;
 
-        [Header("Dependencies")]
+        [FoldoutGroup("Dependencies", expanded: true)]
+        [Tooltip("Handles physics related to the kinematic rigidbody.")]
         [Required]
         [SerializeField]
         private KinematicCharacterMotor motor;
 
+        [FoldoutGroup("Dependencies")]
+        [Tooltip("Tracks health and emits health related events.")]
         [Required]
         [SerializeField]
         private HealthManager healthManager;
 
+        [FoldoutGroup("Dependencies")]
+        [Tooltip("Handles taking damage from damage sources.")]
         [Required]
         [SerializeField]
         private DamageReceiver damageReceiver;
 
-        [Header("Movement Settings")]
+        [FoldoutGroup("Movement Settings")]
+        [Tooltip("How quickly the player should move.")]
+        [MinValue(0f)]
         [SerializeField]
         private float moveSpeed = 8f;
 
+        [FoldoutGroup("Movement Settings")]
+        [Tooltip("How quickly the player should be able to change their velocity.")]
         [SerializeField]
         private float moveAcceleration = 10f;
 
+        [FoldoutGroup("Movement Settings")]
+        [Tooltip("How quickly the player should rotate while moving.")]
         [SerializeField]
         private float rotateSpeed = 10f;
+
+        [FoldoutGroup("Jump Settings")]
+        [Tooltip("How high the player jumps when tapping the jump the button.")]
+        [SerializeField]
+        private float minJumpHeight = 1f;
+
+        [FoldoutGroup("Jump Settings")]
+        [Tooltip("How high the player can jump when holding the jump button.")]
+        [SerializeField]
+        private float maxJumpHeight = 2f;
+
+        [FoldoutGroup("Jump Settings")]
+        [Tooltip("Adjusts player's ability to move while airborne.")]
+        [SerializeField]
+        private float jumpMoveSpeedModifier = 0.5f;
+
+        [FoldoutGroup("Jump Settings")]
+        [Tooltip("Adjusts player rotation while airborne.")]
+        [SerializeField]
+        private float jumpRotateSpeedModifier = 0.25f;
+
+        [FoldoutGroup("Fall Settings")]
+        [Tooltip("Downward acceleration per second due to gravity.")]
+        [SerializeField]
+        private float gravity = 9.81f;
+
+        [FoldoutGroup("Fall Settings")]
+        [Tooltip("The vertical velocity at which the player takes fall damage.")]
+        [SerializeField]
+        private float hardLandingVelocity = 15f;
+
+        [FoldoutGroup("Other Settings")]
+        [Tooltip("The collision layers that the player can interact with.")]
+        [SerializeField]
+        private LayerMask collisionLayerMask;
+
+        [FoldoutGroup("Other Settings")]
+        [Tooltip("The speed that the player can rotate while aim locked in degrees per second.")]
+        [SerializeField]
+        private float aimLockRotateSpeed;
+
+        [FoldoutGroup("Other Settings")]
+        [Tooltip("The maximum instantaneous speed at which the player should be knocked back.")]
+        [SerializeField]
+        private float lateralKnockbackSpeed = 50f;
+
+        [FoldoutGroup("Other Settings")]
+        [Tooltip("The maximum height the player should reach when knocked back.")]
+        [SerializeField]
+        private float maxKnockbackHeight = 1f;
 
         private Vector3 targetDirection;
 
         private Vector3 planarMovement;
-
-        [Header("Jump Settings")]
-        [SerializeField]
-        private float minJumpHeight = 1f;
-
-        [SerializeField]
-        private float maxJumpHeight = 2f;
-
-        [SerializeField]
-        private float jumpMoveSpeedModifier = 0.5f;
-
-        [SerializeField]
-        private float jumpRotateSpeedModifier = 0.25f;
 
         private Vector3 jumpInertia;
 
@@ -75,29 +123,9 @@ namespace Player
 
         private bool wasGrounded = true;
 
-        [Header("Fall Settings")]
-        [SerializeField]
-        private float gravity = 9.81f;
-
-        [SerializeField]
-        private float hardLandingVelocity = 15f;
-
         private float fallVelocity;
 
         private bool wasHardLanding;
-
-        [Header("Other Settings")]
-        [SerializeField]
-        private LayerMask collisionLayerMask;
-
-        [SerializeField]
-        private float aimLockRotateSpeed;
-
-        [SerializeField]
-        private float lateralKnockbackSpeed = 50f;
-
-        [SerializeField]
-        private float maxKnockbackHeight = 1f;
 
         private float aimLockRotation = 0.25f;
 
@@ -190,14 +218,14 @@ namespace Player
                 // if the player is aim locked, rotation from input should be directly applied to the player rather than
                 // being derived from movement
                 float targetAimLockRotation = aimLockRotation * aimLockRotateSpeed * 360f;
-                currentRotation *= Quaternion.Euler(Vector3.up * targetAimLockRotation * Time.deltaTime);
+                currentRotation *= Quaternion.Euler(Vector3.up * targetAimLockRotation * deltaTime);
             }
             else if (targetDirection != Vector3.zero)
             {
                 // calculate player rotation based on player movement
                 float rotationSpeedModifier = GetIsGrounded() ? rotateSpeed : rotateSpeed * jumpRotateSpeedModifier;
                 Quaternion targetRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
-                currentRotation = Quaternion.Slerp(currentRotation, targetRotation, Time.deltaTime * rotationSpeedModifier);
+                currentRotation = Quaternion.Slerp(currentRotation, targetRotation, deltaTime * rotationSpeedModifier);
             }
         }
 
@@ -257,7 +285,7 @@ namespace Player
                 planarMovement += jumpInertia;
             }
 
-            currentVelocity = Vector3.Lerp(currentVelocity, planarMovement, Time.deltaTime * moveAcceleration);
+            currentVelocity = Vector3.Lerp(currentVelocity, planarMovement, deltaTime * moveAcceleration);
 
             if (shouldJump || shouldDoubleJump)
             {
@@ -291,12 +319,12 @@ namespace Player
                 if (!isJumpHeld && !ensureMaxJumpHeight && fallVelocity < 0f)
                 {
                     // if the player releases the jump button, adjust gravity so we hit the target jump height
-                    fallVelocity += gravity * (maxJumpHeight / minJumpHeight) * Time.deltaTime;
+                    fallVelocity += gravity * (maxJumpHeight / minJumpHeight) * deltaTime;
                 }
                 else
                 {
                     // calculate gravity
-                    fallVelocity += gravity * Time.deltaTime;
+                    fallVelocity += gravity * deltaTime;
                 }
 
                 // apply gravity

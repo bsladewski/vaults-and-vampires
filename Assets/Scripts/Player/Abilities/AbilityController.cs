@@ -1,10 +1,12 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Player
 {
     public class AbilityController : MonoBehaviour
     {
-        [Header("Abilities")]
+        [FoldoutGroup("Abilities", expanded: true)]
+        [Tooltip("Tracks whether the player can double jump.")]
         [SerializeField]
         private bool canDoubleJump;
 

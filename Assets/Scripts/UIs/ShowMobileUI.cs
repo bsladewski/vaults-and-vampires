@@ -9,12 +9,14 @@ namespace UIs
         [DllImport("__Internal")]
         private static extern bool IsMobile();
 
-        [Header("Dependencies")]
+        [FoldoutGroup("Dependencies", expanded: true)]
+        [Tooltip("The object containing mobile control UI elements.")]
         [Required]
         [SerializeField]
         private GameObject mobileControls;
 
-        [Header("Settings")]
+        [FoldoutGroup("Settings")]
+        [Tooltip("Whether to show mobile controls on all platforms. This setting is useful for debugging mobile controls.")]
         [SerializeField]
         private bool showOnAllPlatforms;
 

@@ -79043,7 +79043,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7635139731101668, guid: 6dff86776d01e9547a729c548b86611b, type: 3}
       propertyPath: rotationSpeed
-      value: 1
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 2512142536598704780, guid: 6dff86776d01e9547a729c548b86611b,
         type: 3}
@@ -82262,6 +82262,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 131039648}
     m_Modifications:
+    - target: {fileID: 7635139731101668, guid: 6dff86776d01e9547a729c548b86611b, type: 3}
+      propertyPath: rotationSpeed
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 2512142536598704780, guid: 6dff86776d01e9547a729c548b86611b,
         type: 3}
       propertyPath: m_LocalScale.x

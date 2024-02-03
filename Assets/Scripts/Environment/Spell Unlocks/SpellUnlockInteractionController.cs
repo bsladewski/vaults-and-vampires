@@ -7,12 +7,14 @@ namespace Environment
 {
     public class SpellUnlockInteractionController : MonoBehaviour
     {
-        [Header("Dependencies")]
+        [FoldoutGroup("Dependencies", expanded: true)]
+        [Tooltip("The event fired when the player picks up the spell unlock.")]
         [Required]
         [SerializeField]
         private UnityEvent<SpellType> unlockEvent;
 
-        [Header("Settings")]
+        [FoldoutGroup("Settings")]
+        [Tooltip("Collision layer used for spell orb unlocks.")]
         [SerializeField]
         private LayerMask spellUnlockLayerMask;
 

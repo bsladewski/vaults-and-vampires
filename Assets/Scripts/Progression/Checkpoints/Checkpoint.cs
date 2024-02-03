@@ -5,12 +5,14 @@ namespace Progression
 {
     public class Checkpoint : MonoBehaviour
     {
-        [Header("Dependencies")]
+        [FoldoutGroup("Dependencies", expanded: true)]
+        [Tooltip("The transform used for repositioning the player after a respawn.")]
         [Required]
         [SerializeField]
         private Transform checkpointPositionTransform;
 
-        [Header("Settings")]
+        [FoldoutGroup("Settings")]
+        [Tooltip("Major checkpoints are returned after the player dies. Minor checkpoints are returned to if the player falls off the map.")]
         [SerializeField]
         private bool isMajorCheckpoint;
 
