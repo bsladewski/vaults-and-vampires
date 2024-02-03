@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -23,6 +24,12 @@ namespace Utils
 
         private void OnEnable()
         {
+            StartCoroutine(BindEvents());
+        }
+
+        private IEnumerator BindEvents()
+        {
+            yield return new WaitForEndOfFrame();
             healthManager.OnHealthLost += OnHealthLost;
         }
 

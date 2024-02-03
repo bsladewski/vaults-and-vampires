@@ -3,6 +3,7 @@ using UnityEngine;
 using Cameras;
 using Utils;
 using Events;
+using System.Collections;
 
 namespace Player
 {
@@ -103,6 +104,12 @@ namespace Player
         {
             playerInput.Enable();
 
+            StartCoroutine(BindEvents());
+        }
+
+        private IEnumerator BindEvents()
+        {
+            yield return new WaitForEndOfFrame();
             movementController.OnJumped += OnJumped;
             movementController.OnFell += OnFell;
             movementController.OnLanded += OnLanded;

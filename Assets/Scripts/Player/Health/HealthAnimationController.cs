@@ -1,3 +1,4 @@
+using System.Collections;
 using MoreMountains.Feedbacks;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -33,6 +34,12 @@ namespace Player
 
         private void OnEnable()
         {
+            StartCoroutine(BindEvents());
+        }
+
+        private IEnumerator BindEvents()
+        {
+            yield return new WaitForEndOfFrame();
             healthManager.OnHealthLost += OnHealthLost;
             healthManager.OnDeath += OnDeath;
             respawnController.OnRespawn += OnRespawn;

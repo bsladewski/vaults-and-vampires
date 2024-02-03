@@ -1,3 +1,4 @@
+using System.Collections;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -25,6 +26,12 @@ namespace Player
         private void OnEnable()
         {
             playerInput.Enable();
+            StartCoroutine(BindEvents());
+        }
+
+        private IEnumerator BindEvents()
+        {
+            yield return new WaitForEndOfFrame();
             playerInput.ThirdPersonCombat.Attack.performed += OnAttack;
         }
 
