@@ -2,6 +2,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using Events;
 using Utils;
+using System.Collections;
 
 namespace Player
 {
@@ -14,6 +15,12 @@ namespace Player
 
         private void OnEnable()
         {
+            StartCoroutine(BindEvents());
+        }
+
+        private IEnumerator BindEvents()
+        {
+            yield return new WaitForEndOfFrame();
             EventsSystem.Instance.abilityEvents.OnSpellUnlocked += OnSpellUnlocked;
         }
 

@@ -1,3 +1,4 @@
+using System.Collections;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -62,6 +63,12 @@ namespace Cameras
         private void OnEnable()
         {
             playerInput.Enable();
+            StartCoroutine(BindEvents());
+        }
+
+        private IEnumerator BindEvents()
+        {
+            yield return new WaitForEndOfFrame();
             playerInput.ThirdPersonCamera.Zoom.started += ZoomCamera;
             playerInput.ThirdPersonCamera.FixedRotate.started += FixedRotate;
         }

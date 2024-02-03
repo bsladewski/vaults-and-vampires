@@ -43,6 +43,12 @@ namespace Player
 
         private void OnEnable()
         {
+            StartCoroutine(BindEvents());
+        }
+
+        private IEnumerator BindEvents()
+        {
+            yield return new WaitForEndOfFrame();
             healthManager.OnDeath += OnDeath;
         }
 
