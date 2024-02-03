@@ -7,17 +7,21 @@ namespace Environment
     [SelectionBase]
     public class RotatingPlatform : MonoBehaviour, IMoverController
     {
-        [Header("Dependencies")]
+        [FoldoutGroup("Dependencies", expanded: true)]
+        [Tooltip("Manages the movement of the kinematic rigidbody.")]
         [Required]
         [SerializeField]
         private PhysicsMover mover;
 
-        [Header("Settings")]
+        [FoldoutGroup("Settings")]
+        [Tooltip("The axis about which the platform will rotate.")]
         [SerializeField]
         private Vector3 rotationAxis = Vector3.up;
 
+        [FoldoutGroup("Settings")]
+        [Tooltip("Determines how quickly the platform rotates in degrees per second.")]
         [SerializeField]
-        private float rotationSpeed;
+        private float rotationSpeed = 60f;
 
         private void Awake()
         {
@@ -28,7 +32,7 @@ namespace Environment
         {
             goalPosition = mover.transform.position;
             goalRotation = mover.transform.rotation;
-            goalRotation *= Quaternion.Euler(rotationAxis * rotationSpeed);
+            goalRotation *= Quaternion.Euler(rotationAxis * rotationSpeed * deltaTime);
         }
     }
 }

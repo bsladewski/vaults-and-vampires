@@ -1,18 +1,20 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.Events;
 using Utils;
+using Events;
 
 namespace Environment
 {
     public class SpellOrbInteractionController : MonoBehaviour
     {
-        [Header("Dependencies")]
+        [FoldoutGroup("Dependencies", expanded: true)]
+        [Tooltip("The game object that should receive an interaction event.")]
         [Required]
         [SerializeField]
-        private UnityEvent doubleJumpEvent;
+        private GameObject target;
 
-        [Header("Settings")]
+        [FoldoutGroup("Settings")]
+        [Tooltip("Collision layer used for spell orb triggers.")]
         [SerializeField]
         private LayerMask spellOrbLayerMask;
 
@@ -33,16 +35,8 @@ namespace Environment
                 }
 
                 SpellType spellType = spellOrb.GetSpellType();
-                switch (spellType)
-                {
-                    case SpellType.DoubleJump:
-                        spellOrb.ConsumeSpellOrb();
-                        doubleJumpEvent.Invoke();
-                        break;
-                    default:
-                        Debug.LogErrorFormat("Unimplemented spell orb type {0}!", spellType);
-                        break;
-                }
+                EventsSystem.Instance.abilityEvents.OnSpellOrbTriggered?.Invoke(target, spellType);
+                spellOrb.ConsumeSpellOrb();
             }
         }
     }

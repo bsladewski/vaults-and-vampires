@@ -8,25 +8,38 @@ namespace Cameras
     {
         public static ThirdPersonCameraTarget Instance { get; private set; }
 
-        [Header("Dependencies")]
+        [FoldoutGroup("Dependencies", expanded: true)]
+        [Tooltip("The camera controller for third-person gameplay.")]
         [Required]
         [SerializeField]
         private ThirdPersonCameraController cameraController;
 
+        [FoldoutGroup("Dependencies")]
+        [Tooltip("The transform whose position the camera target should follow.")]
         [Required]
         [SerializeField]
         private Transform targetTransform;
 
-        [Header("Settings")]
+        [FoldoutGroup("Settings")]
+        [Tooltip("How quickly the camera should rotate during free rotation.")]
+        [MinValue(0f)]
         [SerializeField]
         private float rotateSpeed = 0.5f;
 
+        [FoldoutGroup("Settings")]
+        [Tooltip("How many degrees the camera should rotate during fixed rotation.")]
+        [PropertyRange(0f, 180f)]
         [SerializeField]
         private int fixedRotateIncrement = 45;
 
+        [FoldoutGroup("Settings")]
+        [Tooltip("How quickly the camera should adjust during aim locked movement.")]
+        [MinValue(0f)]
         [SerializeField]
         private float aimSpeed = 15f;
 
+        [FoldoutGroup("Settings")]
+        [Tooltip("Adjusts the height of the camera target with respect to the follow target.")]
         [SerializeField]
         private float yOffset = 0.75f;
 
@@ -106,19 +119,19 @@ namespace Cameras
             cameraController.ResetCameraPosition(position);
         }
 
-        private void ZoomCamera(InputAction.CallbackContext ctx)
+        private void ZoomCamera(InputAction.CallbackContext context)
         {
             cameraController.CycleFollowOffset();
         }
 
-        private void FixedRotate(InputAction.CallbackContext ctx)
+        private void FixedRotate(InputAction.CallbackContext context)
         {
             if (isAimLocked)
             {
                 return;
             }
 
-            float value = ctx.ReadValue<float>();
+            float value = context.ReadValue<float>();
             float fixedRotation = CalculateCurrentRotationIncrement() + value * fixedRotateIncrement;
 
             transform.rotation = Quaternion.Euler(new Vector3(0f, fixedRotation, 0f));

@@ -6,37 +6,50 @@ namespace Player
 {
     public class MovementAnimationController : MonoBehaviour
     {
-        [Header("Dependencies")]
+        [FoldoutGroup("Dependencies", expanded: true)]
+        [Tooltip("Controls player animations states during movement.")]
         [Required]
         [SerializeField]
         private Animator animator;
 
+        [FoldoutGroup("Dependencies")]
+        [Tooltip("Handles movement of player kinematic rigidbody.")]
         [Required]
         [SerializeField]
         private MovementController movementController;
 
+        [FoldoutGroup("Dependencies")]
+        [Tooltip("Handles input related to movement.")]
         [Required]
         [SerializeField]
         private MovementInputController movementInputController;
 
-        [Header("Feedbacks")]
+        [FoldoutGroup("Feedbacks")]
+        [Tooltip("Feedbacks played when the player jumps.")]
         [Required]
         [SerializeField]
         private MMF_Player jumpFeedbacks;
 
+        [FoldoutGroup("Feedbacks")]
+        [Tooltip("Feedbacks played when the player double jumps.")]
         [Required]
         [SerializeField]
         private MMF_Player doubleJumpFeedbacks;
 
+        [FoldoutGroup("Feedbacks")]
+        [Tooltip("Feedbacks played when the player lands.")]
         [Required]
         [SerializeField]
         private MMF_Player softLandingFeedbacks;
 
+        [FoldoutGroup("Feedbacks")]
+        [Tooltip("Feedbacks played when the player takes damage on landing.")]
         [Required]
         [SerializeField]
         private MMF_Player hardLandingFeedbacks;
 
-        [Header("Settings")]
+        [FoldoutGroup("Settings")]
+        [Tooltip("Controls how quickly animations should respond to changes in player movement.")]
         [SerializeField]
         private float moveAnimationAcceleration = 20f;
 

@@ -7,15 +7,19 @@ namespace Environment
     [SelectionBase]
     public class SpellUnlock : MonoBehaviour
     {
-        [Header("Dependencies")]
+        [FoldoutGroup("Dependencies", expanded: true)]
+        [Tooltip("Spawned when a player unlocks the spell.")]
         [Required]
         [SerializeField]
         private ParticleSystem unlockParticleSystemPrefab;
 
-        [Header("Settings")]
+        [FoldoutGroup("Settings")]
+        [Tooltip("The type of spell unlocked.")]
         [SerializeField]
         private SpellType spellType;
 
+        [FoldoutGroup("Settings")]
+        [Tooltip("The spawn point for the unlock particle effect.")]
         [SerializeField]
         private Transform particleSystemSpawnPoint;
 
@@ -24,7 +28,7 @@ namespace Environment
             return spellType;
         }
 
-        public void PickupSpellUnlock()
+        public void UnlockSpell()
         {
             Instantiate(unlockParticleSystemPrefab, particleSystemSpawnPoint.position, Quaternion.identity);
             Destroy(gameObject);

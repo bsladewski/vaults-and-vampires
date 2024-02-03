@@ -7,29 +7,39 @@ namespace Cameras
 {
     public class ThirdPersonCameraController : MonoBehaviour
     {
-        [Header("Dependencies")]
+        [FoldoutGroup("Dependencies", expanded: true)]
+        [Tooltip("Used to control the main camera.")]
         [Required]
         [SerializeField]
         private CinemachineVirtualCamera virtualCamera;
 
-        private CinemachineTransposer transposer;
-
-        [Header("Follow Offsets")]
+        [FoldoutGroup("Follow Offsets")]
+        [Tooltip("Camera offset when the camera is zoomed in.")]
         [SerializeField]
         private Vector3 closeFollowOffset = new Vector3(0f, 1f, -6f);
 
+        [FoldoutGroup("Follow Offsets")]
+        [Tooltip("Camera offset when the camera is at normal zoom.")]
         [SerializeField]
         private Vector3 normalFollowOffset = new Vector3(0f, 4f, -6f);
 
+        [FoldoutGroup("Follow Offsets")]
+        [Tooltip("Camera offset when the camera is zoomed out.")]
         [SerializeField]
         private Vector3 farFollowOffset = new Vector3(0f, 8f, -8f);
 
-        [Header("Zoom Settings")]
+        [FoldoutGroup("Zoom Settings")]
+        [Tooltip("How long it takes in seconds for the camera to adjust zoom level.")]
+        [MinValue(0f)]
         [SerializeField]
         private float zoomDuration = 1f;
 
+        [FoldoutGroup("Zoom Settings")]
+        [Tooltip("How the camera should ease its position while zooming.")]
         [SerializeField]
         private Ease zoomEase = Ease.OutBack;
+
+        private CinemachineTransposer transposer;
 
         private enum FollowState
         {

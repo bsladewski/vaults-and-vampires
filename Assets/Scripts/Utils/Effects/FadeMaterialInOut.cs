@@ -1,24 +1,33 @@
 using UnityEngine;
 using DG.Tweening;
+using Sirenix.OdinInspector;
 
 namespace Utils
 {
     public class FadeMaterialInOut : MonoBehaviour
     {
-        [Header("Dependencies")]
+        [FoldoutGroup("Dependencies", expanded: true)]
+        [Tooltip("The mesh renderer whose material will be faded.")]
         [SerializeField]
         private MeshRenderer meshRenderer;
 
-        [Header("Settings")]
+        [FoldoutGroup("Settings")]
+        [Tooltip("The duration in seconds of the fade in effect.")]
         [SerializeField]
         private float fadeInDuration = 0.2f;
 
+        [FoldoutGroup("Settings")]
+        [Tooltip("The delay in seconds before the fade out effect begins.")]
         [SerializeField]
         private float fadeOutDelay = 0.2f;
 
+        [FoldoutGroup("Settings")]
+        [Tooltip("The duration in seconds of the fade out effect.")]
         [SerializeField]
         private float fadeOutDuration = 0.4f;
 
+        [FoldoutGroup("Settings")]
+        [Tooltip("Whether the game object should be destroyed when the fade effect ends.")]
         [SerializeField]
         private bool destroyAfterFadeOut = true;
 

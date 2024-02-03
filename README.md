@@ -35,3 +35,4 @@ The game uses the following dependencies:
     -   Odin (Sirenix)
     -   QuickOutline (Chris Nolet, _not yet implemented_)
     -   Text Animator (Febucci, _not yet implemented_)
+    -   Flatkit (Dustyroom)

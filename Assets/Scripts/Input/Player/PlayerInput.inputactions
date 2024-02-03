@@ -365,6 +365,45 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Third-Person Combat",
+            "id": "d0c82b91-1b49-4ec2-96c5-ac39f5b298a4",
+            "actions": [
+                {
+                    "name": "Attack",
+                    "type": "Button",
+                    "id": "fa63d170-cfe1-471a-9438-b86dc1957eef",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "deac31c4-8e9e-4db3-8eb3-48c45b82ace1",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2b9e8e77-ae5a-4aea-bfc8-9fcee8e62b4c",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

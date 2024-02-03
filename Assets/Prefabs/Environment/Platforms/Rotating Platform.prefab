@@ -195,4 +195,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mover: {fileID: 220381673051316471}
   rotationAxis: {x: 0, y: 1, z: 0}
-  rotationSpeed: 1
+  rotationSpeed: 60

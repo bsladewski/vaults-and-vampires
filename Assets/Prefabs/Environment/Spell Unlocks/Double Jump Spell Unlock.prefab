@@ -174,8 +174,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4288147145077133747}
   - component: {fileID: 65353713174014201}
-  - component: {fileID: 3830530260256602597}
   - component: {fileID: 5054676194032501674}
+  - component: {fileID: 3830530260256602597}
   m_Layer: 10
   m_Name: Double Jump Spell Unlock
   m_TagString: Untagged
@@ -222,22 +222,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1.5, z: 0}
---- !u!114 &3830530260256602597
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8621349606724237814}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da6296488969d20488416ac8d3d3c5d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  unlockParticleSystemPrefab: {fileID: 4523310642529589471, guid: fc5ad2261dab98848ae52620d9a265ef,
-    type: 3}
-  spellType: 0
-  particleSystemSpawnPoint: {fileID: 9193271534367374099}
 --- !u!54 &5054676194032501674
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -265,6 +249,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3830530260256602597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8621349606724237814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da6296488969d20488416ac8d3d3c5d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unlockParticleSystemPrefab: {fileID: 4523310642529589471, guid: fc5ad2261dab98848ae52620d9a265ef,
+    type: 3}
+  spellType: 0
+  particleSystemSpawnPoint: {fileID: 9193271534367374099}
 --- !u!1001 &429184150002921471
 PrefabInstance:
   m_ObjectHideFlags: 0

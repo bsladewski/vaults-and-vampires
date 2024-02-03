@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using Utils;
 
@@ -6,7 +7,8 @@ namespace Progression
 {
     public class CheckpointInteractionController : MonoBehaviour
     {
-        [Header("Settings")]
+        [FoldoutGroup("Settings", expanded: true)]
+        [Tooltip("Collision layers used for checkpoint triggers.")]
         [SerializeField]
         private LayerMask checkpointLayerMask;
 

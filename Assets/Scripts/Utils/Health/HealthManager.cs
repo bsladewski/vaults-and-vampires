@@ -1,4 +1,5 @@
 using System;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Utils
@@ -11,7 +12,9 @@ namespace Utils
 
         public Action OnDeath;
 
-        [Header("Settings")]
+        [FoldoutGroup("Settings", expanded: true)]
+        [Tooltip("The amount of health this object will have at full health.")]
+        [MinValue(1)]
         [SerializeField]
         private int maxHealth;
 

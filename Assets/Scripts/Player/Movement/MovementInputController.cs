@@ -2,50 +2,72 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using Cameras;
 using Utils;
+using Events;
 
 namespace Player
 {
     public class MovementInputController : MonoBehaviour
     {
-        [Header("Dependencies")]
+        [FoldoutGroup("Dependencies", expanded: true)]
+        [Tooltip("Handles movement of player kinematic rigidbody.")]
         [Required]
         [SerializeField]
         private MovementController movementController;
 
+        [FoldoutGroup("Dependencies")]
+        [Tooltip("Handles taking damage from damage sources.")]
         [Required]
         [SerializeField]
         private HealthManager healthManager;
 
+        [FoldoutGroup("Dependencies")]
+        [Tooltip("Tracks the abilities that the player has unlocked.")]
         [Required]
         [SerializeField]
         private AbilityController abilityController;
 
+        [FoldoutGroup("Dependencies")]
+        [Tooltip("Handles respawning the player after falling off the map or dying.")]
         [Required]
         [SerializeField]
         private RespawnController respawnController;
 
-        [Header("Settings")]
+        [FoldoutGroup("Aim Locked Movement Settings")]
+        [Tooltip("Adjusts player movement while strafing.")]
+        [MinValue(0f)]
         [SerializeField]
         private float strafeMovementPenalty = 0.75f;
 
+        [FoldoutGroup("Aim Locked Movement Settings")]
+        [Tooltip("Adjusts player movement while moving backwards.")]
+        [MinValue(0f)]
         [SerializeField]
         private float backwardsMovementPenalty = 0.5f;
 
+        [FoldoutGroup("Aim Locked Movement Settings")]
+        [Tooltip("Determines how quickly the camera should adjust its rotation while aim locked.")]
+        [MinValue(0f)]
         [SerializeField]
         private float cameraCorrectionSpeed = 5f;
 
+        [FoldoutGroup("Other Settings")]
+        [Tooltip("A grace period in seconds after becoming ungrounded where the player can jump.")]
         [SerializeField]
         private float coyoteTime = 0.15f;
 
-        private float coyoteTimeTimer;
-
+        [FoldoutGroup("Other Settings")]
+        [Tooltip("A grace period in seconds before becoming grounded where the player can jump.")]
         [SerializeField]
         private float jumpBuffer = 0.15f;
 
-        private float jumpBufferTimer;
-
+        [FoldoutGroup("Other Settings")]
+        [Tooltip("The time in seconds after taking fall damage before the player can move again.")]
         [SerializeField]
         private float hardLandingCooldown = 0.2f;
+
+        private float coyoteTimeTimer;
+
+        private float jumpBufferTimer;
 
         private float hardLandingTimer;
 
@@ -80,12 +102,15 @@ namespace Player
         private void OnEnable()
         {
             playerInput.Enable();
+
             movementController.OnJumped += OnJumped;
             movementController.OnFell += OnFell;
             movementController.OnLanded += OnLanded;
             movementController.OnHardLanding += OnHardLanding;
             healthManager.OnDeath += OnDeath;
             respawnController.OnRespawn += OnRespawn;
+
+            EventsSystem.Instance.abilityEvents.OnSpellOrbTriggered += OnSpellOrbTriggered;
         }
 
         private void OnDisable()
@@ -96,6 +121,8 @@ namespace Player
             movementController.OnHardLanding -= OnHardLanding;
             healthManager.OnDeath -= OnDeath;
             respawnController.OnRespawn -= OnRespawn;
+
+            EventsSystem.Instance.abilityEvents.OnSpellOrbTriggered -= OnSpellOrbTriggered;
         }
 
         private void Update()
@@ -124,17 +151,6 @@ namespace Player
         public float GetAimLockRotation()
         {
             return aimLockRotation;
-        }
-
-        public void TriggerDoubleJump(bool fromEnvironmentTrigger)
-        {
-            movementController.SetShouldDoubleJump(true, fromEnvironmentTrigger);
-            movementController.ResetFallVelocity();
-            if (!fromEnvironmentTrigger)
-            {
-                hasDoubleJumped = true;
-            }
-            startedDoubleJump = true;
         }
 
         private void HandleMovementInput()
@@ -296,6 +312,15 @@ namespace Player
             isMovementLocked = false;
         }
 
+        private void OnSpellOrbTriggered(GameObject target, SpellType spellType)
+        {
+            // if this game object consumed a double jump spell orb, trigger a double jump
+            if (target == gameObject && spellType == SpellType.DoubleJump)
+            {
+                TriggerDoubleJump(true);
+            }
+        }
+
         private void ResetMovementInput()
         {
             // reset any ongoing movement input
@@ -304,6 +329,17 @@ namespace Player
             movementController.SetShouldJump(false);
             movementController.SetShouldDoubleJump(false, false);
             movementController.SetIsJumpHeld(false);
+        }
+
+        private void TriggerDoubleJump(bool fromEnvironmentTrigger)
+        {
+            movementController.SetShouldDoubleJump(true, fromEnvironmentTrigger);
+            movementController.ResetFallVelocity();
+            if (!fromEnvironmentTrigger)
+            {
+                hasDoubleJumped = true;
+            }
+            startedDoubleJump = true;
         }
     }
 }
