@@ -6307,21 +6307,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4645b21ffdfa0c45a27cc28d1f223ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doubleJumpEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Player.MovementInputController, PlayerAssembly
-        m_MethodName: TriggerDoubleJump
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
+  target: {fileID: 1621612847924706902}
   spellOrbLayerMask:
     serializedVersion: 2
     m_Bits: 512
@@ -6337,21 +6323,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85184239b4618d44c9c3defac3d39e12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unlockEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Player.AbilityController, PlayerAssembly
-        m_MethodName: SetCanDoubleJump
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
+  target: {fileID: 7372708741260445949}
   spellUnlockLayerMask:
     serializedVersion: 2
     m_Bits: 1024

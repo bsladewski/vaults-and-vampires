@@ -1,3 +1,4 @@
+using Events;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
@@ -8,10 +9,10 @@ namespace Environment
     public class SpellUnlockInteractionController : MonoBehaviour
     {
         [FoldoutGroup("Dependencies", expanded: true)]
-        [Tooltip("The event fired when the player picks up the spell unlock.")]
+        [Tooltip("The game object that should receive an interaction event.")]
         [Required]
         [SerializeField]
-        private UnityEvent<SpellType> unlockEvent;
+        private GameObject target;
 
         [FoldoutGroup("Settings")]
         [Tooltip("Collision layer used for spell orb unlocks.")]
@@ -29,8 +30,8 @@ namespace Environment
                     return;
                 }
 
-                unlockEvent.Invoke(spellUnlock.GetSpellType());
-                spellUnlock.PickupSpellUnlock();
+                EventsSystem.Instance.abilityEvents.OnSpellUnlocked.Invoke(target, spellUnlock.GetSpellType());
+                spellUnlock.UnlockSpell();
             }
         }
     }

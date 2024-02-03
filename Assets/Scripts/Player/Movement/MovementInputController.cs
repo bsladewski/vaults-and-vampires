@@ -2,6 +2,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using Cameras;
 using Utils;
+using Events;
 
 namespace Player
 {
@@ -101,12 +102,15 @@ namespace Player
         private void OnEnable()
         {
             playerInput.Enable();
+
             movementController.OnJumped += OnJumped;
             movementController.OnFell += OnFell;
             movementController.OnLanded += OnLanded;
             movementController.OnHardLanding += OnHardLanding;
             healthManager.OnDeath += OnDeath;
             respawnController.OnRespawn += OnRespawn;
+
+            EventsSystem.Instance.abilityEvents.OnSpellOrbTriggered += OnSpellOrbTriggered;
         }
 
         private void OnDisable()
@@ -117,6 +121,8 @@ namespace Player
             movementController.OnHardLanding -= OnHardLanding;
             healthManager.OnDeath -= OnDeath;
             respawnController.OnRespawn -= OnRespawn;
+
+            EventsSystem.Instance.abilityEvents.OnSpellOrbTriggered -= OnSpellOrbTriggered;
         }
 
         private void Update()
@@ -145,17 +151,6 @@ namespace Player
         public float GetAimLockRotation()
         {
             return aimLockRotation;
-        }
-
-        public void TriggerDoubleJump(bool fromEnvironmentTrigger)
-        {
-            movementController.SetShouldDoubleJump(true, fromEnvironmentTrigger);
-            movementController.ResetFallVelocity();
-            if (!fromEnvironmentTrigger)
-            {
-                hasDoubleJumped = true;
-            }
-            startedDoubleJump = true;
         }
 
         private void HandleMovementInput()
@@ -317,6 +312,15 @@ namespace Player
             isMovementLocked = false;
         }
 
+        private void OnSpellOrbTriggered(GameObject target, SpellType spellType)
+        {
+            // if this game object consumed a double jump spell orb, trigger a double jump
+            if (target == gameObject && spellType == SpellType.DoubleJump)
+            {
+                TriggerDoubleJump(true);
+            }
+        }
+
         private void ResetMovementInput()
         {
             // reset any ongoing movement input
@@ -325,6 +329,17 @@ namespace Player
             movementController.SetShouldJump(false);
             movementController.SetShouldDoubleJump(false, false);
             movementController.SetIsJumpHeld(false);
+        }
+
+        private void TriggerDoubleJump(bool fromEnvironmentTrigger)
+        {
+            movementController.SetShouldDoubleJump(true, fromEnvironmentTrigger);
+            movementController.ResetFallVelocity();
+            if (!fromEnvironmentTrigger)
+            {
+                hasDoubleJumped = true;
+            }
+            startedDoubleJump = true;
         }
     }
 }
