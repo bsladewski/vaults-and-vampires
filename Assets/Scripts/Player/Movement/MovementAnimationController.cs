@@ -54,6 +54,11 @@ namespace Player
         [SerializeField]
         private float moveAnimationAcceleration = 20f;
 
+        [FoldoutGroup("Settings")]
+        [Tooltip("The speed at which we consider the player to be running.")]
+        [SerializeField]
+        private float runSpeedThreshold = 0.6f;
+
         private float moveAnimationSpeed;
 
         private float horizontalAnimationSpeed;
@@ -106,6 +111,28 @@ namespace Player
             {
                 HandleMovementAnimations();
             }
+        }
+
+        public bool GetIsRunning()
+        {
+            if (!movementInputController.GetIsAimLocked())
+            {
+                return moveAnimationSpeed >= runSpeedThreshold;
+            }
+
+            return (
+                Mathf.Abs(moveAnimationSpeed) + Mathf.Abs(horizontalAnimationSpeed) >= runSpeedThreshold
+            );
+        }
+
+        public bool GetIsStrafing()
+        {
+            return Mathf.Abs(horizontalAnimationSpeed) > Mathf.Abs(moveAnimationSpeed);
+        }
+
+        public bool GetIsMovingBackwards()
+        {
+            return !GetIsStrafing() && movementInputController.GetMovementDirection().z < 0f;
         }
 
         private void HandleMovementAnimations()

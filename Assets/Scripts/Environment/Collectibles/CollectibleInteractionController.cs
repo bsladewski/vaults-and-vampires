@@ -1,3 +1,5 @@
+using System;
+using Events;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using Utils;
@@ -6,6 +8,8 @@ namespace Environment
 {
     public class CollectibleInteractionController : MonoBehaviour
     {
+        public Action OnCollectiblePickedUp;
+
         [FoldoutGroup("Settings", expanded: true)]
         [Tooltip("Collision layers used for collectible triggers.")]
         [SerializeField]
@@ -22,6 +26,7 @@ namespace Environment
                     return;
                 }
 
+                OnCollectiblePickedUp?.Invoke();
                 collectible.PickUp();
             }
         }
