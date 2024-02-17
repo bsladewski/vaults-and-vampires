@@ -36,3 +36,5 @@ The game uses the following dependencies:
     -   QuickOutline (Chris Nolet, _not yet implemented_)
     -   Text Animator (Febucci, _not yet implemented_)
     -   Flatkit (Dustyroom)
+    -   Fantasy Game Sound Effects (Epic Sounds and FX)
+    -   Battle Sound Library (Infinity PBR / Magic Pig Games)

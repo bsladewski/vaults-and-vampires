@@ -12,6 +12,11 @@ namespace Utils
         private int damageAmount = 1;
 
         [FoldoutGroup("Settings")]
+        [Tooltip("The type of damage this source inflicts.")]
+        [SerializeField]
+        private DamageType damageType;
+
+        [FoldoutGroup("Settings")]
         [Tooltip("How intense the knockback should be this from this damage source.")]
         [MinValue(0f)]
         [SerializeField]
@@ -25,6 +30,11 @@ namespace Utils
         public float GetKnockbackIntensity()
         {
             return knockbackIntensity;
+        }
+
+        public DamageType GetDamageType()
+        {
+            return damageType;
         }
     }
 }

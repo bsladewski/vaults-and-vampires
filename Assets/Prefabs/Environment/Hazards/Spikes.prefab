@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageAmount: 1
+  damageType: 1
   knockbackIntensity: 1
 --- !u!65 &1181733895675519
 BoxCollider:

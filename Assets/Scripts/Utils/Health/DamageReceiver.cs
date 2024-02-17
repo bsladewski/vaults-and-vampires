@@ -9,6 +9,8 @@ namespace Utils
     {
         public Action<Vector3, float> OnKnockback;
 
+        public Action<DamageType> OnDamageTaken;
+
         [FoldoutGroup("Dependencies", expanded: true)]
         [Tooltip("Tracks health and emits health related events.")]
         [Required]
@@ -53,6 +55,7 @@ namespace Utils
                 (transform.position - damageSource.transform.position).normalized,
                 damageSource.GetKnockbackIntensity()
             );
+            OnDamageTaken?.Invoke(damageSource.GetDamageType());
         }
 
         public bool IsInvulnerable()

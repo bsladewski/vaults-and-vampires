@@ -1,13 +1,15 @@
+using System;
 using Events;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.Events;
 using Utils;
 
 namespace Environment
 {
     public class SpellUnlockInteractionController : MonoBehaviour
     {
+        public Action OnSpellUnlocked;
+
         [FoldoutGroup("Dependencies", expanded: true)]
         [Tooltip("The game object that should receive an interaction event.")]
         [Required]
@@ -31,6 +33,7 @@ namespace Environment
                 }
 
                 EventsSystem.Instance.abilityEvents.OnSpellUnlocked.Invoke(target, spellUnlock.GetSpellType());
+                OnSpellUnlocked?.Invoke();
                 spellUnlock.UnlockSpell();
             }
         }
