@@ -127,12 +127,14 @@ namespace Player
 
         public bool GetIsStrafing()
         {
-            return Mathf.Abs(horizontalAnimationSpeed) > Mathf.Abs(moveAnimationSpeed);
+            return movementInputController.GetIsAimLocked() &&
+                Mathf.Abs(horizontalAnimationSpeed) > Mathf.Abs(moveAnimationSpeed);
         }
 
         public bool GetIsMovingBackwards()
         {
-            return !GetIsStrafing() && movementInputController.GetMovementDirection().z < 0f;
+            return movementInputController.GetIsAimLocked() && !GetIsStrafing() &&
+                movementInputController.GetMovementDirection().z < 0f;
         }
 
         private void HandleMovementAnimations()
