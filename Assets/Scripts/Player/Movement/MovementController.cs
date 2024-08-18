@@ -394,6 +394,7 @@ namespace Player
         {
             yield return new WaitForEndOfFrame();
             OnJumped?.Invoke();
+            Events.EventsSystem.Instance.playerEvents.OnPlayerJumped?.Invoke();
         }
 
         private IEnumerator FireDoubleJumpEvent()

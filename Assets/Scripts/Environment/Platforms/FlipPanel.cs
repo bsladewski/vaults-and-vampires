@@ -1,6 +1,7 @@
 using UnityEngine;
 using KinematicCharacterController;
 using Sirenix.OdinInspector;
+using System.Collections;
 
 namespace Environment
 {
@@ -86,6 +87,22 @@ namespace Environment
             }
         }
 
+        private void OnEnable()
+        {
+            StartCoroutine(BindEvents());
+        }
+
+        private IEnumerator BindEvents()
+        {
+            yield return new WaitForEndOfFrame();
+            Events.EventsSystem.Instance.playerEvents.OnPlayerJumped += OnPlayerJumped;
+        }
+
+        private void OnDisable()
+        {
+            Events.EventsSystem.Instance.playerEvents.OnPlayerJumped -= OnPlayerJumped;
+        }
+
         public void UpdateMovement(out Vector3 goalPosition, out Quaternion goalRotation, float deltaTime)
         {
             timer += deltaTime;
@@ -130,6 +147,17 @@ namespace Environment
         {
             lastRotation = targetRotation;
             targetRotation = lastRotation * Quaternion.Euler(flipAxis * flipDegrees);
+        }
+
+        private void OnPlayerJumped()
+        {
+            if (!onJump || isFlipping)
+            {
+                return;
+            }
+
+            isFlipping = true;
+            timer = 0f;
         }
     }
 }
