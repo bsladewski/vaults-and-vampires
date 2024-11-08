@@ -26,6 +26,12 @@ namespace Environment
 
         [FoldoutGroup("Settings")]
         [HideIf("onJump")]
+        [Tooltip("Specifies an offset in seconds for the flip cycle.")]
+        [SerializeField]
+        private float offsetTime = 0f;
+
+        [FoldoutGroup("Settings")]
+        [HideIf("onJump")]
         [Tooltip("Determines how much time in seconds the platform is idle before flipping.")]
         [SerializeField]
         private float idleTime = 2f;
@@ -73,6 +79,7 @@ namespace Environment
             initialPosition = mover.transform.position;
             lastRotation = mover.transform.rotation;
             targetRotation = lastRotation;
+            timer = -offsetTime;
             UpdateTargetRotation();
         }
 
