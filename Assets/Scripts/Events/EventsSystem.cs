@@ -8,6 +8,8 @@ namespace Events
 
         public AbilityEvents abilityEvents { get; private set; }
 
+        public PlayerEvents playerEvents { get; private set; }
+
         private void Awake()
         {
             if (Instance != null)
@@ -17,6 +19,7 @@ namespace Events
             Instance = this;
 
             abilityEvents = new AbilityEvents();
+            playerEvents = new PlayerEvents();
         }
     }
 }
