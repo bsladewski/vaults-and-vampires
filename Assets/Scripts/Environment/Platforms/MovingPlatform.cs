@@ -28,7 +28,7 @@ namespace Environment
         private float moveSpeed = 2f;
 
         [FoldoutGroup("Settings")]
-        [Tooltip("How the platform should ease its position between waypoints if no waypoint specific ease is set.")]
+        [Tooltip("How the platform should ease its position between waypoints.")]
         [SerializeField]
         private Ease defaultWaypointEase = Ease.InOutQuad;
 
