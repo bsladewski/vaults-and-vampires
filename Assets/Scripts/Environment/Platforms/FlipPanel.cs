@@ -28,7 +28,7 @@ namespace Environment
         [HideIf("onJump")]
         [Tooltip("Specifies an offset in seconds for the flip cycle.")]
         [SerializeField]
-        private float offsetTime = 0f;
+        private float offsetTime;
 
         [FoldoutGroup("Settings")]
         [HideIf("onJump")]
