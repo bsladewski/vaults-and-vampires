@@ -1,3 +1,4 @@
+using System.Collections;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -20,6 +21,11 @@ namespace Environment
         [Tooltip("How long in seconds it takes for the spikes to retract.")]
         [SerializeField]
         private float retractTime = 1f;
+
+        [FoldoutGroup("Settings")]
+        [Tooltip("How long in seconds the spikes become non-damaging before they retract.")]
+        [SerializeField]
+        private float retractGraceTime = 0.05f;
 
         [FoldoutGroup("Settings")]
         [Tooltip("How the spikes should ease their retract position.")]
@@ -124,8 +130,8 @@ namespace Environment
                 () => spikesVisual.position,
                 value =>
                 {
-                    spikesVisual.position = value;
                     spikesDamageSource.position = value;
+                    spikesVisual.position = value;
                 },
                 visualInitialPosition + spikesVisual.up * extendHeight,
                 extendTime
@@ -137,15 +143,18 @@ namespace Environment
         {
             Tween tween = DOTween.To(
                 () => spikesVisual.position,
-                value =>
-                {
-                    spikesVisual.position = value;
-                    spikesDamageSource.position = value;
-                },
+                value => spikesVisual.position = value,
                 visualInitialPosition,
                 retractTime
             ).SetEase(retractEase).SetDelay(extendedTime);
             tween.onComplete = () => Telegraph(retractedTime);
+            StartCoroutine(RetractDamageSource());
+        }
+
+        private IEnumerator RetractDamageSource()
+        {
+            yield return new WaitForSeconds(retractTime - retractGraceTime);
+            spikesDamageSource.position = damageSourceInitialPosition;
         }
     }
 }
