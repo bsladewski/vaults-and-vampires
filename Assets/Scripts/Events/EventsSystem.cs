@@ -10,6 +10,8 @@ namespace Events
 
         public PlayerEvents playerEvents { get; private set; }
 
+        public CollectibleEvents collectibleEvents { get; private set; }
+
         private void Awake()
         {
             if (Instance != null)
@@ -20,6 +22,7 @@ namespace Events
 
             abilityEvents = new AbilityEvents();
             playerEvents = new PlayerEvents();
+            collectibleEvents = new CollectibleEvents();
         }
     }
 }

@@ -8,15 +8,20 @@ namespace Player
 {
     public class HealthUI : MonoBehaviour
     {
-        [Header("Dependencies")]
+        [FoldoutGroup("Dependencies")]
+        [Tooltip("Tracks when the player gains or loses health.")]
         [Required]
         [SerializeField]
         private HealthManager healthManager;
 
+        [FoldoutGroup("Dependencies")]
+        [Tooltip("The transform that health icons should be a child of.")]
         [Required]
         [SerializeField]
         private Transform healthIconUIParent;
 
+        [FoldoutGroup("Dependencies")]
+        [Tooltip("The prefab used for instantiating health icons.")]
         [Required]
         [SerializeField]
         private HealthIconUI healthIconUIPrefab;

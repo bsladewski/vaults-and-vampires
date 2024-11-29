@@ -26,6 +26,7 @@ namespace Environment
                     return;
                 }
 
+                EventsSystem.Instance.collectibleEvents.OnCoinsCollected?.Invoke(collectible.GetAmount());
                 OnCollectiblePickedUp?.Invoke();
                 collectible.PickUp();
             }

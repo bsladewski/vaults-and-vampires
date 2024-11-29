@@ -1,3 +1,4 @@
+using Events;
 using UnityEngine;
 using KinematicCharacterController;
 using Sirenix.OdinInspector;
@@ -102,12 +103,12 @@ namespace Environment
         private IEnumerator BindEvents()
         {
             yield return new WaitForEndOfFrame();
-            Events.EventsSystem.Instance.playerEvents.OnPlayerJumped += OnPlayerJumped;
+            EventsSystem.Instance.playerEvents.OnPlayerJumped += OnPlayerJumped;
         }
 
         private void OnDisable()
         {
-            Events.EventsSystem.Instance.playerEvents.OnPlayerJumped -= OnPlayerJumped;
+            EventsSystem.Instance.playerEvents.OnPlayerJumped -= OnPlayerJumped;
         }
 
         public void UpdateMovement(out Vector3 goalPosition, out Quaternion goalRotation, float deltaTime)

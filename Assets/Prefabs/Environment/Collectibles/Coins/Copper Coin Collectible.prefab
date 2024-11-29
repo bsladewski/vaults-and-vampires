@@ -162,6 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4915e3253bb7204689e663b9b9433f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  amount: 1
   pickUpParticleSystemPrefab: {fileID: 673489695582292511, guid: 93ff0591441c0d4429c226b52525f78d,
     type: 3}
   particleSystemSpawnPoint: {fileID: 378962464059440834}

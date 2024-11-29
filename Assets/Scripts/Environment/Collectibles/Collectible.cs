@@ -6,7 +6,12 @@ namespace Environment
     [SelectionBase]
     public class Collectible : MonoBehaviour
     {
-        [FoldoutGroup("Dependencies", expanded: true)]
+        [FoldoutGroup("Settings", expanded: true)]
+        [Tooltip("The amount added when this collectible is picked up.")]
+        [SerializeField]
+        private int amount;
+
+        [FoldoutGroup("Dependencies")]
         [Tooltip("Spawned when a collectible is picked up.")]
         [Required]
         [SerializeField]
@@ -27,6 +32,11 @@ namespace Environment
             );
 
             Destroy(gameObject);
+        }
+
+        public int GetAmount()
+        {
+            return amount;
         }
     }
 }
