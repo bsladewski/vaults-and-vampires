@@ -59,6 +59,21 @@ namespace Player
         [SerializeField]
         private float runSpeedThreshold = 0.6f;
 
+        [FoldoutGroup("Settings")]
+        [Tooltip("The minimum amount of time between the start of an idle state and a flavor animation.")]
+        [SerializeField]
+        private float minIdleFlavorTime = 20f;
+
+        [FoldoutGroup("Settings")]
+        [Tooltip("The maximum amount of time between the start of an idle state and a flavor animation.")]
+        [SerializeField]
+        private float maxIdleFlavorTime = 40f;
+
+        [FoldoutGroup("Settings")]
+        [Tooltip("")]
+        [SerializeField]
+        private string[] idleFlavorAnimationTriggers;
+
         private float moveAnimationSpeed;
 
         private float horizontalAnimationSpeed;
@@ -66,6 +81,8 @@ namespace Player
         private bool wasAimLocked;
 
         private bool mirrorJump;
+
+        private float idleFlavorTimer;
 
         private void OnEnable()
         {
@@ -87,6 +104,36 @@ namespace Player
             movementController.OnDoubleJumped -= OnDoubleJumped;
             movementController.OnFell -= OnFell;
             movementController.OnLanded -= OnLanded;
+        }
+
+        private void SetIdleFlavorTimer()
+        {
+            idleFlavorTimer = Random.Range(minIdleFlavorTime, maxIdleFlavorTime);
+        }
+
+        private void Update()
+        {
+            if (moveAnimationSpeed == 0f && idleFlavorTimer > 0f)
+            {
+                idleFlavorTimer -= Time.deltaTime;
+                if (idleFlavorTimer < 0f)
+                {
+                    if (idleFlavorAnimationTriggers == null || idleFlavorAnimationTriggers.Length == 0)
+                    {
+                        Debug.LogWarning("No idle flavor animation triggers defined!");
+                    }
+                    else
+                    {
+                        int idleFlavorAnimationIndex = Random.Range(0, idleFlavorAnimationTriggers.Length);
+                        animator.SetTrigger(idleFlavorAnimationTriggers[idleFlavorAnimationIndex]);
+                    }
+                    SetIdleFlavorTimer();
+                }
+            }
+            else if (idleFlavorTimer < minIdleFlavorTime)
+            {
+                SetIdleFlavorTimer();
+            }
         }
 
         private void LateUpdate()
@@ -144,6 +191,10 @@ namespace Player
                 moveAnimationSpeed,
                 speedNormalized,
                 Time.deltaTime * moveAnimationAcceleration);
+            if (moveAnimationSpeed < 0.01f)
+            {
+                moveAnimationSpeed = 0f;
+            }
 
             animator.SetFloat("Forward Speed", moveAnimationSpeed);
             animator.SetFloat("Total Speed", moveAnimationSpeed);

@@ -5365,6 +5365,12 @@ MonoBehaviour:
   hardLandingFeedbacks: {fileID: 4928913111771825143}
   moveAnimationAcceleration: 20
   runSpeedThreshold: 0.6
+  minIdleFlavorTime: 20
+  maxIdleFlavorTime: 30
+  idleFlavorAnimationTriggers:
+  - Idle Flavor 1
+  - Idle Flavor 2
+  - Idle Flavor 3
 --- !u!82 &2910065838090081852
 AudioSource:
   m_ObjectHideFlags: 0
