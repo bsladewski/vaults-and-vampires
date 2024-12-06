@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using System.Collections;
 using DG.Tweening;
+using MoreMountains.Feedbacks;
 
 namespace UIs
 {
@@ -67,6 +68,24 @@ namespace UIs
         [SerializeField]
         private TextMeshProUGUI copperAmountText;
 
+        [FoldoutGroup("Dependencies")]
+        [Tooltip("Feedbacks applied to the Coin UI when gold coin amount changes.")]
+        [Required]
+        [SerializeField]
+        private MMF_Player goldCoinsChangedFeedbacks;
+
+        [FoldoutGroup("Dependencies")]
+        [Tooltip("Feedbacks applied to the Coin UI when silver coin amount changes.")]
+        [Required]
+        [SerializeField]
+        private MMF_Player silverCoinsChangedFeedbacks;
+
+        [FoldoutGroup("Dependencies")]
+        [Tooltip("Feedbacks applied to the Coin UI when copper coin amount changes.")]
+        [Required]
+        [SerializeField]
+        private MMF_Player copperCoinsChangedFeedbacks;
+
         private int totalAmount;
 
         private RectTransform rectTransform;
@@ -102,6 +121,10 @@ namespace UIs
 
         private void OnCoinsCollected(int amount)
         {
+            if (totalAmount / 100 != (totalAmount + amount) / 100) goldCoinsChangedFeedbacks.PlayFeedbacks();
+            if (totalAmount / 10 % 10 != (totalAmount + amount) / 10 % 10) silverCoinsChangedFeedbacks.PlayFeedbacks();
+            if (totalAmount % 10 != (totalAmount + amount) % 10) copperCoinsChangedFeedbacks.PlayFeedbacks();
+
             totalAmount += amount;
             UpdateAmountText();
             ShowCoinUI();
